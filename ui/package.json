@@ -80,6 +80,9 @@
   "overrides": {
     "vite": {
       "rollup": "npm:@rollup/wasm-node"
-    }
+    },
+    "dompurify": "^3.3.0",
+    "got": "^14.6.0",
+    "tmp": "^0.2.5"
   }
 }
