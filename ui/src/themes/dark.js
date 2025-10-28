@@ -1,11 +1,12 @@
 import blue from '@material-ui/core/colors/blue'
 import stylesheet from './dark.css.js'
+import { BorderColor } from '@material-ui/icons'
 
 export default {
   themeName: 'Dark',
   palette: {
     primary: {
-      main: '#90caf9',
+      main: '#1ed760',
     },
     secondary: blue,
     type: 'dark',
@@ -14,6 +15,15 @@ export default {
     MuiFormGroup: {
       root: {
         color: 'white',
+      },
+    },
+     MuiOutlinedInput: {
+      notchedOutline: {
+        borderWidth: 1.5,
+        borderColor: '#7c7c7c',
+      },
+      input: {
+        padding: '15px 10px',
       },
     },
     NDLogin: {

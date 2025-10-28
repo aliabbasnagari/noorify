@@ -34,33 +34,44 @@ const useStyles = makeStyles(
       flexDirection: 'column',
       minHeight: '100vh',
       alignItems: 'center',
-      justifyContent: 'flex-start',
-      background: `url(${config.loginBackgroundURL})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      justifyContent: 'center',
+      backgroundColor: theme.palette.type === 'light' ? '#fafafa' : '#121212',
     },
     card: {
-      minWidth: 300,
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '60%',
+      minWidth: 800,
       marginTop: '6em',
+      padding: '3em',
+      borderRadius: '10px',
+      overflow: 'visible',
+    },
+    loginCard: {
+      width: '380px',
+      maxWidth: '100%',
+      margin: '0 auto',
+      borderRadius: '10px',
       overflow: 'visible',
     },
     avatar: {
       margin: '1em',
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '-3em',
     },
     icon: {
       backgroundColor: 'transparent',
-      width: '6.3em',
-      height: '6.3em',
+      width: '3em',
+      height: '3em',
     },
     systemName: {
-      marginTop: '1em',
       display: 'flex',
       justifyContent: 'center',
-      color: '#3f51b5', //theme.palette.grey[500]
+      color: theme.palette.text.primary,
+      fontSize: '1.5em',
+      fontWeight: 'bold',
     },
     welcome: {
       marginTop: '1em',
@@ -68,18 +79,24 @@ const useStyles = makeStyles(
       display: 'flex',
       justifyContent: 'center',
       flexWrap: 'wrap',
-      color: '#3f51b5', //theme.palette.grey[500]
+      color: 'white', //theme.palette.grey[500]
     },
     form: {
       padding: '0 1em 1em 1em',
     },
     input: {
+      outlineWidth: '50px',
       marginTop: '1em',
     },
     actions: {
       padding: '0 1em 1em 1em',
     },
-    button: {},
+    button: {
+      fontWeight: 'bold',
+      borderRadius: '50px',
+      fontSize: '1em',
+      padding: '0.70em',
+    },
     systemNameLink: {
       textDecoration: 'none',
     },
@@ -100,6 +117,7 @@ const renderInput = ({
   ...props
 }) => (
   <TextField
+    variant="outlined"
     error={!!(touched && error)}
     helperText={touched && error}
     {...inputProps}
@@ -119,20 +137,11 @@ const FormLogin = ({ loading, handleSubmit, validate }) => {
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} noValidate>
           <div className={classes.main}>
-            <Card className={classes.card}>
+            <div className={classes.loginCard}>
               <div className={classes.avatar}>
                 <img src={Logo} className={classes.icon} alt={'logo'} />
               </div>
-              <div className={classes.systemName}>
-                <a
-                  href="https://www.navidrome.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.systemNameLink}
-                >
-                  Navidrome
-                </a>
-              </div>
+              <div className={classes.systemName}>Log in to Noorify</div>
               {config.welcomeMessage && (
                 <div
                   className={classes.welcome}
@@ -173,7 +182,8 @@ const FormLogin = ({ loading, handleSubmit, validate }) => {
                   {translate('ra.auth.sign_in')}
                 </Button>
               </CardActions>
-            </Card>
+            </div>
+
             <Notification />
           </div>
         </form>
