@@ -46,7 +46,7 @@ func (r *sqlRepository) parseRestFilters(ctx context.Context, options rest.Query
 			continue
 		}
 		// Default to a "starts with" filter
-		filters = append(filters, startsWithFilter(f, v))
+		filters = append(filters, Like{f: fmt.Sprintf("%s%%", v)})
 	}
 	return filters
 }
@@ -69,13 +69,11 @@ func (r *sqlRepository) parseRestOptions(ctx context.Context, options ...rest.Qu
 func (r sqlRepository) sanitizeSort(sort, order string) (string, string) {
 	if sort != "" {
 		sort = toSnakeCase(sort)
-		if mapped, ok := r.sortMappings[sort]; ok {
-			sort = mapped
-		} else {
-			if !r.isFieldWhiteListed(sort) {
-				log.Warn(r.ctx, "Ignoring sort not whitelisted", "sort", sort, "table", r.tableName)
-				sort = ""
-			}
+		// Validate only: buildSortOrder resolves the mapping later, and mapping here as well would
+		// feed sortMapping its own output.
+		if _, _, known := r.lookupSortMapping(sort); !known && !r.isFieldWhiteListed(sort) {
+			log.Warn(r.ctx, "Ignoring sort not whitelisted", "sort", sort, "table", r.tableName)
+			sort = ""
 		}
 	}
 	if order != "" {
@@ -91,8 +89,10 @@ func eqFilter(field string, value any) Sqlizer {
 	return Eq{field: value}
 }
 
-func startsWithFilter(field string, value any) Sqlizer {
-	return Like{field: fmt.Sprintf("%s%%", value)}
+func startsWithFilter(field string) func(string, any) Sqlizer {
+	return func(_ string, value any) Sqlizer {
+		return Like{field: fmt.Sprintf("%s%%", value)}
+	}
 }
 
 func containsFilter(field string) func(string, any) Sqlizer {

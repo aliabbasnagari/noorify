@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM ghcr.io/crazy-max/osxcross:14.5-debian AS osxcros
 
 ########################################################################################################################
 ### Build xx (original image: tonistiigi/xx)
-FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/alpine:3.20 AS xx-build
+FROM --platform=$BUILDPLATFORM alpine:3.20 AS xx-build
 
 # v1.9.0
 ENV XX_VERSION=a5592eab7a57895e8d385394ff12241bc65ecd50
@@ -26,7 +26,7 @@ COPY --from=xx-build /out/ /usr/bin/
 
 ########################################################################################################################
 ### Build Navidrome UI
-FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/node:lts-alpine AS ui
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS ui
 WORKDIR /app
 
 # Install node dependencies
@@ -43,7 +43,7 @@ COPY --from=ui /build /build
 
 ########################################################################################################################
 ### Build Navidrome binary for Docker image (dynamic musl, enables native libwebp via dlopen)
-FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/golang:1.26-alpine AS build-alpine
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS build-alpine
 COPY --from=xx / /
 
 ARG TARGETPLATFORM
@@ -69,12 +69,15 @@ RUN --mount=type=bind,source=. \
     set -e
     xx-go --wrap
     export CGO_ENABLED=1
+    BUILD_TAGS=$(./release/build-tags.sh)
     # -latomic is required on 32-bit arm (arm/v6, arm/v7) so SQLite's 64-bit atomics resolve.
-    go build -tags=netgo,sqlite_fts5 -ldflags="-w -s \
+    go build -tags="${BUILD_TAGS}" -ldflags="-w -s \
         -linkmode=external -extldflags '-latomic' \
         -X github.com/navidrome/navidrome/consts.gitSha=${GIT_SHA} \
         -X github.com/navidrome/navidrome/consts.gitTag=${GIT_TAG}" \
         -o /out/navidrome .
+    # Fail the build if native libwebp (purego) leaked into a 32-bit binary (issue #5738).
+    ./release/verify-binary.sh /out/navidrome
     # Fail the build if the binary is accidentally statically linked: dlopen (and
     # therefore native libwebp detection) only works with a dynamic interpreter.
     file /out/navidrome | grep -q "dynamically linked" || { echo "ERROR: /out/navidrome is not dynamically linked"; file /out/navidrome; exit 1; }
@@ -82,7 +85,7 @@ EOT
 
 ########################################################################################################################
 ### Build Navidrome binary for standalone distribution (static glibc, cross-compiled)
-FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/golang:1.26-trixie AS base
+FROM --platform=$BUILDPLATFORM golang:1.26-trixie AS base
 RUN apt-get update && apt-get install -y clang lld
 COPY --from=xx / /
 WORKDIR /workspace
@@ -108,11 +111,12 @@ RUN --mount=type=bind,source=. \
     --mount=from=osxcross,src=/osxcross/SDK,target=/xx-sdk,ro \
     --mount=type=cache,target=/root/.cache \
     --mount=type=cache,target=/go/pkg/mod <<EOT
+    set -e
 
     # Setup CGO cross-compilation environment
     xx-go --wrap
     export CGO_ENABLED=1
-    cat $(go env GOENV)
+    cat "$(go env GOENV)" 2>/dev/null || true
 
     # Only Darwin (macOS) requires clang (default), Windows requires gcc, everything else can use any compiler.
     # So let's use gcc for everything except Darwin.
@@ -121,14 +125,25 @@ RUN --mount=type=bind,source=. \
         export CXX=$(xx-info)-g++
         export LD_EXTRA="-extldflags '-static -latomic'"
     fi
+    # GNU ld corrupts the R_ARM_IRELATIVE addends of libatomic's ifunc resolvers
+    # (wrong address, Thumb bit lost) once .text outgrows the 16MB Thumb branch
+    # range, making static arm binaries jump to garbage inside glibc's ifunc
+    # resolution and crash before main() (issue #5738). Link 32-bit arm with LLD,
+    # which emits correct addends.
+    if [ "$(xx-info arch)" = "arm" ]; then
+        export LD_EXTRA="-extldflags '-static -latomic -fuse-ld=lld'"
+    fi
     if [ "$(xx-info os)" = "windows" ]; then
         export EXT=".exe"
     fi
 
-    go build -tags=netgo,sqlite_fts5 -ldflags="${LD_EXTRA} -w -s \
+    BUILD_TAGS=$(./release/build-tags.sh)
+    go build -tags="${BUILD_TAGS}" -ldflags="${LD_EXTRA} -w -s \
         -X github.com/navidrome/navidrome/consts.gitSha=${GIT_SHA} \
         -X github.com/navidrome/navidrome/consts.gitTag=${GIT_TAG}" \
         -o /out/navidrome${EXT} .
+    # Fail the build if native libwebp (purego) leaked into a 32-bit binary (issue #5738).
+    ./release/verify-binary.sh /out/navidrome*
 EOT
 
 # Verify if the binary was built for the correct platform and it is statically linked
@@ -139,7 +154,7 @@ COPY --from=build /out /
 
 ########################################################################################################################
 ### Build Final Image
-FROM public.ecr.aws/docker/library/alpine:3.20 AS final
+FROM alpine:3.20 AS final
 LABEL maintainer="deluan@navidrome.org"
 LABEL org.opencontainers.image.source="https://github.com/navidrome/navidrome"
 
@@ -159,7 +174,6 @@ ENV ND_MUSICFOLDER=/music
 ENV ND_DATAFOLDER=/data
 ENV ND_CONFIGFILE=/data/navidrome.toml
 ENV ND_PORT=4533
-ENV ND_ENABLEWEBPENCODING=true
 RUN touch /.nddockerenv
 
 EXPOSE ${ND_PORT}

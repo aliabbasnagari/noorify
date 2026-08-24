@@ -11,6 +11,7 @@ import (
 	"github.com/navidrome/navidrome/core"
 	"github.com/navidrome/navidrome/core/stream"
 	"github.com/navidrome/navidrome/model"
+	"github.com/navidrome/navidrome/persistence"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/stretchr/testify/mock"
@@ -69,8 +70,11 @@ var _ = Describe("Archiver", func() {
 
 			mfRepo := &mockMediaFileRepository{}
 			mfRepo.On("GetAll", []model.QueryOptions{{
-				Filters: squirrel.Eq{"album_artist_id": "1"},
-				Sort:    "album",
+				Filters: squirrel.And{
+					persistence.ParticipantIDFilter("media_file", "1", model.RoleAlbumArtist),
+					squirrel.Eq{"missing": false},
+				},
+				Sort: "album",
 			}}).Return(mfs, nil)
 
 			ds.On("MediaFile", mock.Anything).Return(mfRepo)
@@ -89,6 +93,32 @@ var _ = Describe("Archiver", func() {
 		})
 	})
 
+	Context("when the transcode limiter rejects a file", func() {
+		It("aborts the archive instead of continuing with empty entries", func() {
+			mfs := model.MediaFiles{
+				{Path: "test_data/01 - track1.mp3", Suffix: "mp3", AlbumID: "1", Album: "Album", DiscNumber: 1},
+				{Path: "test_data/02 - track2.mp3", Suffix: "mp3", AlbumID: "1", Album: "Album", DiscNumber: 1},
+			}
+
+			mfRepo := &mockMediaFileRepository{}
+			mfRepo.On("GetAll", []model.QueryOptions{{
+				Filters: squirrel.Eq{"album_id": "1"},
+				Sort:    "album",
+			}}).Return(mfs, nil)
+			ds.On("MediaFile", mock.Anything).Return(mfRepo)
+
+			ms.On("NewStream", mock.Anything, mock.Anything, stream.Request{Format: "mp3", BitRate: 128}).
+				Return(nil, stream.ErrTooManyTranscodes).Once()
+
+			out := new(bytes.Buffer)
+			err := arch.ZipAlbum(context.Background(), "1", "mp3", 128, out)
+			Expect(err).To(MatchError(stream.ErrTooManyTranscodes))
+			// NewStream should only have been called once: the loop must bail
+			// out on the rejection instead of trying every remaining track.
+			ms.AssertNumberOfCalls(GinkgoT(), "NewStream", 1)
+		})
+	})
+
 	Context("ZipShare", func() {
 		It("zips a share correctly", func() {
 			mfs := model.MediaFiles{
@@ -104,12 +134,15 @@ var _ = Describe("Archiver", func() {
 				Tracks:       mfs,
 			}
 
-			sh.On("Load", mock.Anything, "1").Return(share, nil)
 			ms.On("NewStream", mock.Anything, mock.Anything, stream.Request{Format: "mp3", BitRate: 128}).Return(io.NopCloser(strings.NewReader("test")), nil).Times(2)
 
 			out := new(bytes.Buffer)
-			err := arch.ZipShare(context.Background(), "1", out)
+			err := arch.ZipShare(context.Background(), share, out)
 			Expect(err).To(BeNil())
+
+			// Share.Load records a visit; re-loading here would double-count
+			// every download.
+			sh.AssertNotCalled(GinkgoT(), "Load", mock.Anything, mock.Anything)
 
 			zr, err := zip.NewReader(bytes.NewReader(out.Bytes()), int64(out.Len()))
 			Expect(err).To(BeNil())
