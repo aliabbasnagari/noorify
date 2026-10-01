@@ -23,7 +23,14 @@
     "usernameRequired": "Username is required",
     "passwordRequired": "Password is required",
     "confirmPasswordLabel": "Confirm password",
-    "passwordMismatch": "Passwords don't match"
+    "passwordMismatch": "Passwords don't match",
+    "setupTitle": "Create your admin account",
+    "setupSubtitle": "Welcome! Set up the first account to start managing your music library.",
+    "welcomeBack": "Welcome back",
+    "signInSubtitle": "Sign in to continue listening.",
+    "creatingAdmin": "Creating account…",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "errors": {
     "somethingWentWrong": "Something went wrong",

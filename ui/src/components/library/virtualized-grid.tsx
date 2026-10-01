@@ -81,8 +81,12 @@ export function VirtualizedGrid<T>({
 
   useEffect(() => {
     if (lastVirtualRowIndex === undefined) return
+    // Compare against what's actually loaded, not the full `total` row
+    // count: the scroll height is sized for `total`, so the viewport can
+    // reach not-yet-fetched (blank) rows long before it nears the very end.
+    const loadedRows = Math.ceil(items.length / columns)
     if (
-      lastVirtualRowIndex >= rowCount - 3 &&
+      lastVirtualRowIndex >= loadedRows - 3 &&
       hasNextPage &&
       !isFetchingNextPage
     ) {
@@ -90,7 +94,8 @@ export function VirtualizedGrid<T>({
     }
   }, [
     lastVirtualRowIndex,
-    rowCount,
+    items.length,
+    columns,
     hasNextPage,
     isFetchingNextPage,
     onLoadMore,

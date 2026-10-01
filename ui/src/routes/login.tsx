@@ -1,4 +1,6 @@
 import { createRoute, useNavigate } from "@tanstack/react-router"
+import { useState } from "react"
+import { Eye, EyeOff, Lock, Music2, User } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -72,7 +74,13 @@ function LoginPage() {
   const navigate = useNavigate()
   const search = loginRoute.useSearch()
   const setSession = useAuthStore((s) => s.setSession)
-  const schema = loginSchema(t, config.firstTime)
+  // `config.firstTime` is baked into the page at load time. Capture it once
+  // so this form keeps its mode for the whole visit, and clear the global
+  // after the admin is created — otherwise a later logout (no reload) would
+  // show the account-setup form again instead of the login form.
+  const [firstTime] = useState(config.firstTime)
+  const [showPassword, setShowPassword] = useState(false)
+  const schema = loginSchema(t, firstTime)
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -81,11 +89,12 @@ function LoginPage() {
 
   const onSubmit = form.handleSubmit(async (values) => {
     try {
-      const endpoint = config.firstTime ? "/auth/createAdmin" : "/auth/login"
+      const endpoint = firstTime ? "/auth/createAdmin" : "/auth/login"
       const session = await apiFetch<AuthSession>(endpoint, {
         method: "POST",
         body: { username: values.username, password: values.password },
       })
+      if (firstTime) config.firstTime = false
       setSession(session)
       navigate({ to: search.redirect || "/" })
     } catch (error) {
@@ -97,12 +106,33 @@ function LoginPage() {
     }
   })
 
+  const passwordType = showPassword ? "text" : "password"
+
   return (
-    <div className="flex h-dvh items-center justify-center bg-background px-4">
-      <div className="w-full max-w-sm space-y-6">
-        <h1 className="text-center text-2xl font-bold">{t("app.name")}</h1>
+    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-background px-4 py-8">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--primary)_20%,transparent),transparent_60%)]"
+      />
+      <div className="relative w-full max-w-sm space-y-6 rounded-2xl border border-border bg-card/80 p-8 shadow-xl backdrop-blur">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
+            <Music2 className="size-7" />
+          </div>
+          <h1 className="text-2xl font-bold">{t("app.name")}</h1>
+          <div className="space-y-1">
+            <h2 className="text-lg font-semibold">
+              {firstTime ? t("auth.setupTitle") : t("auth.welcomeBack")}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {firstTime
+                ? t("auth.setupSubtitle")
+                : config.welcomeMessage || t("auth.signInSubtitle")}
+            </p>
+          </div>
+        </div>
         <Form {...form}>
-          <form onSubmit={onSubmit} className="space-y-4">
+          <form onSubmit={onSubmit} className="space-y-4" noValidate>
             <FormField
               control={form.control}
               name="username"
@@ -110,7 +140,15 @@ function LoginPage() {
                 <FormItem>
                   <FormLabel>{t("auth.usernameLabel")}</FormLabel>
                   <FormControl>
-                    <Input autoComplete="username" autoFocus {...field} />
+                    <div className="relative">
+                      <User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        autoComplete="username"
+                        autoFocus
+                        className="h-10 pl-9"
+                        {...field}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,17 +161,39 @@ function LoginPage() {
                 <FormItem>
                   <FormLabel>{t("auth.passwordLabel")}</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      autoComplete={config.firstTime ? "new-password" : "current-password"}
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        type={passwordType}
+                        autoComplete={
+                          firstTime ? "new-password" : "current-password"
+                        }
+                        className="h-10 px-9"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        aria-label={
+                          showPassword
+                            ? t("auth.hidePassword")
+                            : t("auth.showPassword")
+                        }
+                        className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="size-4" />
+                        ) : (
+                          <Eye className="size-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {config.firstTime && (
+            {firstTime && (
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -141,7 +201,15 @@ function LoginPage() {
                   <FormItem>
                     <FormLabel>{t("auth.confirmPasswordLabel")}</FormLabel>
                     <FormControl>
-                      <Input type="password" autoComplete="new-password" {...field} />
+                      <div className="relative">
+                        <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                          type={passwordType}
+                          autoComplete="new-password"
+                          className="h-10 pl-9"
+                          {...field}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -150,12 +218,15 @@ function LoginPage() {
             )}
             <Button
               type="submit"
-              className="w-full rounded-full"
+              size="lg"
+              className="h-10 w-full rounded-full"
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting
-                ? t("auth.signingIn")
-                : config.firstTime
+                ? firstTime
+                  ? t("auth.creatingAdmin")
+                  : t("auth.signingIn")
+                : firstTime
                   ? t("auth.createAdmin")
                   : t("auth.signIn")}
             </Button>
