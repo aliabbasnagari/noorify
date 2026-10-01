@@ -19,6 +19,22 @@ export interface Song {
   discNumber?: number
   starred: boolean
   rating: number
+  genre?: string
+  year?: number
+  playCount?: number
+  bpm?: number
+  tags?: Record<string, string[]>
+}
+
+export interface Genre {
+  id: string
+  name: string
+}
+
+export interface Tag {
+  id: string
+  tagName: string
+  tagValue: string
 }
 
 export interface Album {

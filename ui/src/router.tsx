@@ -7,6 +7,7 @@ import { homeRoute } from "@/routes/home"
 import { searchRoute } from "@/routes/search"
 import { albumsRoute } from "@/routes/albums"
 import { artistsRoute } from "@/routes/artists"
+import { songsRoute } from "@/routes/songs"
 import { radioRoute } from "@/routes/radio"
 import { libraryRoute } from "@/routes/library"
 import { playlistsRoute } from "@/routes/playlists"
@@ -34,6 +35,7 @@ const routeTree = rootRoute.addChildren([
     searchRoute,
     albumsRoute,
     artistsRoute,
+    songsRoute,
     radioRoute,
     libraryRoute,
     playlistsRoute,

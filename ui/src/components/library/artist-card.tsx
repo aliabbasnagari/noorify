@@ -24,17 +24,21 @@ export function ArtistCard({ artist }: { artist: Artist }) {
       draggable={false}
       className="group relative flex flex-col items-center gap-2 rounded-md p-3 text-center transition-colors hover:bg-accent"
     >
-      <div className="relative aspect-square w-full overflow-hidden rounded-full bg-muted">
-        <img
-          src={getCoverArtUrl(artist.id, "ar", 300)}
-          alt=""
-          className="size-full object-cover"
-          loading="lazy"
-          draggable={false}
-        />
+      {/* The play button sits outside the clipped circle — inside it, the
+       * square's bottom-right corner is cut off by the rounded mask. */}
+      <div className="relative aspect-square w-full">
+        <div className="size-full overflow-hidden rounded-full bg-muted">
+          <img
+            src={getCoverArtUrl(artist.id, "ar", 300)}
+            alt=""
+            className="size-full object-cover"
+            loading="lazy"
+            draggable={false}
+          />
+        </div>
         <Button
           size="icon"
-          className="absolute right-1 bottom-1 rounded-full opacity-0 shadow-lg transition-opacity group-hover:opacity-100"
+          className="absolute right-2 bottom-2 rounded-full opacity-0 shadow-lg transition-opacity group-hover:opacity-100"
           aria-label={t("library.components.artistCard.playAria", {
             name: artist.name,
           })}

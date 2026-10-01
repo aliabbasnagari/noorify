@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import { Disc3, ListMusic, Mic2, Radio } from "lucide-react"
+import { Disc3, ListMusic, Mic2, Music, Radio } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useResourceList } from "@/hooks/use-resource-list"
 import { PlaylistRow } from "@/components/library/playlist-row"
@@ -9,6 +9,7 @@ import type { Playlist } from "@/lib/api/types"
 const SECTIONS = [
   { to: "/albums" as const, icon: Disc3, labelKey: "library.albums" },
   { to: "/artists" as const, icon: Mic2, labelKey: "library.artists" },
+  { to: "/songs" as const, icon: Music, labelKey: "library.songs" },
   { to: "/radio" as const, icon: Radio, labelKey: "library.radio" },
 ]
 
@@ -30,7 +31,7 @@ export default function LibraryPage() {
     <div className="space-y-6 py-6">
       <h1 className="text-2xl font-bold">{t("library.yourLibrary")}</h1>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {SECTIONS.map(({ to, icon: Icon, labelKey }) => (
           <Link
             key={to}

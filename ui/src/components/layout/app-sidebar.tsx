@@ -6,6 +6,7 @@ import {
   Search,
   Disc3,
   Mic2,
+  Music,
   Radio,
   Settings,
   ChevronLeft,
@@ -27,6 +28,7 @@ const primaryNav = [
   { to: "/search" as const, icon: Search, labelKey: "nav.search" },
   { to: "/albums" as const, icon: Disc3, labelKey: "nav.albums" },
   { to: "/artists" as const, icon: Mic2, labelKey: "nav.artists" },
+  { to: "/songs" as const, icon: Music, labelKey: "nav.songs" },
   { to: "/radio" as const, icon: Radio, labelKey: "nav.radio" },
 ]
 

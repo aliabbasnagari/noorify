@@ -10,6 +10,8 @@ import { StarButton } from "@/components/library/star-button"
 import { SongRow } from "@/components/library/song-row"
 import { AlbumCard } from "@/components/library/album-card"
 import { ArtistCard } from "@/components/library/artist-card"
+import { ArtistSongs } from "@/components/library/artist-songs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ShareDialog } from "@/components/library/share-dialog"
 import { ArtHeroBackground } from "@/components/library/art-hero-background"
 import { config } from "@/lib/config"
@@ -180,16 +182,28 @@ export default function ArtistDetailPage({ artistId }: { artistId: string }) {
         </section>
       )}
 
-      {albums.length > 0 && (
-        <section className="space-y-3 pb-8">
-          <h2 className="text-lg font-semibold">{t("artist.discography")}</h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {albums.map((album) => (
-              <AlbumCard key={album.id} album={album} />
-            ))}
-          </div>
-        </section>
-      )}
+      <Tabs defaultValue="discography" className="pb-8">
+        <TabsList variant="line">
+          <TabsTrigger value="discography">
+            {t("artist.discography")}
+          </TabsTrigger>
+          <TabsTrigger value="songs">{t("artist.songs")}</TabsTrigger>
+        </TabsList>
+        <TabsContent value="discography">
+          {albums.length > 0 ? (
+            <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {albums.map((album) => (
+                <AlbumCard key={album.id} album={album} />
+              ))}
+            </div>
+          ) : (
+            <p className="pt-2 text-muted-foreground">{t("artist.noAlbums")}</p>
+          )}
+        </TabsContent>
+        <TabsContent value="songs" className="pt-2">
+          <ArtistSongs artistId={artist.id} />
+        </TabsContent>
+      </Tabs>
 
       {similarArtists.length > 0 && (
         <section className="space-y-3 pb-16">

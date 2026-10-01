@@ -34,6 +34,7 @@ export function SongRow({
   index,
   displayNumber,
   showAlbum = false,
+  extras = [],
   active = false,
   onPlay,
   onPlayNext,
@@ -47,6 +48,8 @@ export function SongRow({
    * than one disc. */
   displayNumber?: number
   showAlbum?: boolean
+  /** Extra metadata shown after the artist/album on the subtitle line. */
+  extras?: string[]
   active?: boolean
   onPlay: () => void
   onPlayNext: () => void
@@ -97,6 +100,7 @@ export function SongRow({
         <p className="truncate text-xs text-muted-foreground">
           {song.artist}
           {showAlbum && ` — ${song.album}`}
+          {extras.length > 0 && ` · ${extras.join(" · ")}`}
         </p>
       </button>
 

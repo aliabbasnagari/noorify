@@ -10,7 +10,7 @@ const TABS = [
 ]
 
 /** Spotify's own mobile web nav is exactly these three tabs (Home/Search/
- * Your Library) — everything else (Albums/Artists/Radio/Playlists) lives
+ * Your Library) — everything else (Albums/Artists/Songs/Radio/Playlists) lives
  * inside the Library tab (library-page.tsx) rather than each getting its
  * own bottom-bar slot, which wouldn't fit at phone width anyway. */
 export function MobileTabBar() {
