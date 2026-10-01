@@ -1,0 +1,397 @@
+{
+  "app": {
+    "name": "Navidrome"
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "albums": "Albums",
+    "artists": "Artists",
+    "radio": "Radio",
+    "library": "Your Library",
+    "admin": "Settings"
+  },
+  "auth": {
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "signIn": "Log In",
+    "createAdmin": "Create Admin Account",
+    "signingIn": "Logging in…",
+    "invalidCredentials": "Invalid username or password",
+    "networkError": "Could not reach the server",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "confirmPasswordLabel": "Confirm password",
+    "passwordMismatch": "Passwords don't match"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpected": "An unexpected error occurred. You can try again or reload the page.",
+    "tryAgain": "Try again",
+    "reload": "Reload page",
+    "pageNotFound": "Page not found",
+    "pageNotFoundDescription": "The page you are looking for does not exist.",
+    "goHome": "Go home",
+    "loadFailed": "Could not load data. Check your connection and try again.",
+    "actionFailed": "That action failed. Please try again.",
+    "trackFailed": "Could not play \"{{title}}\"",
+    "loveFailed": "Could not update your library"
+  },
+  "common": {
+    "loading": "Loading…",
+    "logout": "Log out",
+    "yourShares": "Your shares",
+    "theme": "Theme",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "back": "Back",
+    "forward": "Forward"
+  },
+  "home": {
+    "title": "Home",
+    "recentlyAdded": "Recently Added",
+    "recentlyPlayed": "Recently Played",
+    "mostPlayed": "Most Played",
+    "favorites": "Favorites",
+    "topRated": "Top Rated",
+    "randomPicks": "Random Picks"
+  },
+  "albums": {
+    "title": "Albums",
+    "sortName": "Name",
+    "sortRecentlyAdded": "Recently added",
+    "sortArtist": "Artist",
+    "sortYear": "Year",
+    "sortMostPlayed": "Most played",
+    "sortRandom": "Random",
+    "emptyMessage": "No albums yet — add some music to your library."
+  },
+  "artists": {
+    "title": "Artists",
+    "sortName": "Name",
+    "sortMostAlbums": "Most albums",
+    "sortRandom": "Random",
+    "emptyMessage": "No artists yet — add some music to your library."
+  },
+  "search": {
+    "placeholder": "What do you want to listen to?",
+    "prompt": "Search across artists, albums, songs, and playlists.",
+    "searching": "Searching…",
+    "noResults": "No results for \"{{query}}\".",
+    "artists": "Artists",
+    "albums": "Albums",
+    "songs": "Songs",
+    "playlists": "Playlists"
+  },
+  "radio": {
+    "title": "Radio",
+    "addStation": "Add station",
+    "emptyMessage": "No radio stations yet.",
+    "play": "Play {{name}}",
+    "edit": "Edit {{name}}",
+    "delete": "Delete {{name}}",
+    "deleteConfirm": "Delete \"{{name}}\"? This can't be undone."
+  },
+  "shares": {
+    "emptyMessage": "You haven't shared anything yet.",
+    "visitCount_one": "{{count}} visit",
+    "visitCount_other": "{{count}} visits",
+    "expires": "Expires {{date}}",
+    "downloadable": "Downloadable",
+    "copyLink": "Copy link",
+    "delete": "Delete share \"{{name}}\"",
+    "deleteConfirm": "Delete this share link? It will stop working immediately."
+  },
+  "player": {
+    "shuffle": "Shuffle",
+    "previous": "Previous",
+    "next": "Next",
+    "play": "Play",
+    "pause": "Pause",
+    "repeat": "Repeat: {{mode}}",
+    "repeatMode": {
+      "off": "Off",
+      "all": "All",
+      "one": "One"
+    },
+    "liveRadio": "Live radio",
+    "seek": "Seek",
+    "lyrics": {
+      "loading": "Loading lyrics…",
+      "empty": "No lyrics available for this track."
+    },
+    "queue": {
+      "title": "Queue",
+      "nowPlaying": "Now playing",
+      "nextUp": "Next up",
+      "empty": "Queue is empty.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "remove": "Remove from queue"
+    },
+    "bar": {
+      "nothingPlaying": "Nothing playing",
+      "expandNowPlaying": "Expand now playing",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "volume": "Volume"
+    }
+  },
+  "smartPlaylist": {
+    "match": "Match",
+    "all": "all",
+    "any": "any",
+    "ofTheFollowing": "of the following:",
+    "noRules": "No rules yet — add one below.",
+    "addRule": "Add rule",
+    "addGroup": "Add group",
+    "removeGroup": "Remove group",
+    "removeRule": "Remove rule",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "and": "and",
+    "days": "Days",
+    "true": "true",
+    "false": "false",
+    "fields": {
+      "title": "Title",
+      "album": "Album",
+      "artist": "Artist",
+      "albumartist": "Album Artist",
+      "genre": "Genre",
+      "path": "File Path",
+      "comment": "Comment",
+      "year": "Year",
+      "duration": "Duration (seconds)",
+      "bpm": "BPM",
+      "rating": "Rating",
+      "albumrating": "Album Rating",
+      "playcount": "Play Count",
+      "albumplaycount": "Album Play Count",
+      "loved": "Favorite",
+      "albumloved": "Album Favorite",
+      "missing": "Missing",
+      "compilation": "Compilation",
+      "dateadded": "Date Added",
+      "lastplayed": "Last Played"
+    },
+    "operators": {
+      "is": "is",
+      "isNot": "is not",
+      "contains": "contains",
+      "notContains": "does not contain",
+      "startsWith": "starts with",
+      "endsWith": "ends with",
+      "gt": "is greater than",
+      "lt": "is less than",
+      "inTheRange": "is between",
+      "before": "is before",
+      "after": "is after",
+      "inTheLast": "is in the last (days)",
+      "notInTheLast": "is not in the last (days)",
+      "isPresent": "has a value",
+      "isMissing": "has no value"
+    },
+    "random": "Random",
+    "loading": "Loading…",
+    "editSmartPlaylistRules": "Edit Smart Playlist Rules",
+    "newSmartPlaylist": "New Smart Playlist",
+    "name": "Name",
+    "description": "Description",
+    "rules": "Rules",
+    "sortBy": "Sort by",
+    "defaultOrder": "Default order",
+    "direction": "Direction",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "limitNoLimit": "Limit (0 = no limit)",
+    "nameRequired": "Name is required.",
+    "saveError": "Couldn't save the playlist — check your rules and try again.",
+    "savingEllipsis": "Saving…",
+    "save": "Save"
+  },
+  "help": {
+    "title": "Keyboard Shortcuts",
+    "togglePlay": "Play / Pause",
+    "previous": "Previous track",
+    "next": "Next track",
+    "currentSong": "Jump to current song",
+    "volumeUp": "Volume up",
+    "volumeDown": "Volume down",
+    "toggleLove": "Love / unlove current song",
+    "toggleMenu": "Toggle menu",
+    "showHelp": "Show keyboard shortcuts"
+  },
+  "admin": {
+    "dataTable": {
+      "noResults": "No results.",
+      "loading": "Loading…",
+      "pageOf": "Page {{page}} of {{pageCount}} — {{rowCount}} total",
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "library": {
+    "yourLibrary": "Your Library",
+    "albums": "Albums",
+    "artists": "Artists",
+    "radio": "Radio",
+    "playlists": "Playlists",
+    "loading": "Loading…",
+    "noPlaylistsYet": "No playlists yet.",
+    "components": {
+      "songRow": {
+        "playAria": "Play {{title}}",
+        "moreOptionsAria": "More options",
+        "playNow": "Play now",
+        "playNext": "Play next",
+        "addToQueue": "Add to queue",
+        "addToPlaylist": "Add to playlist",
+        "noPlaylists": "No playlists yet",
+        "goToAlbum": "Go to album",
+        "goToArtist": "Go to artist",
+        "download": "Download",
+        "share": "Share"
+      },
+      "albumCard": {
+        "playAria": "Play {{name}}"
+      },
+      "albumListRow": {
+        "playAria": "Play {{name}}"
+      },
+      "artistCard": {
+        "playAria": "Play {{name}}"
+      },
+      "createPlaylistDialog": {
+        "trigger": "Create playlist",
+        "blankPlaylist": "Blank playlist",
+        "smartPlaylist": "Smart playlist",
+        "title": "New playlist",
+        "nameLabel": "Name",
+        "nameRequired": "Name is required",
+        "descriptionLabel": "Description",
+        "create": "Create"
+      },
+      "editPlaylistDialog": {
+        "trigger": "Edit details",
+        "title": "Edit playlist",
+        "nameLabel": "Name",
+        "nameRequired": "Name is required",
+        "descriptionLabel": "Description",
+        "save": "Save"
+      },
+      "playlistRow": {
+        "playAria": "Play {{name}}",
+        "ownerSongs_one": "{{owner}} · {{count}} song",
+        "ownerSongs_other": "{{owner}} · {{count}} songs"
+      },
+      "radioDialog": {
+        "editTitle": "Edit station",
+        "addTitle": "Add radio station",
+        "nameLabel": "Name",
+        "nameRequired": "Name is required",
+        "streamUrlLabel": "Stream URL",
+        "streamUrlRequired": "Stream URL is required",
+        "urlInvalid": "Must be a valid URL",
+        "streamUrlPlaceholder": "https://stream.example.com/live",
+        "homePageLabel": "Homepage (optional)",
+        "homePagePlaceholder": "https://example.com",
+        "save": "Save",
+        "addStation": "Add station"
+      },
+      "ratingStars": {
+        "rateAria_one": "Rate {{count}} star",
+        "rateAria_other": "Rate {{count}} stars"
+      },
+      "shareDialog": {
+        "title": "Share",
+        "copyLinkAria": "Copy link",
+        "accessNoteListen": "Anyone with this link can listen — no account needed.",
+        "accessNoteListenDownload": "Anyone with this link can listen and download — no account needed.",
+        "descriptionLabel": "Description (optional)",
+        "allowDownloading": "Allow downloading",
+        "createError": "Couldn't create the share link — try again.",
+        "creating": "Creating…",
+        "createLink": "Create link"
+      },
+      "sortableTrackRow": {
+        "dragAria": "Drag to reorder",
+        "removeAria": "Remove from playlist"
+      },
+      "starButton": {
+        "addAria": "Add to favourites",
+        "removeAria": "Remove from favourites"
+      },
+      "viewToggle": {
+        "gridView": "Grid view",
+        "listView": "List view"
+      },
+      "virtualizedGrid": {
+        "empty": "Nothing here yet."
+      }
+    }
+  },
+  "nowPlaying": {
+    "closeNowPlaying": "Close now playing",
+    "nothingPlaying": "Nothing playing.",
+    "lyrics": "Lyrics",
+    "lyricsNotAvailableForRadio": "Lyrics aren't available for radio stations.",
+    "upNext": "Up next",
+    "queueIsEmpty": "Queue is empty."
+  },
+  "share": {
+    "sharedViaNavidrome": "Shared via Navidrome",
+    "downloadAll": "Download all",
+    "previous": "Previous",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "seek": "Seek"
+  },
+  "playlists": {
+    "playlists": "Playlists",
+    "loading": "Loading…",
+    "noPlaylistsYet": "No playlists yet."
+  },
+  "playlist": {
+    "loading": "Loading…",
+    "loadingTracks": "Loading tracks…",
+    "playlistNotFound": "Playlist not found.",
+    "smartPlaylist": "Smart Playlist",
+    "playlist": "Playlist",
+    "songCount_one": "{{count}} song",
+    "songCount_other": "{{count}} songs",
+    "playName": "Play {{name}}",
+    "editRules": "Edit rules",
+    "deleteConfirm": "Delete \"{{name}}\"? This can't be undone.",
+    "delete": "Delete",
+    "share": "Share",
+    "playlistIsEmpty": "This playlist is empty."
+  },
+  "album": {
+    "loading": "Loading…",
+    "loadingTracks": "Loading tracks…",
+    "albumNotFound": "Album not found.",
+    "album": "Album",
+    "songCount_one": "{{count}} song",
+    "songCount_other": "{{count}} songs",
+    "playName": "Play {{name}}",
+    "share": "Share",
+    "discNumber": "Disc {{n}}"
+  },
+  "artist": {
+    "loading": "Loading…",
+    "artistNotFound": "Artist not found.",
+    "artist": "Artist",
+    "albumCount_one": "{{count}} album",
+    "albumCount_other": "{{count}} albums",
+    "playName": "Play {{name}}",
+    "share": "Share",
+    "about": "About",
+    "readMore": "Read more",
+    "showLess": "Show less",
+    "popular": "Popular",
+    "discography": "Discography",
+    "fansAlsoLike": "Fans also like"
+  }
+}

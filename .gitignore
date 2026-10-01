@@ -21,6 +21,7 @@ coverage.out
 dist
 music
 music.old
+artwork\hashed
 *.db*
 .gitinfo
 docker-compose.yml
