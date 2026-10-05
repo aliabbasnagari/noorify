@@ -63,6 +63,9 @@ interface PlayerState {
    * off restores it instead of leaving the queue permanently shuffled. */
   unshuffledQueue: QueuedTrack[] | null
   repeatMode: RepeatMode
+  /** Set by restoreQueue: the audio engine loads the current track paused
+   * and seeks here (seconds) instead of autoplaying, then clears it. */
+  resumeAt: number | null
   volume: number // 0-100
   muted: boolean
 
@@ -83,6 +86,12 @@ interface PlayerState {
   ) => void
 
   setQueue: (tracks: QueuedTrack[], startIndex?: number) => void
+  /** Loads a previously saved queue paused at `positionSeconds`. */
+  restoreQueue: (
+    tracks: QueuedTrack[],
+    index: number,
+    positionSeconds: number,
+  ) => void
   playTrackAt: (index: number) => void
   playNext: () => void
   playPrevious: () => void
@@ -115,6 +124,7 @@ export const usePlayerStore = create<PlayerState>()(
       shuffle: false,
       unshuffledQueue: null,
       repeatMode: "off",
+      resumeAt: null,
       volume: 100,
       muted: false,
 
@@ -132,6 +142,22 @@ export const usePlayerStore = create<PlayerState>()(
           shuffle: false,
           unshuffledQueue: null,
         }),
+
+      restoreQueue: (tracks, index, positionSeconds) => {
+        if (!tracks.length) return
+        const currentIndex = Math.min(Math.max(index, 0), tracks.length - 1)
+        set({
+          queue: tracks,
+          currentIndex,
+          playNonce: get().playNonce + 1,
+          shuffle: false,
+          unshuffledQueue: null,
+          resumeAt: positionSeconds,
+          isPlaying: false,
+          currentTime: positionSeconds,
+          duration: tracks[currentIndex].durationSeconds,
+        })
+      },
 
       playTrackAt: (index) => {
         const { queue } = get()

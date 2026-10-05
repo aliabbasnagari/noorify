@@ -5,11 +5,13 @@ import { PlayerBar } from "@/components/layout/player-bar"
 import { MobileTabBar } from "@/components/layout/mobile-tab-bar"
 import { HelpDialog } from "@/components/layout/help-dialog"
 import { usePlayerHotkeys } from "@/hooks/use-player-hotkeys"
+import { useQueueSync } from "@/hooks/use-queue-sync"
 import { useSyncUserLibraries } from "@/hooks/use-sync-user-libraries"
 
 export function AppShell({ children }: { children: ReactNode }) {
   usePlayerHotkeys()
   useSyncUserLibraries()
+  useQueueSync()
 
   return (
     <div className="grid h-dvh grid-rows-[1fr_auto_auto] bg-background text-foreground">

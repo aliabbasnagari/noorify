@@ -110,6 +110,24 @@ class AudioEngine {
     }
 
     this.audio.src = track.isRadio ? (track.streamUrl ?? "") : streamUrl(track.id)
+
+    // Restored session: load paused and seek to the saved position instead
+    // of autoplaying (browsers block autoplay without a gesture anyway) or
+    // reporting a "now playing" the user hasn't started.
+    const { resumeAt } = usePlayerStore.getState()
+    if (resumeAt !== null) {
+      usePlayerStore.setState({ resumeAt: null })
+      this.audio.addEventListener(
+        "loadedmetadata",
+        () => {
+          this.audio.currentTime = resumeAt
+        },
+        { once: true },
+      )
+      this.updateMediaSessionMetadata(track)
+      return
+    }
+
     void this.audio.play().catch(() => {
       // Most likely the browser blocking autoplay before a user gesture —
       // the native `pause` event already fired setTelemetry({isPlaying:false}),
