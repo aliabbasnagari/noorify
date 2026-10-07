@@ -20,7 +20,7 @@ export function PlayingBars({
       {DELAYS.map((delay) => (
         <span
           key={delay}
-          className="h-full w-0.5 origin-bottom rounded-full bg-current"
+          className="h-full w-1 origin-bottom rounded-full bg-current"
           style={
             playing
               ? {

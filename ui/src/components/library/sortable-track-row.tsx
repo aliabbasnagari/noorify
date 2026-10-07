@@ -58,7 +58,10 @@ export function SortableTrackRow({
       )}
       <div className="min-w-0 flex-1">
         <SongRow
-          song={track}
+          // `track.id` is the playlist-row id; every SongRow action (rate,
+          // star, info, download, share, add to playlist) needs the song's
+          // own id — see PlaylistTrack's doc comment in lib/api/types.ts.
+          song={{ ...track, id: track.mediaFileId }}
           index={index}
           active={active}
           onPlay={onPlay}
