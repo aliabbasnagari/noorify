@@ -2,8 +2,6 @@ name: Bug Report
 description: Before opening a new issue, please search to see if an issue already exists for the bug you encountered.
 title: "[Bug]: "
 labels: ["bug", "triage"]
-#assignees:
-#  - deluan
 body:
   - type: markdown
     attributes:
@@ -14,7 +12,7 @@ body:
     attributes:
       label: "I confirm that:"
       options:
-        - label: I have searched the existing [open AND closed issues](https://github.com/navidrome/navidrome/issues?q=is%3Aissue) to see if an issue already exists for the bug I've encountered
+        - label: I have searched the existing [open AND closed issues](https://github.com/aliabbasnagari/noorify/issues?q=is%3Aissue) to see if an issue already exists for the bug I've encountered
           required: true
         - label: I'm using the latest version (your issue may have been fixed already)
           required: false
@@ -22,7 +20,7 @@ body:
     id: version
     attributes:
       label: Version
-      description: What version of Navidrome are you running? (please try upgrading first, as your issue may have been fixed already).
+      description: What version of Noorify are you running? (please try upgrading first, as your issue may have been fixed already).
     validations:
       required: true
   - type: textarea
@@ -65,7 +63,7 @@ body:
   - type: dropdown
     id: distribution
     attributes:
-      label: How Navidrome is installed?
+      label: How Noorify is installed?
       multiple: false
       options:
         - Docker
@@ -97,7 +95,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/navidrome/navidrome/blob/master/CODE_OF_CONDUCT.md).
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/aliabbasnagari/noorify/blob/master/CODE_OF_CONDUCT.md).
       options:
-        - label: I agree to follow Navidrome's Code of Conduct
+        - label: I agree to follow Noorify's Code of Conduct
           required: true
