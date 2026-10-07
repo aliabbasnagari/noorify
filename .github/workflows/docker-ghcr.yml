@@ -2,7 +2,7 @@ name: "Docker: Build and push to GHCR"
 on:
   push:
     branches:
-      - noorify
+      - master
     tags:
       - "v*"
   workflow_dispatch:
@@ -57,7 +57,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/noorify' }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
             type=sha,format=short
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
