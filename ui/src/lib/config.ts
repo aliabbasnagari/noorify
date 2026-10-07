@@ -35,6 +35,9 @@ export interface AppConfig {
   lastFMEnabled: boolean
   listenBrainzEnabled: boolean
   enableExternalServices: boolean
+  /** Global persistent-ID specs (conf PID.Album / PID.Track); libraries can override them. */
+  pidAlbum: string
+  pidTrack: string
   enableNowPlaying: boolean
   playbackReportIntervalMs: number
   enableReplayGain: boolean
@@ -77,6 +80,8 @@ const defaultConfig: AppConfig = {
   lastFMEnabled: true,
   listenBrainzEnabled: true,
   enableExternalServices: true,
+  pidAlbum: "musicbrainz_albumid|albumartistid,album,albumversion,releasedate", // consts.DefaultAlbumPID
+  pidTrack: "musicbrainz_trackid|albumid,discnumber,tracknumber,title", // consts.DefaultTrackPID
   enableNowPlaying: true,
   playbackReportIntervalMs: 60000,
   enableReplayGain: true,

@@ -131,6 +131,9 @@ export interface Library {
   totalSize: number
   totalDuration: number
   defaultNewUsers: boolean
+  /** Per-library persistent-ID overrides; empty means "use the global setting". */
+  pidAlbum?: string
+  pidTrack?: string
 }
 
 /** model/user.go. `password`/`currentPassword` are write-only (never present
