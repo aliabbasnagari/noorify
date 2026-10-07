@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "@tanstack/react-router"
-import { MoreHorizontal, Play } from "lucide-react"
+import { Info, MoreHorizontal, Play } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { StarButton } from "@/components/library/star-button"
+import { RatingStars } from "@/components/library/rating-stars"
+import { PlayingBars } from "@/components/library/playing-bars"
+import { SongInfoDialog } from "@/components/library/song-info-dialog"
+import { usePlayerStore } from "@/stores/player-store"
 import { ShareDialog } from "@/components/library/share-dialog"
 import { useResourceList } from "@/hooks/use-resource-list"
 import { apiFetch } from "@/lib/api/http"
@@ -65,12 +69,14 @@ export function SongRow({
     end: 200,
   })
   const [shareOpen, setShareOpen] = useState(false)
+  const [infoOpen, setInfoOpen] = useState(false)
+  const isPlaying = usePlayerStore((s) => s.isPlaying)
 
   return (
     <div
       data-slot="song-row"
       className={cn(
-        "group grid grid-cols-[2rem_1fr_auto_auto] items-center gap-3 rounded-md px-2 py-1.5 hover:bg-accent",
+        "group grid grid-cols-[2rem_1fr_auto_auto_auto] items-center gap-3 rounded-md px-2 py-1.5 hover:bg-accent",
         active && "bg-accent",
       )}
     >
@@ -82,9 +88,13 @@ export function SongRow({
           title: song.title,
         })}
       >
-        <span className={cn("group-hover:hidden", active && "text-primary")}>
-          {displayNumber ?? index + 1}
-        </span>
+        {active ? (
+          <PlayingBars playing={isPlaying} className="group-hover:hidden" />
+        ) : (
+          <span className="group-hover:hidden">
+            {displayNumber ?? index + 1}
+          </span>
+        )}
         <Play className="hidden size-3.5 fill-current group-hover:block" />
       </button>
 
@@ -103,6 +113,20 @@ export function SongRow({
           {extras.length > 0 && ` · ${extras.join(" · ")}`}
         </p>
       </button>
+
+      {config.enableStarRating ? (
+        <RatingStars
+          resource="song"
+          id={song.id}
+          rating={song.rating}
+          className={cn(
+            "opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100",
+            song.rating > 0 && "opacity-100",
+          )}
+        />
+      ) : (
+        <span />
+      )}
 
       <StarButton resource="song" id={song.id} starred={song.starred} />
 
@@ -175,6 +199,10 @@ export function SongRow({
             >
               {t("library.components.songRow.download")}
             </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setInfoOpen(true)}>
+              <Info className="size-3.5" />
+              {t("library.components.songRow.getInfo")}
+            </DropdownMenuItem>
             {config.enableSharing && (
               <DropdownMenuItem onClick={() => setShareOpen(true)}>
                 {t("library.components.songRow.share")}
@@ -182,6 +210,13 @@ export function SongRow({
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+        {infoOpen && (
+          <SongInfoDialog
+            songId={song.id}
+            open={infoOpen}
+            onOpenChange={setInfoOpen}
+          />
+        )}
         {config.enableSharing && (
           <ShareDialog
             resourceIds={[song.id]}

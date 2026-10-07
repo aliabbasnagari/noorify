@@ -47,6 +47,7 @@
   },
   "common": {
     "loading": "Loading…",
+    "yes": "Yes",
     "logout": "Log out",
     "yourShares": "Your shares",
     "theme": "Theme",
@@ -281,7 +282,36 @@
         "goToAlbum": "Go to album",
         "goToArtist": "Go to artist",
         "download": "Download",
+        "getInfo": "Get info",
         "share": "Share"
+      },
+      "songInfo": {
+        "title": "Song info",
+        "path": "Path",
+        "library": "Library",
+        "album": "Album",
+        "discSubtitle": "Disc subtitle",
+        "albumArtist": "Album artist",
+        "artist": "Artist",
+        "genre": "Genre",
+        "year": "Year",
+        "trackNumber": "Track",
+        "duration": "Duration",
+        "compilation": "Compilation",
+        "format": "Format",
+        "bitRate": "Bit rate",
+        "bitDepth": "Bit depth",
+        "sampleRate": "Sample rate",
+        "channels": "Channels",
+        "size": "Size",
+        "bpm": "BPM",
+        "playCount": "Play count",
+        "lastPlayed": "Last played",
+        "updatedAt": "File updated",
+        "albumGain": "Album gain",
+        "trackGain": "Track gain",
+        "comment": "Comment",
+        "tags": "Tags"
       },
       "albumCard": {
         "playAria": "Play {{name}}"
@@ -407,6 +437,7 @@
     "songCount_other": "{{count}} songs",
     "playName": "Play {{name}}",
     "share": "Share",
+    "download": "Download",
     "discNumber": "Disc {{n}}"
   },
   "artist": {
@@ -417,6 +448,7 @@
     "albumCount_other": "{{count}} albums",
     "playName": "Play {{name}}",
     "share": "Share",
+    "download": "Download",
     "about": "About",
     "readMore": "Read more",
     "showLess": "Show less",

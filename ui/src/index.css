@@ -143,3 +143,14 @@
     @apply font-sans;
   }
 }
+
+/* Animated "now playing" equalizer bars (see components/library/playing-bars.tsx). */
+@keyframes playing-bar {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

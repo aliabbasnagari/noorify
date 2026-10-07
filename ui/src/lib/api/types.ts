@@ -26,6 +26,34 @@ export interface Song {
   tags?: Record<string, string[]>
 }
 
+/** Full `/api/song/{id}` record (model.MediaFile) — what "Get Info" shows. */
+export interface SongDetails extends Song {
+  path: string
+  libraryName?: string
+  albumArtistId: string
+  albumArtist: string
+  discSubtitle?: string
+  year?: number
+  size: number
+  suffix?: string
+  codec?: string
+  bitRate?: number
+  bitDepth?: number
+  sampleRate?: number
+  channels?: number
+  compilation?: boolean
+  comment?: string
+  bpm?: number
+  playCount?: number
+  playDate?: string
+  updatedAt?: string
+  rgAlbumGain?: number | null
+  rgTrackGain?: number | null
+  genres?: { id: string; name: string }[]
+  tags?: Record<string, string[]>
+  participants?: Record<string, { id: string; name: string }[]>
+}
+
 export interface Genre {
   id: string
   name: string

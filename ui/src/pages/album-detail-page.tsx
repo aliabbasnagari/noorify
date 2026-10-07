@@ -1,10 +1,10 @@
 import { useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Link } from "@tanstack/react-router"
-import { Play, Share2 } from "lucide-react"
+import { Download, Play, Share2 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { getList, getOne } from "@/lib/api/http"
-import { getCoverArtUrl } from "@/lib/api/subsonic"
+import { downloadUrl, getCoverArtUrl } from "@/lib/api/subsonic"
 import type { Album, Song } from "@/lib/api/types"
 import { Button } from "@/components/ui/button"
 import { StarButton } from "@/components/library/star-button"
@@ -110,6 +110,17 @@ export default function AlbumDetailPage({ albumId }: { albumId: string }) {
         </Button>
         <StarButton resource="album" id={album.id} starred={album.starred} />
         <RatingStars resource="album" id={album.id} rating={album.rating} />
+        {config.enableDownloads && (
+          <Button
+            variant="outline"
+            size="sm"
+            nativeButton={false}
+            render={<a href={downloadUrl(album.id)} download />}
+          >
+            <Download className="size-3.5" />
+            {t("album.download")}
+          </Button>
+        )}
         {config.enableSharing && (
           <ShareDialog
             resourceIds={[album.id]}

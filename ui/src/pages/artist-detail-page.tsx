@@ -1,9 +1,14 @@
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { Play, Share2 } from "lucide-react"
+import { Download, Play, Share2 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { getList, getOne } from "@/lib/api/http"
-import { getArtistInfo, getCoverArtUrl, getTopSongs } from "@/lib/api/subsonic"
+import {
+  downloadUrl,
+  getArtistInfo,
+  getCoverArtUrl,
+  getTopSongs,
+} from "@/lib/api/subsonic"
 import type { Album, Artist, Song, SubsonicTopSong } from "@/lib/api/types"
 import { Button } from "@/components/ui/button"
 import { StarButton } from "@/components/library/star-button"
@@ -123,6 +128,17 @@ export default function ArtistDetailPage({ artistId }: { artistId: string }) {
           <Play className="size-5 fill-current" />
         </Button>
         <StarButton resource="artist" id={artist.id} starred={artist.starred} />
+        {config.enableDownloads && (
+          <Button
+            variant="outline"
+            size="sm"
+            nativeButton={false}
+            render={<a href={downloadUrl(artist.id)} download />}
+          >
+            <Download className="size-3.5" />
+            {t("artist.download")}
+          </Button>
+        )}
         {config.enableSharing && (
           <ShareDialog
             resourceIds={[artist.id]}
