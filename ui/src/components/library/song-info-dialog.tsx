@@ -57,7 +57,15 @@ export function SongInfoDialog({
   )
   const tags = Object.entries(song?.tags ?? {}).filter(
     ([name]) =>
-      !["genre", "disctotal", "tracktotal", "releasetype", "recordlabel", "media", "albumversion"].includes(name),
+      ![
+        "genre",
+        "disctotal",
+        "tracktotal",
+        "releasetype",
+        "recordlabel",
+        "media",
+        "albumversion",
+      ].includes(name),
   )
 
   return (

@@ -9,7 +9,10 @@ vi.mock("@/lib/api/http", () => ({
   getList: vi.fn().mockResolvedValue({ data: [{ id: 1 }], total: 1 }),
 }))
 
-function renderWithClient<T>(resource: string, options?: Parameters<typeof useAdminList>[1]) {
+function renderWithClient<T>(
+  resource: string,
+  options?: Parameters<typeof useAdminList>[1],
+) {
   const client = new QueryClient()
   const wrapper = ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={client}>{children}</QueryClientProvider>

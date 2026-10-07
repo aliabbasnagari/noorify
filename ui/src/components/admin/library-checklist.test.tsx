@@ -17,7 +17,9 @@ const libraries: Library[] = [
 
 function Harness() {
   const [selectedIds, setSelectedIds] = useState<number[]>([1])
-  return <LibraryChecklist selectedIds={selectedIds} onChange={setSelectedIds} />
+  return (
+    <LibraryChecklist selectedIds={selectedIds} onChange={setSelectedIds} />
+  )
 }
 
 function renderChecklist() {
@@ -54,7 +56,9 @@ describe("LibraryChecklist", () => {
     vi.mocked(getList).mockResolvedValue({ data: libraries, total: 2 })
     renderChecklist()
 
-    const selectAll = await screen.findByRole("checkbox", { name: "Select all" })
+    const selectAll = await screen.findByRole("checkbox", {
+      name: "Select all",
+    })
     fireEvent.click(selectAll)
     await waitFor(() =>
       expect(screen.getByRole("checkbox", { name: "Podcasts" })).toBeChecked(),

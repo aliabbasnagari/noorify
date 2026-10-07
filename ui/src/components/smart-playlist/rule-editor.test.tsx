@@ -16,7 +16,9 @@ function ControlledEditor({ initial }: { initial: RuleGroup }) {
 describe("SmartPlaylistRuleEditor", () => {
   it("shows a placeholder when there are no rules yet", () => {
     render(<ControlledEditor initial={emptyGroup("all")} />)
-    expect(screen.getByText("No rules yet — add one below.")).toBeInTheDocument()
+    expect(
+      screen.getByText("No rules yet — add one below."),
+    ).toBeInTheDocument()
   })
 
   it("adds a rule using the first field with its default operator", () => {
@@ -36,7 +38,9 @@ describe("SmartPlaylistRuleEditor", () => {
   it("adds a nested group", () => {
     render(<ControlledEditor initial={emptyGroup("all")} />)
     fireEvent.click(screen.getByRole("button", { name: "Add group" }))
-    expect(screen.getByRole("button", { name: "Remove group" })).toBeInTheDocument()
+    expect(
+      screen.getByRole("button", { name: "Remove group" }),
+    ).toBeInTheDocument()
     // Two "Match ... of the following" selectors now: root + nested group.
     expect(screen.getAllByText("of the following:")).toHaveLength(2)
   })
@@ -49,7 +53,9 @@ describe("SmartPlaylistRuleEditor", () => {
     }
     render(<ControlledEditor initial={initial} />)
     fireEvent.click(screen.getByRole("button", { name: "Remove rule" }))
-    expect(screen.getByText("No rules yet — add one below.")).toBeInTheDocument()
+    expect(
+      screen.getByText("No rules yet — add one below."),
+    ).toBeInTheDocument()
   })
 
   it("removes a nested group without touching sibling rules", () => {

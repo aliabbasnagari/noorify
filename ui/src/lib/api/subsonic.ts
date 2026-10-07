@@ -99,7 +99,10 @@ export async function subsonicFetch<T>(
     throw new SubsonicError(`Subsonic ${endpoint} returned an invalid response`)
   }
   if (root.status !== "ok") {
-    if (root.error?.code !== undefined && SUBSONIC_AUTH_ERROR_CODES.has(root.error.code)) {
+    if (
+      root.error?.code !== undefined &&
+      SUBSONIC_AUTH_ERROR_CODES.has(root.error.code)
+    ) {
       handleUnauthorized()
     }
     throw new SubsonicError(
@@ -231,7 +234,11 @@ function searchSongToSong(s: SubsonicSearchSong): Song {
  */
 export async function search3(
   query: string,
-  counts: { artistCount?: number; albumCount?: number; songCount?: number } = {},
+  counts: {
+    artistCount?: number
+    albumCount?: number
+    songCount?: number
+  } = {},
 ) {
   const root = await subsonicFetch<{
     searchResult3: {

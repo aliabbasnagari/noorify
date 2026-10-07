@@ -133,7 +133,9 @@ export default function PlaylistDetailPage({
   }
 
   if (playlistLoading)
-    return <p className="py-16 text-muted-foreground">{t("playlist.loading")}</p>
+    return (
+      <p className="py-16 text-muted-foreground">{t("playlist.loading")}</p>
+    )
   if (!playlist)
     return (
       <p className="py-16 text-muted-foreground">
@@ -179,7 +181,13 @@ export default function PlaylistDetailPage({
           <Play className="size-5 fill-current" />
         </Button>
         {isSmart ? (
-          <Button variant="outline" size="sm" render={<Link to="/playlist/$playlistId/rules" params={{ playlistId }} />}>
+          <Button
+            variant="outline"
+            size="sm"
+            render={
+              <Link to="/playlist/$playlistId/rules" params={{ playlistId }} />
+            }
+          >
             <ListMusic className="size-3.5" />
             {t("playlist.editRules")}
           </Button>
@@ -190,11 +198,7 @@ export default function PlaylistDetailPage({
           variant="outline"
           size="sm"
           onClick={() => {
-            if (
-              confirm(
-                t("playlist.deleteConfirm", { name: playlist.name }),
-              )
-            ) {
+            if (confirm(t("playlist.deleteConfirm", { name: playlist.name }))) {
               deletePlaylistMutation.mutate()
             }
           }}

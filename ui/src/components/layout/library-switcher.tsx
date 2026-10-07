@@ -27,7 +27,9 @@ export function LibrarySwitcher() {
   const libraries = useLibraryStore((s) => s.libraries)
   const activeLibraryIds = useLibraryStore((s) => s.activeLibraryIds)
   const toggleLibraryId = useLibraryStore((s) => s.toggleLibraryId)
-  const setAllLibrariesSelected = useLibraryStore((s) => s.setAllLibrariesSelected)
+  const setAllLibrariesSelected = useLibraryStore(
+    (s) => s.setAllLibrariesSelected,
+  )
   const queryClient = useQueryClient()
 
   if (libraries.length <= 1) return null
@@ -53,7 +55,11 @@ export function LibrarySwitcher() {
       >
         <PopoverTrigger
           render={
-            <Button variant="outline" size="sm" className="w-full justify-start">
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full justify-start"
+            >
               <LibraryIcon className="size-4 shrink-0 text-muted-foreground" />
               <span className="truncate">{summary}</span>
             </Button>

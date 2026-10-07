@@ -34,7 +34,8 @@ export function RemapMissingFileDialog({
 
   const { data, isLoading } = useQuery({
     queryKey: ["search3", "remap-target", debouncedQuery],
-    queryFn: () => search3(debouncedQuery, { songCount: 15, albumCount: 0, artistCount: 0 }),
+    queryFn: () =>
+      search3(debouncedQuery, { songCount: 15, albumCount: 0, artistCount: 0 }),
     enabled: debouncedQuery.length > 0,
   })
 
@@ -62,9 +63,10 @@ export function RemapMissingFileDialog({
           <DialogTitle>Remap missing file</DialogTitle>
         </DialogHeader>
         <p className="text-sm text-muted-foreground">
-          Find the track that <span className="font-mono">{missingFile.path}</span>{" "}
-          was actually re-imported as, and its play history/ratings/playlist
-          entries will move onto it.
+          Find the track that{" "}
+          <span className="font-mono">{missingFile.path}</span> was actually
+          re-imported as, and its play history/ratings/playlist entries will
+          move onto it.
         </p>
         <Input
           value={query}
@@ -74,8 +76,8 @@ export function RemapMissingFileDialog({
         />
         {mutation.isError && (
           <p className="text-sm text-destructive">
-            Couldn't remap — the target may itself be missing, or something
-            went wrong. Try again.
+            Couldn't remap — the target may itself be missing, or something went
+            wrong. Try again.
           </p>
         )}
         <div className="max-h-72 space-y-1 overflow-y-auto">

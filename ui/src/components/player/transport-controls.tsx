@@ -1,4 +1,12 @@
-import { Pause, Play, Repeat, Repeat1, Shuffle, SkipBack, SkipForward } from "lucide-react"
+import {
+  Pause,
+  Play,
+  Repeat,
+  Repeat1,
+  Shuffle,
+  SkipBack,
+  SkipForward,
+} from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
@@ -64,7 +72,9 @@ export function TransportControls() {
         size="icon-sm"
         disabled={!hasTrack}
         aria-pressed={repeatMode !== "off"}
-        aria-label={t("player.repeat", { mode: t(`player.repeatMode.${repeatMode}`) })}
+        aria-label={t("player.repeat", {
+          mode: t(`player.repeatMode.${repeatMode}`),
+        })}
         className={cn(repeatMode !== "off" && "text-primary")}
         onClick={cycleRepeatMode}
       >

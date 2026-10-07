@@ -32,8 +32,11 @@ export const queryClient = new QueryClient({
       staleTime: 30_000,
       // Retrying a 4xx can't help; only retry transient/network failures.
       retry: (failureCount, error) =>
-        !(error instanceof ApiError && error.status >= 400 && error.status < 500) &&
-        failureCount < 2,
+        !(
+          error instanceof ApiError &&
+          error.status >= 400 &&
+          error.status < 500
+        ) && failureCount < 2,
     },
   },
 })

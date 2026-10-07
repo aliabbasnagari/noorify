@@ -109,7 +109,9 @@ class AudioEngine {
       return
     }
 
-    this.audio.src = track.isRadio ? (track.streamUrl ?? "") : streamUrl(track.id)
+    this.audio.src = track.isRadio
+      ? (track.streamUrl ?? "")
+      : streamUrl(track.id)
 
     // Restored session: load paused and seek to the saved position instead
     // of autoplaying (browsers block autoplay without a gesture anyway) or

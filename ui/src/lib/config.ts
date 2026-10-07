@@ -133,3 +133,8 @@ export interface ShareInfo {
 export const shareInfo = parseInjected<ShareInfo>(
   window.__SHARE_INFO__,
 ) as ShareInfo | null
+
+/** Called once the first admin account exists, so a later logout shows the login form. */
+export function markSetupComplete() {
+  config.firstTime = false
+}

@@ -27,12 +27,16 @@ export default function LibrariesPage() {
     setSorting,
     pagination,
     setPagination,
-  } = useAdminList<Library>("library", { defaultSort: "name", defaultOrder: "ASC" })
+  } = useAdminList<Library>("library", {
+    defaultSort: "name",
+    defaultOrder: "ASC",
+  })
   const queryClient = useQueryClient()
   const [scanningId, setScanningId] = useState<number | null>(null)
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => apiFetch(`/api/library/${id}`, { method: "DELETE" }),
+    mutationFn: (id: number) =>
+      apiFetch(`/api/library/${id}`, { method: "DELETE" }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["library"] }),
   })
 
@@ -84,7 +88,9 @@ export default function LibrariesPage() {
               disabled={scanning}
               onClick={() => void handleScan(library, false)}
             >
-              <RefreshCw className={scanning ? "size-3.5 animate-spin" : "size-3.5"} />
+              <RefreshCw
+                className={scanning ? "size-3.5 animate-spin" : "size-3.5"}
+              />
             </Button>
             <LibraryDialog
               library={library}

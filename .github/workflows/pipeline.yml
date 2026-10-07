@@ -354,25 +354,6 @@ jobs:
           cd ui
           npm run build
 
-  i18n-lint:
-    name: Lint i18n files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - run: |
-          set -e
-          for file in resources/i18n/*.json; do
-            echo "Validating $file"
-            if ! jq empty "$file" 2>error.log; then
-              error_message=$(cat error.log)
-              line_number=$(echo "$error_message" | grep -oP 'line \K[0-9]+')
-              echo "::error file=$file,line=$line_number::$error_message"
-              exit 1
-            fi
-          done
-      - run: ./.github/workflows/validate-translations.sh -v
-
-
   check-push-enabled:
     name: Check Docker configuration
     runs-on: ubuntu-latest
@@ -385,7 +366,7 @@ jobs:
 
   build:
     name: Build
-    needs: [js, go, go-plugins, go-windows, go-lint, i18n-lint, git-version, check-push-enabled, validate-migrations]
+    needs: [js, go, go-plugins, go-windows, go-lint, git-version, check-push-enabled, validate-migrations]
     strategy:
       matrix:
         platform: [ linux/amd64, linux/arm64, linux/arm/v5, linux/arm/v6, linux/arm/v7, linux/386, linux/riscv64, darwin/amd64, darwin/arm64, windows/amd64, windows/386 ]

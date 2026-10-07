@@ -1,9 +1,6 @@
 import { apiFetch } from "@/lib/api/http"
 import { isAuthenticated } from "@/stores/auth-store"
-import {
-  usePlayerStore,
-  type QueuedTrack,
-} from "@/stores/player-store"
+import { usePlayerStore, type QueuedTrack } from "@/stores/player-store"
 
 // Persists the play queue through the server's per-user `/api/queue`
 // (model.PlayQueue: track ids + current index + position in milliseconds —
@@ -89,9 +86,8 @@ function savePosition(keepalive = false) {
 /** Starts saving queue/position changes. Returns a stop function. */
 export function startQueueSync(): () => void {
   let saveTimer: ReturnType<typeof setTimeout> | undefined
-  let lastTrackId = usePlayerStore.getState().queue[
-    usePlayerStore.getState().currentIndex
-  ]?.id
+  let lastTrackId =
+    usePlayerStore.getState().queue[usePlayerStore.getState().currentIndex]?.id
 
   const unsubscribe = usePlayerStore.subscribe((state, prev) => {
     // Restoring a saved queue must not immediately write it back.
@@ -107,9 +103,9 @@ export function startQueueSync(): () => void {
       return
     clearTimeout(saveTimer)
     saveTimer = setTimeout(() => {
-      const trackId = usePlayerStore.getState().queue[
-        usePlayerStore.getState().currentIndex
-      ]?.id
+      const trackId =
+        usePlayerStore.getState().queue[usePlayerStore.getState().currentIndex]
+          ?.id
       // A new track starts at 0; telemetry's currentTime is still the old
       // track's until the next timeupdate.
       const position =

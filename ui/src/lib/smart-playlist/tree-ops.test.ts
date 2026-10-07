@@ -32,14 +32,22 @@ describe("addAtPath", () => {
 
 describe("updateAtPath", () => {
   it("replaces the node at the given path", () => {
-    const root: RuleGroup = { kind: "group", combinator: "all", rules: [rule("a")] }
+    const root: RuleGroup = {
+      kind: "group",
+      combinator: "all",
+      rules: [rule("a")],
+    }
     const result = updateAtPath(root, [0], () => rule("b"))
     expect(result.rules).toEqual([rule("b")])
   })
 
   it("updates the root group itself when path is empty", () => {
     const root = emptyGroup("all")
-    const result = updateAtPath(root, [], (node) => ({ ...node, combinator: "any" }) as RuleGroup)
+    const result = updateAtPath(
+      root,
+      [],
+      (node) => ({ ...node, combinator: "any" }) as RuleGroup,
+    )
     expect(result.combinator).toBe("any")
   })
 
@@ -54,7 +62,10 @@ describe("updateAtPath", () => {
     }
     const result = updateAtPath(root, [1, 1], () => rule("changed"))
     expect(result.rules[0]).toEqual(rule("keep-me"))
-    expect((result.rules[1] as RuleGroup).rules).toEqual([rule("a"), rule("changed")])
+    expect((result.rules[1] as RuleGroup).rules).toEqual([
+      rule("a"),
+      rule("changed"),
+    ])
   })
 })
 
@@ -73,7 +84,9 @@ describe("removeAtPath", () => {
     const root: RuleGroup = {
       kind: "group",
       combinator: "all",
-      rules: [{ kind: "group", combinator: "any", rules: [rule("a"), rule("b")] }],
+      rules: [
+        { kind: "group", combinator: "any", rules: [rule("a"), rule("b")] },
+      ],
     }
     const result = removeAtPath(root, [0, 0])
     expect((result.rules[0] as RuleGroup).rules).toEqual([rule("b")])

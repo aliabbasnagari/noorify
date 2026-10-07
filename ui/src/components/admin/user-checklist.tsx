@@ -15,10 +15,12 @@ export function UserChecklist({
 }) {
   const { data, isLoading } = useQuery({
     queryKey: ["user", "list", "checklist"],
-    queryFn: () => getList<AdminUser>("user", { sort: "userName", order: "ASC", end: 500 }),
+    queryFn: () =>
+      getList<AdminUser>("user", { sort: "userName", order: "ASC", end: 500 }),
   })
   const users = data?.data ?? []
-  const allSelected = users.length > 0 && users.every((u) => selectedIds.includes(u.id))
+  const allSelected =
+    users.length > 0 && users.every((u) => selectedIds.includes(u.id))
 
   function toggleAll() {
     onChange(allSelected ? [] : users.map((u) => u.id))

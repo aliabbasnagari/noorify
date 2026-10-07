@@ -16,10 +16,12 @@ export function LibraryChecklist({
 }) {
   const { data, isLoading } = useQuery({
     queryKey: ["library", "list", "checklist"],
-    queryFn: () => getList<Library>("library", { sort: "name", order: "ASC", end: 500 }),
+    queryFn: () =>
+      getList<Library>("library", { sort: "name", order: "ASC", end: 500 }),
   })
   const libraries = data?.data ?? []
-  const allSelected = libraries.length > 0 && libraries.every((l) => selectedIds.includes(l.id))
+  const allSelected =
+    libraries.length > 0 && libraries.every((l) => selectedIds.includes(l.id))
 
   function toggleAll() {
     onChange(allSelected ? [] : libraries.map((l) => l.id))

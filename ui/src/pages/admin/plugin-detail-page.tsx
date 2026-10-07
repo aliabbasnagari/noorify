@@ -101,7 +101,8 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
   }
 
   if (isLoading) return <p className="py-16 text-muted-foreground">Loading…</p>
-  if (!plugin) return <p className="py-16 text-muted-foreground">Plugin not found.</p>
+  if (!plugin)
+    return <p className="py-16 text-muted-foreground">Plugin not found.</p>
 
   return (
     <div className="max-w-2xl space-y-6 py-2">
@@ -109,10 +110,15 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
         <div>
           <h1 className="text-2xl font-bold">{manifest?.name ?? plugin.id}</h1>
           <p className="text-sm text-muted-foreground">
-            {manifest?.description} {manifest?.version && `· v${manifest.version}`}
+            {manifest?.description}{" "}
+            {manifest?.version && `· v${manifest.version}`}
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => navigate({ to: "/admin/plugins" })}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => navigate({ to: "/admin/plugins" })}
+        >
           Back
         </Button>
       </div>
@@ -125,7 +131,10 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
 
       <div className="flex items-center justify-between rounded-md border border-border px-3 py-2.5">
         <Label className="!mt-0">Enabled</Label>
-        <Switch checked={plugin.enabled} onCheckedChange={handleToggleEnabled} />
+        <Switch
+          checked={plugin.enabled}
+          onCheckedChange={handleToggleEnabled}
+        />
       </div>
 
       {manifest?.config && (
@@ -137,7 +146,9 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
             onChange={(e) => setConfigText(e.target.value)}
             className="font-mono text-xs"
           />
-          {configError && <p className="text-sm text-destructive">{configError}</p>}
+          {configError && (
+            <p className="text-sm text-destructive">{configError}</p>
+          )}
         </div>
       )}
 
@@ -147,7 +158,9 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
             <Label className="!mt-0">All users</Label>
             <Switch checked={allUsers} onCheckedChange={setAllUsers} />
           </div>
-          {!allUsers && <UserChecklist selectedIds={userIds} onChange={setUserIds} />}
+          {!allUsers && (
+            <UserChecklist selectedIds={userIds} onChange={setUserIds} />
+          )}
         </div>
       )}
 
@@ -158,12 +171,18 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
             <Switch checked={allLibraries} onCheckedChange={setAllLibraries} />
           </div>
           {!allLibraries && (
-            <LibraryChecklist selectedIds={libraryIds} onChange={setLibraryIds} />
+            <LibraryChecklist
+              selectedIds={libraryIds}
+              onChange={setLibraryIds}
+            />
           )}
           {manifest.permissions.library.filesystem && (
             <div className="flex items-center justify-between pt-1">
               <Label className="!mt-0">Allow write access</Label>
-              <Switch checked={allowWriteAccess} onCheckedChange={setAllowWriteAccess} />
+              <Switch
+                checked={allowWriteAccess}
+                onCheckedChange={setAllowWriteAccess}
+              />
             </div>
           )}
         </div>
@@ -178,7 +197,9 @@ export default function PluginDetailPage({ pluginId }: { pluginId: string }) {
       </Button>
 
       <details className="rounded-md border border-border p-3">
-        <summary className="cursor-pointer text-sm font-medium">Raw manifest</summary>
+        <summary className="cursor-pointer text-sm font-medium">
+          Raw manifest
+        </summary>
         <pre className="mt-2 overflow-x-auto text-xs text-muted-foreground">
           {JSON.stringify(manifest, null, 2)}
         </pre>

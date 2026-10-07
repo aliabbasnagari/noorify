@@ -32,7 +32,10 @@ export function HelpDialog() {
         </DialogHeader>
         <dl className="space-y-2">
           {SHORTCUTS.map(({ labelKey, keys }) => (
-            <div key={labelKey} className="flex items-center justify-between gap-4">
+            <div
+              key={labelKey}
+              className="flex items-center justify-between gap-4"
+            >
               <dt className="text-sm text-muted-foreground">{t(labelKey)}</dt>
               <dd className="rounded border border-border bg-muted px-2 py-0.5 font-mono text-xs">
                 {keys}

@@ -60,7 +60,9 @@ export function AboutDialog({
 
   async function copyConfig() {
     if (!serverConfig) return
-    await navigator.clipboard.writeText(JSON.stringify(serverConfig.config, null, 2))
+    await navigator.clipboard.writeText(
+      JSON.stringify(serverConfig.config, null, 2),
+    )
     setCopied(true)
   }
 
@@ -68,7 +70,8 @@ export function AboutDialog({
     ? "…"
     : insights.lastRun === "disabled"
       ? "Disabled"
-      : insights.lastRun.startsWith("1969-12-31") || insights.lastRun.startsWith("0001-01-01")
+      : insights.lastRun.startsWith("1969-12-31") ||
+          insights.lastRun.startsWith("0001-01-01")
         ? "Waiting for first run"
         : insights.lastRun
 
@@ -86,14 +89,21 @@ export function AboutDialog({
               <TabsTrigger value="config">Config</TabsTrigger>
             </TabsList>
             <TabsContent value="about" className="space-y-3 pt-2">
-              <AboutContent version={config.version} insightsLabel={isAdmin ? insightsLabel : null} />
+              <AboutContent
+                version={config.version}
+                insightsLabel={isAdmin ? insightsLabel : null}
+              />
             </TabsContent>
             <TabsContent value="config" className="space-y-3 pt-2">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-muted-foreground">
                   {serverConfig?.configFile || "No config file loaded"}
                 </p>
-                <Button variant="outline" size="sm" onClick={() => void copyConfig()}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => void copyConfig()}
+                >
                   <Copy className="size-3.5" />
                   {copied ? "Copied!" : "Copy as JSON"}
                 </Button>
@@ -102,31 +112,44 @@ export function AboutDialog({
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-muted/50">
                     <tr>
-                      <th className="px-2 py-1.5 text-left font-medium">Name</th>
-                      <th className="px-2 py-1.5 text-left font-medium">Environment variable</th>
-                      <th className="px-2 py-1.5 text-left font-medium">Value</th>
+                      <th className="px-2 py-1.5 text-left font-medium">
+                        Name
+                      </th>
+                      <th className="px-2 py-1.5 text-left font-medium">
+                        Environment variable
+                      </th>
+                      <th className="px-2 py-1.5 text-left font-medium">
+                        Value
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {serverConfig &&
-                      Object.entries(serverConfig.config).map(([key, value]) => (
-                        <tr key={key} className="border-t border-border">
-                          <td className="px-2 py-1.5">{key}</td>
-                          <td className="px-2 py-1.5 font-mono text-muted-foreground">
-                            ND_{key.toUpperCase()}
-                          </td>
-                          <td className="px-2 py-1.5 font-mono break-all text-muted-foreground">
-                            {typeof value === "object" ? JSON.stringify(value) : String(value)}
-                          </td>
-                        </tr>
-                      ))}
+                      Object.entries(serverConfig.config).map(
+                        ([key, value]) => (
+                          <tr key={key} className="border-t border-border">
+                            <td className="px-2 py-1.5">{key}</td>
+                            <td className="px-2 py-1.5 font-mono text-muted-foreground">
+                              ND_{key.toUpperCase()}
+                            </td>
+                            <td className="px-2 py-1.5 font-mono break-all text-muted-foreground">
+                              {typeof value === "object"
+                                ? JSON.stringify(value)
+                                : String(value)}
+                            </td>
+                          </tr>
+                        ),
+                      )}
                   </tbody>
                 </table>
               </div>
             </TabsContent>
           </Tabs>
         ) : (
-          <AboutContent version={config.version} insightsLabel={isAdmin ? insightsLabel : null} />
+          <AboutContent
+            version={config.version}
+            insightsLabel={isAdmin ? insightsLabel : null}
+          />
         )}
       </DialogContent>
     </Dialog>

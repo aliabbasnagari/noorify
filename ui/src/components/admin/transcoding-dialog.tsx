@@ -151,7 +151,11 @@ export function TranscodingDialog({
                 <FormItem>
                   <FormLabel>Command</FormLabel>
                   <FormControl>
-                    <Textarea rows={3} {...field} className="font-mono text-xs" />
+                    <Textarea
+                      rows={3}
+                      {...field}
+                      className="font-mono text-xs"
+                    />
                   </FormControl>
                   {!isEditing && (
                     <p className="text-xs text-muted-foreground">

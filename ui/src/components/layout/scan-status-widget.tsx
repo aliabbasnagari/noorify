@@ -4,7 +4,11 @@ import { getScanStatus, startFullLibraryScan } from "@/lib/api/subsonic"
 import { formatShortDuration } from "@/lib/format"
 import { useScanStatusStore } from "@/stores/scan-status-store"
 import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 const SCAN_TYPE_LABELS: Record<string, string> = {
   full: "Full scan",
@@ -58,10 +62,13 @@ export function ScanStatusWidget() {
         <div className="space-y-1 text-sm">
           <p className="font-medium">
             {scanning ? "Scanning…" : "Idle"}
-            {status?.scanType && ` — ${SCAN_TYPE_LABELS[status.scanType] ?? status.scanType}`}
+            {status?.scanType &&
+              ` — ${SCAN_TYPE_LABELS[status.scanType] ?? status.scanType}`}
           </p>
           <p className="text-xs text-muted-foreground">
-            {status ? `${status.folderCount} folders scanned` : "No scan status yet"}
+            {status
+              ? `${status.folderCount} folders scanned`
+              : "No scan status yet"}
             {status && ` · ${formatShortDuration(status.elapsedTime)}`}
           </p>
           {hasError && (

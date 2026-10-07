@@ -31,7 +31,7 @@
 set -e
 
 # Path to the reference English translation file
-EN_FILE="${EN_FILE:-ui/src/i18n/en.json}"
+EN_FILE="${EN_FILE:-ui/src/i18n/locales/en.json}"
 TRANSLATION_DIR="${TRANSLATION_DIR:-resources/i18n}"
 VERBOSE=false
 

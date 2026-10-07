@@ -62,7 +62,11 @@ export function Shelf<T extends WithId>({
     if (e.pointerType !== "mouse" || e.button !== 0) return
     const el = scrollRef.current
     if (!el) return
-    dragRef.current = { startX: e.clientX, startScrollLeft: el.scrollLeft, moved: false }
+    dragRef.current = {
+      startX: e.clientX,
+      startScrollLeft: el.scrollLeft,
+      moved: false,
+    }
     // Pointer capture is acquired lazily, only once real dragging is
     // confirmed (see handlePointerMove) — capturing here unconditionally
     // would retarget the click event that follows a plain, un-moved click

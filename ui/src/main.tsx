@@ -1,6 +1,6 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
-import { registerSW } from 'virtual:pwa-register'
+import { registerSW } from "virtual:pwa-register"
 
 import "./index.css"
 import App from "./App.tsx"
@@ -8,10 +8,13 @@ import SharePlayerPage from "./pages/share-player-page.tsx"
 import { ThemeProvider } from "./components/theme-provider.tsx"
 import { shareInfo } from "./lib/config.ts"
 
-declare global { interface Window { global: typeof globalThis } }
+declare global {
+  interface Window {
+    global: typeof globalThis
+  }
+}
 
 window.global = window // fix "global is not defined" error in react-image-lightbox
-
 
 registerSW({ immediate: true })
 

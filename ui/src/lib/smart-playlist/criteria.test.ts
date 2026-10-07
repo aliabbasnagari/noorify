@@ -20,7 +20,12 @@ describe("criteriaToWire / wireToCriteria", () => {
             kind: "group",
             combinator: "any",
             rules: [
-              { kind: "rule", field: "artist", operator: "contains", value: "Beatles" },
+              {
+                kind: "rule",
+                field: "artist",
+                operator: "contains",
+                value: "Beatles",
+              },
               { kind: "rule", field: "year", operator: "gt", value: 1970 },
             ],
           },
@@ -41,7 +46,12 @@ describe("criteriaToWire / wireToCriteria", () => {
       order: undefined,
       limit: undefined,
     }
-    criteria.root.rules.push({ kind: "rule", field: "loved", operator: "is", value: true })
+    criteria.root.rules.push({
+      kind: "rule",
+      field: "loved",
+      operator: "is",
+      value: true,
+    })
 
     expect(criteriaToWire(criteria)).toEqual({
       all: [{ is: { loved: true } }],
@@ -59,7 +69,9 @@ describe("criteriaToWire / wireToCriteria", () => {
     expect(criteria.root).toEqual({
       kind: "group",
       combinator: "all",
-      rules: [{ kind: "rule", field: "comment", operator: "isMissing", value: true }],
+      rules: [
+        { kind: "rule", field: "comment", operator: "isMissing", value: true },
+      ],
     })
   })
 })

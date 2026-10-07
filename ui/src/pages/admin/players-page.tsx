@@ -25,7 +25,10 @@ export default function PlayersPage() {
     setSorting,
     pagination,
     setPagination,
-  } = useAdminList<Player>("player", { defaultSort: "name", defaultOrder: "ASC" })
+  } = useAdminList<Player>("player", {
+    defaultSort: "name",
+    defaultOrder: "ASC",
+  })
   const queryClient = useQueryClient()
   const [editing, setEditing] = useState<Player | null>(null)
 
@@ -38,21 +41,28 @@ export default function PlayersPage() {
   })
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => apiFetch(`/api/player/${id}`, { method: "DELETE" }),
+    mutationFn: (id: string) =>
+      apiFetch(`/api/player/${id}`, { method: "DELETE" }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["player"] }),
   })
 
   const columns: ColumnDef<Player, unknown>[] = [
     { accessorKey: "name", header: "Name" },
     ...(isAdmin
-      ? [{ accessorKey: "userName", header: "User" } as ColumnDef<Player, unknown>]
+      ? [
+          { accessorKey: "userName", header: "User" } as ColumnDef<
+            Player,
+            unknown
+          >,
+        ]
       : []),
     {
       accessorKey: "transcodingId",
       header: "Transcoding",
       cell: ({ row }) =>
         row.original.transcodingId
-          ? (transcodingById?.get(row.original.transcodingId) ?? row.original.transcodingId)
+          ? (transcodingById?.get(row.original.transcodingId) ??
+            row.original.transcodingId)
           : "—",
     },
     {
@@ -85,7 +95,9 @@ export default function PlayersPage() {
             aria-label={`Delete ${row.original.name}`}
             onClick={() => {
               if (
-                confirm(`Delete player "${row.original.name}"? This can't be undone.`)
+                confirm(
+                  `Delete player "${row.original.name}"? This can't be undone.`,
+                )
               ) {
                 deleteMutation.mutate(row.original.id)
               }

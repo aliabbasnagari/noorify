@@ -10,8 +10,14 @@ function mockScrollMetrics(
   el: HTMLElement,
   { scrollWidth, clientWidth }: { scrollWidth: number; clientWidth: number },
 ) {
-  Object.defineProperty(el, "scrollWidth", { value: scrollWidth, configurable: true })
-  Object.defineProperty(el, "clientWidth", { value: clientWidth, configurable: true })
+  Object.defineProperty(el, "scrollWidth", {
+    value: scrollWidth,
+    configurable: true,
+  })
+  Object.defineProperty(el, "clientWidth", {
+    value: clientWidth,
+    configurable: true,
+  })
 }
 
 function renderShelf() {

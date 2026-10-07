@@ -17,7 +17,9 @@ describe("share-url", () => {
   it("builds URLs off the app's own origin when shareURL is unset", () => {
     config.shareURL = ""
     config.baseURL = ""
-    expect(shareLinkUrl("abc123")).toBe(`${window.location.origin}/share/abc123`)
+    expect(shareLinkUrl("abc123")).toBe(
+      `${window.location.origin}/share/abc123`,
+    )
     expect(shareStreamUrl("tok")).toBe(`${window.location.origin}/share/s/tok`)
     expect(shareDownloadUrl("abc123")).toBe(
       `${window.location.origin}/share/d/abc123`,

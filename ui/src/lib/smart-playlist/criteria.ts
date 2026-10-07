@@ -75,7 +75,9 @@ function wireToRule(wire: WireRule): RuleNode {
   }
 }
 
-export function criteriaToWire(criteria: SmartPlaylistCriteria): Record<string, unknown> {
+export function criteriaToWire(
+  criteria: SmartPlaylistCriteria,
+): Record<string, unknown> {
   return {
     ...ruleToWire(criteria.root),
     ...(criteria.sort ? { sort: criteria.sort } : {}),
@@ -84,7 +86,9 @@ export function criteriaToWire(criteria: SmartPlaylistCriteria): Record<string, 
   }
 }
 
-export function wireToCriteria(wire: Record<string, unknown>): SmartPlaylistCriteria {
+export function wireToCriteria(
+  wire: Record<string, unknown>,
+): SmartPlaylistCriteria {
   const { sort, order, limit, ...rest } = wire
   return {
     root: wireToRule(rest) as RuleGroup,
@@ -105,5 +109,10 @@ export function defaultValueForOperator(operator: RuleOperator): RuleValue {
 }
 
 export function emptyRule(field: string, operator: RuleOperator): RuleLeaf {
-  return { kind: "rule", field, operator, value: defaultValueForOperator(operator) }
+  return {
+    kind: "rule",
+    field,
+    operator,
+    value: defaultValueForOperator(operator),
+  }
 }

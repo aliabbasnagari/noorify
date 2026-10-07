@@ -24,7 +24,12 @@ import {
   type RuleLeaf,
   type RuleOperator,
 } from "@/lib/smart-playlist/criteria"
-import { addAtPath, removeAtPath, updateAtPath, type Path } from "@/lib/smart-playlist/tree-ops"
+import {
+  addAtPath,
+  removeAtPath,
+  updateAtPath,
+  type Path,
+} from "@/lib/smart-playlist/tree-ops"
 
 export function SmartPlaylistRuleEditor({
   root,
@@ -33,7 +38,15 @@ export function SmartPlaylistRuleEditor({
   root: RuleGroup
   onChange: (root: RuleGroup) => void
 }) {
-  return <RuleGroupView group={root} path={[]} root={root} onChange={onChange} depth={0} />
+  return (
+    <RuleGroupView
+      group={root}
+      path={[]}
+      root={root}
+      onChange={onChange}
+      depth={0}
+    />
+  )
 }
 
 function RuleGroupView({
@@ -52,12 +65,24 @@ function RuleGroupView({
   const { t } = useTranslation()
 
   function setCombinator(combinator: "all" | "any") {
-    onChange(updateAtPath(root, path, (node) => ({ ...node, combinator }) as RuleGroup))
+    onChange(
+      updateAtPath(
+        root,
+        path,
+        (node) => ({ ...node, combinator }) as RuleGroup,
+      ),
+    )
   }
 
   function addRule() {
     const field = FIELDS[0]
-    onChange(addAtPath(root, path, emptyRule(field.key, defaultOperatorFor(field.type))))
+    onChange(
+      addAtPath(
+        root,
+        path,
+        emptyRule(field.key, defaultOperatorFor(field.type)),
+      ),
+    )
   }
 
   function addGroup() {
@@ -72,10 +97,14 @@ function RuleGroupView({
       )}
     >
       <div className="flex items-center gap-2 text-sm">
-        <span className="text-muted-foreground">{t("smartPlaylist.match")}</span>
+        <span className="text-muted-foreground">
+          {t("smartPlaylist.match")}
+        </span>
         <Select
           value={group.combinator}
-          onValueChange={(value) => value && setCombinator(value as "all" | "any")}
+          onValueChange={(value) =>
+            value && setCombinator(value as "all" | "any")
+          }
         >
           <SelectTrigger className="w-20">
             <SelectValue />
@@ -122,7 +151,9 @@ function RuleGroupView({
             <RuleLeafRow
               key={index}
               rule={node}
-              onChange={(updated) => onChange(updateAtPath(root, childPath, () => updated))}
+              onChange={(updated) =>
+                onChange(updateAtPath(root, childPath, () => updated))
+              }
               onRemove={() => onChange(removeAtPath(root, childPath))}
             />
           )
@@ -157,9 +188,16 @@ function RuleLeafRow({
 
   function handleFieldChange(field: string) {
     const newType = fieldType(field)
-    const stillValid = OPERATORS_BY_TYPE[newType].some((o) => o.value === rule.operator)
+    const stillValid = OPERATORS_BY_TYPE[newType].some(
+      (o) => o.value === rule.operator,
+    )
     const operator = stillValid ? rule.operator : defaultOperatorFor(newType)
-    onChange({ ...rule, field, operator, value: defaultValueForOperator(operator) })
+    onChange({
+      ...rule,
+      field,
+      operator,
+      value: defaultValueForOperator(operator),
+    })
   }
 
   function handleOperatorChange(operator: RuleOperator) {
@@ -168,7 +206,10 @@ function RuleLeafRow({
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Select value={rule.field} onValueChange={(v) => v && handleFieldChange(v)}>
+      <Select
+        value={rule.field}
+        onValueChange={(v) => v && handleFieldChange(v)}
+      >
         <SelectTrigger className="w-40">
           <SelectValue />
         </SelectTrigger>

@@ -8,7 +8,11 @@ import type { Radio } from "@/lib/api/types"
 import { useResourceList } from "@/hooks/use-resource-list"
 import { Button } from "@/components/ui/button"
 import { RadioDialog } from "@/components/library/radio-dialog"
-import { radioToQueuedTrack, useCurrentTrack, usePlayerStore } from "@/stores/player-store"
+import {
+  radioToQueuedTrack,
+  useCurrentTrack,
+  usePlayerStore,
+} from "@/stores/player-store"
 import { useAuthStore } from "@/stores/auth-store"
 
 export default function RadioPage() {
@@ -91,7 +95,13 @@ function RadioCard({ radio, isAdmin }: { radio: Radio; isAdmin: boolean }) {
         </span>
       </button>
       <div className="min-w-0">
-        <p className={active ? "truncate text-sm font-medium text-primary" : "truncate text-sm font-medium"}>
+        <p
+          className={
+            active
+              ? "truncate text-sm font-medium text-primary"
+              : "truncate text-sm font-medium"
+          }
+        >
           {radio.name}
         </p>
         {radio.homePageUrl && (

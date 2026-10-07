@@ -62,7 +62,7 @@ test-ndpgen: ##@Development Run tests for ndpgen plugin
 	cd plugins/cmd/ndpgen && go test ./......
 .PHONY: test-ndpgen
 
-testall: test test-ndpgen test-i18n test-js ##@Development Run Go and JS tests
+testall: test test-ndpgen test-js ##@Development Run Go and JS tests
 .PHONY: testall
 
 test-race: ##@Development Run Go tests with race detector

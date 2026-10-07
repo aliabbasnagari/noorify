@@ -11,7 +11,11 @@ import { ArtistCard } from "@/components/library/artist-card"
 import { PlaylistRow } from "@/components/library/playlist-row"
 import { SongRow } from "@/components/library/song-row"
 import { useDebouncedValue } from "@/hooks/use-debounced-value"
-import { songToQueuedTrack, useCurrentTrack, usePlayerStore } from "@/stores/player-store"
+import {
+  songToQueuedTrack,
+  useCurrentTrack,
+  usePlayerStore,
+} from "@/stores/player-store"
 
 function searchPlaylists(query: string) {
   return getList<Playlist>("playlist", { filter: { q: query }, end: 10 })
@@ -123,9 +127,7 @@ export default function SearchPage() {
 
           {data.playlists.length > 0 && (
             <section className="space-y-2">
-              <h2 className="text-lg font-semibold">
-                {t("search.playlists")}
-              </h2>
+              <h2 className="text-lg font-semibold">{t("search.playlists")}</h2>
               <div>
                 {data.playlists.map((playlist) => (
                   <PlaylistRow key={playlist.id} playlist={playlist} />

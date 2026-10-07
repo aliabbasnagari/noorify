@@ -1,11 +1,22 @@
 import { useEffect, useRef, useState } from "react"
-import { Download, Music, Pause, Play, SkipBack, SkipForward } from "lucide-react"
+import {
+  Download,
+  Music,
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+} from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { config, type ShareInfo } from "@/lib/config"
 import { formatDuration } from "@/lib/format"
-import { shareCoverUrl, shareDownloadUrl, shareStreamUrl } from "@/lib/share-url"
+import {
+  shareCoverUrl,
+  shareDownloadUrl,
+  shareStreamUrl,
+} from "@/lib/share-url"
 
 /**
  * The public, unauthenticated share player — server/public's handleShares
@@ -79,7 +90,11 @@ export default function SharePlayerPage({ info }: { info: ShareInfo }) {
             </h1>
           )}
           {canDownload && (
-            <Button variant="outline" size="sm" render={<a href={shareDownloadUrl(info.id)} />}>
+            <Button
+              variant="outline"
+              size="sm"
+              render={<a href={shareDownloadUrl(info.id)} />}
+            >
               <Download className="size-3.5" />
               {t("share.downloadAll")}
             </Button>

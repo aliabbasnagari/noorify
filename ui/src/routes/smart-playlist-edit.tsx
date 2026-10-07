@@ -3,7 +3,9 @@ import { createRoute } from "@tanstack/react-router"
 import { authenticatedRoute } from "@/routes/authenticated"
 import { RouteFallback } from "@/components/layout/route-fallback"
 
-const SmartPlaylistEditorPage = lazy(() => import("@/pages/smart-playlist-editor-page"))
+const SmartPlaylistEditorPage = lazy(
+  () => import("@/pages/smart-playlist-editor-page"),
+)
 
 export const smartPlaylistEditRoute = createRoute({
   getParentRoute: () => authenticatedRoute,

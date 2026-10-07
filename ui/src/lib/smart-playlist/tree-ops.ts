@@ -25,7 +25,11 @@ export function updateAtPath(
   return { ...root, rules }
 }
 
-export function addAtPath(root: RuleGroup, path: Path, node: RuleNode): RuleGroup {
+export function addAtPath(
+  root: RuleGroup,
+  path: Path,
+  node: RuleNode,
+): RuleGroup {
   return updateAtPath(root, path, (target) => {
     if (target.kind !== "group") {
       throw new Error("invalid path: expected a group")

@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io"
 	"io/fs"
-	"os"
 	"path"
 	"path/filepath"
 	"testing/fstest"
@@ -37,8 +36,12 @@ var _ = Describe("Translations", func() {
 
 	Describe("loadTranslation", func() {
 		It("loads a translation file correctly", func() {
-			fs := os.DirFS("ui/src")
-			tr, err := loadTranslation(fs, "en.json")
+			fsys := fstest.MapFS{
+				"i18n/en.json": &fstest.MapFile{
+					Data: []byte(`{"languageName":"English","resources":{"song":{"name":"Song |||| Songs"}}}`),
+				},
+			}
+			tr, err := loadTranslation(fsys, "en.json")
 			Expect(err).To(BeNil())
 			Expect(tr.ID).To(Equal("en"))
 			Expect(tr.Name).To(Equal("English"))

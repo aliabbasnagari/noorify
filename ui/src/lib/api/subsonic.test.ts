@@ -28,7 +28,12 @@ describe("search3", () => {
               status: "ok",
               searchResult3: {
                 artist: [
-                  { id: "ar1", name: "Some Artist", albumCount: 3, userRating: 4 },
+                  {
+                    id: "ar1",
+                    name: "Some Artist",
+                    albumCount: 3,
+                    userRating: 4,
+                  },
                 ],
                 album: [
                   {
@@ -65,7 +70,13 @@ describe("search3", () => {
     const result = await search3("some query")
 
     expect(result.artists).toEqual([
-      { id: "ar1", name: "Some Artist", albumCount: 3, starred: false, rating: 4 },
+      {
+        id: "ar1",
+        name: "Some Artist",
+        albumCount: 3,
+        starred: false,
+        rating: 4,
+      },
     ])
     expect(result.albums).toEqual([
       {

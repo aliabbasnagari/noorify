@@ -71,7 +71,8 @@ function ShareRow({ share }: { share: Share }) {
           {share.description || share.contents}
         </p>
         <p className="truncate text-xs text-muted-foreground">
-          {share.contents} · {t("shares.visitCount", { count: share.visitCount ?? 0 })}
+          {share.contents} ·{" "}
+          {t("shares.visitCount", { count: share.visitCount ?? 0 })}
           {expires ? ` · ${t("shares.expires", { date: expires })}` : ""}
         </p>
       </div>
@@ -84,7 +85,11 @@ function ShareRow({ share }: { share: Share }) {
         aria-label={t("shares.copyLink")}
         onClick={() => void copyLink()}
       >
-        {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+        {copied ? (
+          <Check className="size-3.5" />
+        ) : (
+          <Copy className="size-3.5" />
+        )}
       </Button>
       <Button
         variant="outline"

@@ -27,13 +27,20 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-function schema(isEditing: boolean, changingPassword: boolean, requireCurrent: boolean) {
+function schema(
+  isEditing: boolean,
+  changingPassword: boolean,
+  requireCurrent: boolean,
+) {
   const settingPassword = changingPassword || !isEditing
   return z
     .object({
       userName: z.string().min(1, "Username is required"),
       name: z.string().min(1, "Name is required"),
-      email: z.union([z.string().email("Must be a valid email"), z.literal("")]),
+      email: z.union([
+        z.string().email("Must be a valid email"),
+        z.literal(""),
+      ]),
       isAdmin: z.boolean(),
       password: settingPassword
         ? z.string().min(1, "Password is required")
@@ -246,9 +253,15 @@ export function UserDialog({
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{isEditing ? "New password" : "Password"}</FormLabel>
+                      <FormLabel>
+                        {isEditing ? "New password" : "Password"}
+                      </FormLabel>
                       <FormControl>
-                        <Input type="password" autoComplete="new-password" {...field} />
+                        <Input
+                          type="password"
+                          autoComplete="new-password"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -261,7 +274,11 @@ export function UserDialog({
                     <FormItem>
                       <FormLabel>Confirm password</FormLabel>
                       <FormControl>
-                        <Input type="password" autoComplete="new-password" {...field} />
+                        <Input
+                          type="password"
+                          autoComplete="new-password"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -277,7 +294,10 @@ export function UserDialog({
                 <FormItem className="flex flex-row items-center justify-between">
                   <FormLabel className="!mt-0">Admin</FormLabel>
                   <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -290,7 +310,10 @@ export function UserDialog({
             ) : (
               <div className="space-y-1.5">
                 <p className="text-sm font-medium">Libraries</p>
-                <LibraryChecklist selectedIds={libraryIds} onChange={setLibraryIds} />
+                <LibraryChecklist
+                  selectedIds={libraryIds}
+                  onChange={setLibraryIds}
+                />
               </div>
             )}
 

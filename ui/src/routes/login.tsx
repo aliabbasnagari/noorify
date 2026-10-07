@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { rootRoute } from "@/routes/root"
 import { apiFetch, ApiError } from "@/lib/api/http"
-import { config } from "@/lib/config"
+import { config, markSetupComplete } from "@/lib/config"
 import { useAuthStore, type AuthSession } from "@/stores/auth-store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -94,7 +94,7 @@ function LoginPage() {
         method: "POST",
         body: { username: values.username, password: values.password },
       })
-      if (firstTime) config.firstTime = false
+      if (firstTime) markSetupComplete()
       setSession(session)
       navigate({ to: search.redirect || "/" })
     } catch (error) {

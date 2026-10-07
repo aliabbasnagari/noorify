@@ -57,7 +57,12 @@ export function PlayerDialog({
 
   const { data: transcodingOptions } = useQuery({
     queryKey: ["transcoding", "list", "for-player-dialog"],
-    queryFn: () => getList<Transcoding>("transcoding", { sort: "name", order: "ASC", end: 200 }),
+    queryFn: () =>
+      getList<Transcoding>("transcoding", {
+        sort: "name",
+        order: "ASC",
+        end: 200,
+      }),
   })
 
   const form = useForm<z.infer<typeof schema>>({
@@ -78,8 +83,10 @@ export function PlayerDialog({
         body: {
           ...player,
           name: values.name,
-          transcodingId: values.transcodingId === NONE ? "" : values.transcodingId,
-          maxBitRate: values.maxBitRate === NONE ? 0 : Number(values.maxBitRate),
+          transcodingId:
+            values.transcodingId === NONE ? "" : values.transcodingId,
+          maxBitRate:
+            values.maxBitRate === NONE ? 0 : Number(values.maxBitRate),
           reportRealPath: values.reportRealPath,
           scrobbleEnabled: values.scrobbleEnabled,
         },
@@ -129,7 +136,10 @@ export function PlayerDialog({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Transcoding</FormLabel>
-                  <Select value={field.value} onValueChange={(v) => v && field.onChange(v)}>
+                  <Select
+                    value={field.value}
+                    onValueChange={(v) => v && field.onChange(v)}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
@@ -153,7 +163,10 @@ export function PlayerDialog({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Max bit rate</FormLabel>
-                  <Select value={field.value} onValueChange={(v) => v && field.onChange(v)}>
+                  <Select
+                    value={field.value}
+                    onValueChange={(v) => v && field.onChange(v)}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
@@ -178,7 +191,10 @@ export function PlayerDialog({
                 <FormItem className="flex flex-row items-center justify-between">
                   <FormLabel className="!mt-0">Report real path</FormLabel>
                   <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -191,7 +207,10 @@ export function PlayerDialog({
                   <FormItem className="flex flex-row items-center justify-between">
                     <FormLabel className="!mt-0">Scrobbling enabled</FormLabel>
                     <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} />
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
                     </FormControl>
                   </FormItem>
                 )}

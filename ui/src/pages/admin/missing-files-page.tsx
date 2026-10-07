@@ -26,7 +26,8 @@ export default function MissingFilesPage() {
 
   const { data: libraries } = useQuery({
     queryKey: ["library", "list", "for-missing-filter"],
-    queryFn: () => getList<Library>("library", { sort: "name", order: "ASC", end: 200 }),
+    queryFn: () =>
+      getList<Library>("library", { sort: "name", order: "ASC", end: 200 }),
   })
 
   const {
@@ -40,12 +41,17 @@ export default function MissingFilesPage() {
   } = useAdminList<MissingFile>("missing", {
     defaultSort: "updated_at",
     defaultOrder: "DESC",
-    filter: libraryFilter === ALL_LIBRARIES ? undefined : { library_id: libraryFilter },
+    filter:
+      libraryFilter === ALL_LIBRARIES
+        ? undefined
+        : { library_id: libraryFilter },
   })
 
   const deleteOneMutation = useMutation({
     mutationFn: (id: string) =>
-      apiFetch(`/api/missing?id=${encodeURIComponent(id)}`, { method: "DELETE" }),
+      apiFetch(`/api/missing?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["missing"] }),
   })
 
@@ -106,7 +112,10 @@ export default function MissingFilesPage() {
       <div className="flex items-center justify-between gap-2">
         <h1 className="text-2xl font-bold">Missing Files</h1>
         <div className="flex items-center gap-2">
-          <Select value={libraryFilter} onValueChange={(v) => v && setLibraryFilter(v)}>
+          <Select
+            value={libraryFilter}
+            onValueChange={(v) => v && setLibraryFilter(v)}
+          >
             <SelectTrigger className="w-44">
               <SelectValue />
             </SelectTrigger>
@@ -139,9 +148,9 @@ export default function MissingFilesPage() {
         </div>
       </div>
       <p className="text-sm text-muted-foreground">
-        Tracks the scanner could no longer find on disk. Removing an entry
-        only deletes it from the library database — it never touches
-        anything on your filesystem.
+        Tracks the scanner could no longer find on disk. Removing an entry only
+        deletes it from the library database — it never touches anything on your
+        filesystem.
       </p>
       <DataTable
         columns={columns}

@@ -45,7 +45,8 @@ export const useLibraryStore = create<LibraryState>()(
       libraries: [],
       activeLibraryIds: [],
       setLibraries: (libraries) => {
-        const { libraries: previous, activeLibraryIds: previousSelection } = get()
+        const { libraries: previous, activeLibraryIds: previousSelection } =
+          get()
         const newIds = libraries.map((l) => l.id)
         let finalSelection: number[]
         if (previousSelection.length === 0 && previous.length === 0) {

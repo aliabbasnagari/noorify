@@ -10,13 +10,25 @@ import { TranscodingDialog } from "@/components/admin/transcoding-dialog"
 import { Button } from "@/components/ui/button"
 
 export default function TranscodingPage() {
-  const { items, total, isLoading, sorting, setSorting, pagination, setPagination } =
-    useAdminList<Transcoding>("transcoding", { defaultSort: "name", defaultOrder: "ASC" })
+  const {
+    items,
+    total,
+    isLoading,
+    sorting,
+    setSorting,
+    pagination,
+    setPagination,
+  } = useAdminList<Transcoding>("transcoding", {
+    defaultSort: "name",
+    defaultOrder: "ASC",
+  })
   const queryClient = useQueryClient()
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => apiFetch(`/api/transcoding/${id}`, { method: "DELETE" }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["transcoding"] }),
+    mutationFn: (id: string) =>
+      apiFetch(`/api/transcoding/${id}`, { method: "DELETE" }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["transcoding"] }),
   })
 
   const columns: ColumnDef<Transcoding, unknown>[] = [

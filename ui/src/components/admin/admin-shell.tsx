@@ -30,7 +30,10 @@ const ADMIN_NAV = [
 export function AdminShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const nav = config.pluginsEnabled
-    ? [...ADMIN_NAV, { to: "/admin/plugins" as const, icon: Puzzle, label: "Plugins" }]
+    ? [
+        ...ADMIN_NAV,
+        { to: "/admin/plugins" as const, icon: Puzzle, label: "Plugins" },
+      ]
     : ADMIN_NAV
 
   return (

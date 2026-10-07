@@ -133,10 +133,7 @@ export function LibraryDialog({
       }
     }
     if (!valid) return
-    if (
-      isEditing &&
-      pidConfigChanged(values, library, globals)
-    ) {
+    if (isEditing && pidConfigChanged(values, library, globals)) {
       setConfirmingPid(true)
       return
     }
@@ -153,16 +150,18 @@ export function LibraryDialog({
       <DialogTrigger render={trigger} />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit library" : "New library"}</DialogTitle>
+          <DialogTitle>
+            {isEditing ? "Edit library" : "New library"}
+          </DialogTitle>
         </DialogHeader>
         {confirmingPid ? (
           <div className="space-y-4">
             <p className="font-medium">Change persistent IDs?</p>
             <p className="text-sm text-muted-foreground">
-              This regroups albums and tracks in this library. A full rescan
-              of this library starts now. Track stars, ratings and play
-              counts are kept. Album stars and ratings move to the new albums
-              where an old album maps to a new one.
+              This regroups albums and tracks in this library. A full rescan of
+              this library starts now. Track stars, ratings and play counts are
+              kept. Album stars and ratings move to the new albums where an old
+              album maps to a new one.
             </p>
             <DialogFooter>
               <Button
@@ -182,142 +181,139 @@ export function LibraryDialog({
             </DialogFooter>
           </div>
         ) : (
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(submit)}
-            className="space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} autoFocus />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="path"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Path</FormLabel>
-                  <FormControl>
-                    <Input {...field} disabled={pathLocked} />
-                  </FormControl>
-                  {pathLocked && (
-                    <p className="text-xs text-muted-foreground">
-                      The main library's path can't be changed.
-                    </p>
-                  )}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="defaultNewUsers"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between">
-                  <FormLabel className="!mt-0">
-                    Assign to new users by default
-                  </FormLabel>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <div className="space-y-4 border-t pt-4">
-              <h3 className="text-sm font-medium">Persistent IDs</h3>
-              {PID_FIELDS.map(({ name, label, allowFolder }) => (
-                <FormField
-                  key={name}
-                  control={form.control}
-                  name={name}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{label}</FormLabel>
-                      <Select
-                        value={pidModes[name]}
-                        onValueChange={(v) => {
-                          if (!v) return
-                          const mode = v as PidMode
-                          setPidModes((m) => ({ ...m, [name]: mode }))
-                          field.onChange(pidValueForMode(mode, globals[name]))
-                          form.clearErrors(name)
-                        }}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="w-full">
-                            <SelectValue>
-                              {PID_MODE_LABELS[pidModes[name]](globals[name])}
-                            </SelectValue>
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value={PID_GLOBAL}>
-                            {PID_MODE_LABELS[PID_GLOBAL](globals[name])}
-                          </SelectItem>
-                          {allowFolder && (
-                            <SelectItem value={PID_FOLDER}>
-                              {PID_MODE_LABELS[PID_FOLDER](globals[name])}
-                            </SelectItem>
-                          )}
-                          <SelectItem value={PID_CUSTOM}>
-                            {PID_MODE_LABELS[PID_CUSTOM](globals[name])}
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {pidModes[name] === PID_CUSTOM && (
-                        <>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} autoFocus />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="path"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Path</FormLabel>
+                    <FormControl>
+                      <Input {...field} disabled={pathLocked} />
+                    </FormControl>
+                    {pathLocked && (
+                      <p className="text-xs text-muted-foreground">
+                        The main library's path can't be changed.
+                      </p>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="defaultNewUsers"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between">
+                    <FormLabel className="!mt-0">
+                      Assign to new users by default
+                    </FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <div className="space-y-4 border-t pt-4">
+                <h3 className="text-sm font-medium">Persistent IDs</h3>
+                {PID_FIELDS.map(({ name, label, allowFolder }) => (
+                  <FormField
+                    key={name}
+                    control={form.control}
+                    name={name}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{label}</FormLabel>
+                        <Select
+                          value={pidModes[name]}
+                          onValueChange={(v) => {
+                            if (!v) return
+                            const mode = v as PidMode
+                            setPidModes((m) => ({ ...m, [name]: mode }))
+                            field.onChange(pidValueForMode(mode, globals[name]))
+                            form.clearErrors(name)
+                          }}
+                        >
                           <FormControl>
-                            <Input
-                              {...field}
-                              aria-label={`${label} spec`}
-                              placeholder="PID spec"
-                            />
+                            <SelectTrigger className="w-full">
+                              <SelectValue>
+                                {PID_MODE_LABELS[pidModes[name]](globals[name])}
+                              </SelectValue>
+                            </SelectTrigger>
                           </FormControl>
-                          <p className="text-xs text-muted-foreground">
-                            Tags and attributes that identify an item. See the
-                            documentation for the syntax:{" "}
-                            <a
-                              href={PID_DOCS_URL}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline"
-                            >
-                              Persistent IDs
-                            </a>
-                          </p>
-                        </>
-                      )}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ))}
-            </div>
-            {mutation.isError && (
-              <p className="text-sm text-destructive">
-                Couldn't save the library — check the name/path are unique
-                and any custom PID spec is valid, then try again.
-              </p>
-            )}
-            <DialogFooter>
-              <Button type="submit" disabled={mutation.isPending}>
-                {mutation.isPending ? "Saving…" : "Save"}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
+                          <SelectContent>
+                            <SelectItem value={PID_GLOBAL}>
+                              {PID_MODE_LABELS[PID_GLOBAL](globals[name])}
+                            </SelectItem>
+                            {allowFolder && (
+                              <SelectItem value={PID_FOLDER}>
+                                {PID_MODE_LABELS[PID_FOLDER](globals[name])}
+                              </SelectItem>
+                            )}
+                            <SelectItem value={PID_CUSTOM}>
+                              {PID_MODE_LABELS[PID_CUSTOM](globals[name])}
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                        {pidModes[name] === PID_CUSTOM && (
+                          <>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                aria-label={`${label} spec`}
+                                placeholder="PID spec"
+                              />
+                            </FormControl>
+                            <p className="text-xs text-muted-foreground">
+                              Tags and attributes that identify an item. See the
+                              documentation for the syntax:{" "}
+                              <a
+                                href={PID_DOCS_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline"
+                              >
+                                Persistent IDs
+                              </a>
+                            </p>
+                          </>
+                        )}
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ))}
+              </div>
+              {mutation.isError && (
+                <p className="text-sm text-destructive">
+                  Couldn't save the library — check the name/path are unique and
+                  any custom PID spec is valid, then try again.
+                </p>
+              )}
+              <DialogFooter>
+                <Button type="submit" disabled={mutation.isPending}>
+                  {mutation.isPending ? "Saving…" : "Save"}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
         )}
       </DialogContent>
     </Dialog>

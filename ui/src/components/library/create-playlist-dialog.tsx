@@ -35,7 +35,9 @@ import {
 
 function createPlaylistSchema(t: (key: string) => string) {
   return z.object({
-    name: z.string().min(1, t("library.components.createPlaylistDialog.nameRequired")),
+    name: z
+      .string()
+      .min(1, t("library.components.createPlaylistDialog.nameRequired")),
     comment: z.string().optional(),
   })
 }
@@ -63,7 +65,10 @@ export function CreatePlaylistDialog() {
       queryClient.invalidateQueries({ queryKey: ["playlist"] })
       setDialogOpen(false)
       form.reset()
-      navigate({ to: "/playlist/$playlistId", params: { playlistId: playlist.id } })
+      navigate({
+        to: "/playlist/$playlistId",
+        params: { playlistId: playlist.id },
+      })
     },
   })
 

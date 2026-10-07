@@ -28,7 +28,9 @@ describe("pid-presets", () => {
 
   it("detects effective changes only", () => {
     expect(pidConfigChanged({}, {}, globals)).toBe(false)
-    expect(pidConfigChanged({ pidAlbum: "ALBUM-SPEC " }, {}, globals)).toBe(false)
+    expect(pidConfigChanged({ pidAlbum: "ALBUM-SPEC " }, {}, globals)).toBe(
+      false,
+    )
     expect(pidConfigChanged({ pidAlbum: "folder" }, {}, globals)).toBe(true)
     expect(
       pidConfigChanged({ pidTrack: "" }, { pidTrack: "custom" }, globals),

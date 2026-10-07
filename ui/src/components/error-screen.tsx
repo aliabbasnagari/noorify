@@ -16,7 +16,9 @@ export function ErrorScreen({
       role="alert"
       className="flex h-dvh flex-col items-center justify-center gap-4 bg-background px-4 text-center text-foreground"
     >
-      <h1 className="text-xl font-semibold">{t("errors.somethingWentWrong")}</h1>
+      <h1 className="text-xl font-semibold">
+        {t("errors.somethingWentWrong")}
+      </h1>
       <p className="max-w-md text-sm text-muted-foreground">
         {t("errors.unexpected")}
       </p>

@@ -25,11 +25,15 @@ export default function UsersPage() {
     setSorting,
     pagination,
     setPagination,
-  } = useAdminList<AdminUser>("user", { defaultSort: "userName", defaultOrder: "ASC" })
+  } = useAdminList<AdminUser>("user", {
+    defaultSort: "userName",
+    defaultOrder: "ASC",
+  })
   const queryClient = useQueryClient()
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => apiFetch(`/api/user/${id}`, { method: "DELETE" }),
+    mutationFn: (id: string) =>
+      apiFetch(`/api/user/${id}`, { method: "DELETE" }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
   })
 

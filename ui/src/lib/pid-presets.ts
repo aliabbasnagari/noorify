@@ -39,6 +39,7 @@ export function pidConfigChanged(
   const effective = (value: string | undefined, field: PidField) =>
     ((value ?? "").trim() || globals[field]).toLowerCase()
   return (["pidAlbum", "pidTrack"] as const).some(
-    (field) => effective(values[field], field) !== effective(record[field], field),
+    (field) =>
+      effective(values[field], field) !== effective(record[field], field),
   )
 }

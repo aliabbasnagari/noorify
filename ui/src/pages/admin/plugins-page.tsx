@@ -23,13 +23,23 @@ function parseManifest(raw: string): PluginManifest | null {
 }
 
 export default function PluginsPage() {
-  const { items, total, isLoading, sorting, setSorting, pagination, setPagination } =
-    useAdminList<Plugin>("plugin", { defaultSort: "id", defaultOrder: "ASC" })
+  const {
+    items,
+    total,
+    isLoading,
+    sorting,
+    setSorting,
+    pagination,
+    setPagination,
+  } = useAdminList<Plugin>("plugin", { defaultSort: "id", defaultOrder: "ASC" })
   const queryClient = useQueryClient()
 
   const toggleMutation = useMutation({
     mutationFn: ({ id, enabled }: { id: string; enabled: boolean }) =>
-      apiFetch<Plugin>(`/api/plugin/${id}`, { method: "PUT", body: { enabled } }),
+      apiFetch<Plugin>(`/api/plugin/${id}`, {
+        method: "PUT",
+        body: { enabled },
+      }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["plugin"] }),
   })
 
@@ -95,7 +105,9 @@ export default function PluginsPage() {
         return (
           <Switch
             checked={plugin.enabled}
-            onCheckedChange={(enabled) => toggleMutation.mutate({ id: plugin.id, enabled })}
+            onCheckedChange={(enabled) =>
+              toggleMutation.mutate({ id: plugin.id, enabled })
+            }
           />
         )
       },
@@ -112,7 +124,11 @@ export default function PluginsPage() {
           disabled={rescanMutation.isPending}
           onClick={() => rescanMutation.mutate()}
         >
-          <RefreshCw className={rescanMutation.isPending ? "size-3.5 animate-spin" : "size-3.5"} />
+          <RefreshCw
+            className={
+              rescanMutation.isPending ? "size-3.5 animate-spin" : "size-3.5"
+            }
+          />
           Rescan
         </Button>
       </div>
