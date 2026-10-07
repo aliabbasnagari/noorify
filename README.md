@@ -82,8 +82,8 @@ Here are some useful direct links:
 ## Screenshots
 
 <p align="left">
-    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/noorify/.github/screenshots/ss-mobile-login.png">
-    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/noorify/.github/screenshots/ss-mobile-player.png">
-    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/noorify/.github/screenshots/ss-mobile-album-view.png">
-    <img width="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/noorify/.github/screenshots/ss-desktop-player.png">
+    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-login.png">
+    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-player.png">
+    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-album-view.png">
+    <img width="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-desktop-player.png">
 </p>
