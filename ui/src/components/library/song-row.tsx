@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "@tanstack/react-router"
-import { Info, MoreHorizontal, Play } from "lucide-react"
+import { MoreHorizontal, Play } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
@@ -200,7 +200,6 @@ export function SongRow({
               {t("library.components.songRow.download")}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setInfoOpen(true)}>
-              <Info className="size-3.5" />
               {t("library.components.songRow.getInfo")}
             </DropdownMenuItem>
             {config.enableSharing && (
