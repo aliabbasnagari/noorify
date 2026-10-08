@@ -41,12 +41,12 @@ jobs:
         id: git-version
         run: |
           GIT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || true)
-          if [ -n "$GIT_TAG" ]; then
-            if [[ "$GITHUB_REF" != refs/tags/* ]]; then
-              GIT_TAG=${GIT_TAG}-SNAPSHOT
-            fi
-            echo "GIT_TAG=$GIT_TAG" >> $GITHUB_OUTPUT
+          # No release tag in this repo yet: fall back so packaging jobs (MSI) still get a version
+          GIT_TAG=${GIT_TAG:-v0.0.0}
+          if [[ "$GITHUB_REF" != refs/tags/* ]]; then
+            GIT_TAG=${GIT_TAG}-SNAPSHOT
           fi
+          echo "GIT_TAG=$GIT_TAG" >> $GITHUB_OUTPUT
           GIT_SHA=$(git rev-parse --short HEAD)
           PR_NUM=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           if [[ $PR_NUM != "null" ]]; then
@@ -54,7 +54,7 @@ jobs:
             GIT_SHA="pr-${PR_NUM}/${GIT_SHA}"
           fi
           echo "GIT_SHA=$GIT_SHA" >> $GITHUB_OUTPUT
-          
+
           echo "GIT_TAG=$GIT_TAG"
           echo "GIT_SHA=$GIT_SHA"
 
@@ -216,7 +216,7 @@ jobs:
       contents: read
       actions: write
     env:
-      COVERAGE_COMMENT: 'false'
+      COVERAGE_COMMENT: "false"
     steps:
       - uses: actions/checkout@v7
 
@@ -366,10 +366,33 @@ jobs:
 
   build:
     name: Build
-    needs: [js, go, go-plugins, go-windows, go-lint, git-version, check-push-enabled, validate-migrations]
+    needs:
+      [
+        js,
+        go,
+        go-plugins,
+        go-windows,
+        go-lint,
+        git-version,
+        check-push-enabled,
+        validate-migrations,
+      ]
     strategy:
       matrix:
-        platform: [ linux/amd64, linux/arm64, linux/arm/v5, linux/arm/v6, linux/arm/v7, linux/386, linux/riscv64, darwin/amd64, darwin/arm64, windows/amd64, windows/386 ]
+        platform:
+          [
+            linux/amd64,
+            linux/arm64,
+            linux/arm/v5,
+            linux/arm/v6,
+            linux/arm/v7,
+            linux/386,
+            linux/riscv64,
+            darwin/amd64,
+            darwin/arm64,
+            windows/amd64,
+            windows/386,
+          ]
     runs-on: ubuntu-latest
     env:
       IS_LINUX: ${{ startsWith(matrix.platform, 'linux/') && 'true' || 'false' }}
@@ -452,7 +475,7 @@ jobs:
         run: |
           mkdir -p /tmp/digests
           digest="${{ steps.push-image.outputs.digest }}"
-          touch "/tmp/digests/${digest#sha256:}"          
+          touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v7
@@ -493,7 +516,7 @@ jobs:
         working-directory: /tmp/digests
         run: |
           docker buildx imagetools create $(jq -cr '.tags | map(select(startswith("ghcr.io"))) | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)          
+            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
 
       - name: Inspect image in ghcr.io
         run: |
@@ -592,6 +615,8 @@ jobs:
     name: Package/Release
     needs: [build, msi]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       package_list: ${{ steps.set-package-list.outputs.package_list }}
     steps:
@@ -615,7 +640,7 @@ jobs:
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v7
         with:
-          version: '2.16.0'
+          version: "2.16.0"
           args: "release --clean -f release/goreleaser.yml ${{ env.RELEASE_FLAGS }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
