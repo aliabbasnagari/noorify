@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
+import { playerButtonFx } from "@/components/player/button-fx"
 import { usePlayerStore, type QueuedTrack } from "@/stores/player-store"
 import { formatDuration } from "@/lib/format"
 
@@ -29,7 +30,8 @@ export function QueuePanel() {
         render={
           <Button
             variant="ghost"
-            size="icon-sm"
+            size="icon-lg"
+            className={playerButtonFx}
             aria-label={t("player.queue.title")}
           />
         }

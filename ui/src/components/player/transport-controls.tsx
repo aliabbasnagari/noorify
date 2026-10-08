@@ -10,6 +10,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
+import { playerButtonFx } from "@/components/player/button-fx"
 import { audioEngine } from "@/lib/player/audio-engine"
 import { useCurrentTrack, usePlayerStore } from "@/stores/player-store"
 
@@ -31,27 +32,28 @@ export function TransportControls() {
     <div className="flex items-center gap-3">
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon-lg"
         disabled={!hasTrack}
         aria-pressed={shuffle}
         aria-label={t("player.shuffle")}
-        className={cn(shuffle && "text-primary")}
+        className={cn(playerButtonFx, shuffle && "text-primary")}
         onClick={toggleShuffle}
       >
         <Shuffle />
       </Button>
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon-lg"
         disabled={!hasTrack}
         aria-label={t("player.previous")}
+        className={playerButtonFx}
         onClick={() => audioEngine.previous()}
       >
         <SkipBack />
       </Button>
       <Button
-        size="icon"
-        className="rounded-full"
+        size="icon-lg"
+        className={cn("rounded-full", playerButtonFx)}
         disabled={!hasTrack}
         aria-label={isPlaying ? t("player.pause") : t("player.play")}
         onClick={() => audioEngine.togglePlayPause()}
@@ -60,22 +62,23 @@ export function TransportControls() {
       </Button>
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon-lg"
         disabled={!hasTrack}
         aria-label={t("player.next")}
+        className={playerButtonFx}
         onClick={() => audioEngine.next()}
       >
         <SkipForward />
       </Button>
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon-lg"
         disabled={!hasTrack}
         aria-pressed={repeatMode !== "off"}
         aria-label={t("player.repeat", {
           mode: t(`player.repeatMode.${repeatMode}`),
         })}
-        className={cn(repeatMode !== "off" && "text-primary")}
+        className={cn(playerButtonFx, repeatMode !== "off" && "text-primary")}
         onClick={cycleRepeatMode}
       >
         <RepeatIcon />

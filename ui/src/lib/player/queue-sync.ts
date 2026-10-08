@@ -15,6 +15,8 @@ interface ServerQueue {
     id: string
     title: string
     artist: string
+    artistId: string
+    participants?: { artist?: { id: string; name: string }[] }
     albumId: string
     album: string
     duration: number
@@ -49,6 +51,8 @@ export async function restoreSavedQueue() {
         id: s.id,
         title: s.title,
         artist: s.artist,
+        artistId: s.artistId,
+        artists: s.participants?.artist,
         albumId: s.albumId,
         albumTitle: s.album,
         durationSeconds: s.duration,

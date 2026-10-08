@@ -7,6 +7,10 @@ export interface QueuedTrack {
   title: string
   artist: string
   albumId: string
+  /** Absent for radio stations and queues saved before this field existed. */
+  artistId?: string
+  /** Every credited artist, so each can link to its own page. */
+  artists?: { id: string; name: string }[]
   albumTitle: string
   durationSeconds: number
   /** Internet radio stations play their own raw stream URL directly (no
@@ -21,6 +25,8 @@ export function songToQueuedTrack(song: Song): QueuedTrack {
     id: song.id,
     title: song.title,
     artist: song.artist,
+    artistId: song.artistId,
+    artists: song.participants?.artist,
     albumId: song.albumId,
     albumTitle: song.album,
     durationSeconds: song.duration,

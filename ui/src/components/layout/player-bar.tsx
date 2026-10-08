@@ -3,6 +3,8 @@ import { Maximize2, Pause, Play, Volume2, VolumeX } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
+import { playerButtonFx } from "@/components/player/button-fx"
+import { ArtistLinks } from "@/components/library/artist-links"
 import { QueuePanel } from "@/components/player/queue-panel"
 import { SeekBar } from "@/components/player/seek-bar"
 import { TransportControls } from "@/components/player/transport-controls"
@@ -102,7 +104,7 @@ export function PlayerBar() {
           </Link>
           <Button
             size="icon"
-            className="shrink-0 rounded-full"
+            className={cn("shrink-0 rounded-full", playerButtonFx)}
             disabled={!currentTrack}
             aria-label={isPlaying ? t("player.pause") : t("player.play")}
             onClick={(e) => {
@@ -132,22 +134,32 @@ export function PlayerBar() {
               {currentTrack?.title ?? t("player.bar.nothingPlaying")}
             </p>
             <p className="truncate text-xs text-muted-foreground">
-              {currentTrack?.artist ?? "—"}
+              {currentTrack ? (
+                <ArtistLinks
+                  artist={currentTrack.artist}
+                  artistId={currentTrack.artistId}
+                  artists={currentTrack.artists}
+                  className="hover:text-foreground hover:underline"
+                />
+              ) : (
+                "—"
+              )}
             </p>
           </div>
         </div>
 
         <div className="flex flex-col items-center gap-1.5">
           <TransportControls />
-          <SeekBar className="w-full max-w-md" />
+          <SeekBar className="w-full max-w-xl" />
         </div>
 
         <div className="flex items-center justify-end gap-2">
           {currentTrack && (
             <Button
               variant="ghost"
-              size="icon-sm"
+              size="icon-lg"
               aria-label={t("player.bar.expandNowPlaying")}
+              className={playerButtonFx}
               render={<Link to="/now-playing" />}
             >
               <Maximize2 />
@@ -156,13 +168,14 @@ export function PlayerBar() {
           <QueuePanel />
           <Button
             variant="ghost"
-            size="icon-sm"
+            size="icon-lg"
             aria-label={muted ? t("player.bar.unmute") : t("player.bar.mute")}
+            className={playerButtonFx}
             onClick={toggleMute}
           >
             {muted || volume === 0 ? <VolumeX /> : <Volume2 />}
           </Button>
-          <div className="w-16">
+          <div className="w-24">
             <Slider
               value={[muted ? 0 : volume]}
               max={100}

@@ -1,6 +1,7 @@
 import { useRouter } from "@tanstack/react-router"
 import { X } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { ArtistLinks } from "@/components/library/artist-links"
 import { Button } from "@/components/ui/button"
 import { ArtHeroBackground } from "@/components/library/art-hero-background"
 import { LyricsPanel } from "@/components/player/lyrics-panel"
@@ -59,7 +60,12 @@ export default function NowPlayingPage() {
                   {currentTrack.title}
                 </h1>
                 <p className="truncate text-muted-foreground">
-                  {currentTrack.artist}
+                  <ArtistLinks
+                    artist={currentTrack.artist}
+                    artistId={currentTrack.artistId}
+                    artists={currentTrack.artists}
+                    className="hover:text-foreground hover:underline"
+                  />
                 </p>
               </div>
               <div className="flex w-full max-w-md flex-col items-center gap-3">

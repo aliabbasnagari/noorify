@@ -24,6 +24,8 @@ export interface Song {
   playCount?: number
   bpm?: number
   tags?: Record<string, string[]>
+  /** Credited people by role; `artist` lists every credited artist. */
+  participants?: Record<string, { id: string; name: string }[]>
 }
 
 /** Full `/api/song/{id}` record (model.MediaFile) — what "Get Info" shows. */
@@ -51,7 +53,6 @@ export interface SongDetails extends Song {
   rgTrackGain?: number | null
   genres?: { id: string; name: string }[]
   tags?: Record<string, string[]>
-  participants?: Record<string, { id: string; name: string }[]>
 }
 
 export interface Genre {
