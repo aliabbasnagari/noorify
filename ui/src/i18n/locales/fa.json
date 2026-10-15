@@ -1,0 +1,479 @@
+{
+  "app": {
+    "name": "Navidrome"
+  },
+  "nav": {
+    "home": "خانه",
+    "search": "جستجو",
+    "albums": "آلبوم‌ها",
+    "artists": "هنرمندان",
+    "songs": "آهنگ‌ها",
+    "radio": "رادیو",
+    "library": "کتابخانه شما",
+    "admin": "تنظیمات"
+  },
+  "auth": {
+    "usernameLabel": "نام کاربری",
+    "passwordLabel": "گذرواژه",
+    "signIn": "ورود",
+    "createAdmin": "ایجاد حساب مدیر",
+    "signingIn": "در حال ورود…",
+    "invalidCredentials": "نام کاربری یا گذرواژه نادرست است",
+    "networkError": "امکان اتصال به سرور نبود",
+    "usernameRequired": "نام کاربری الزامی است",
+    "passwordRequired": "گذرواژه الزامی است",
+    "confirmPasswordLabel": "تأیید گذرواژه",
+    "passwordMismatch": "گذرواژه‌ها مطابقت ندارند",
+    "setupTitle": "حساب مدیر خود را بسازید",
+    "setupSubtitle": "خوش آمدید! برای شروع مدیریت کتابخانه موسیقی خود، اولین حساب را بسازید.",
+    "welcomeBack": "خوش برگشتید",
+    "signInSubtitle": "برای ادامه گوش دادن وارد شوید.",
+    "creatingAdmin": "در حال ایجاد حساب…",
+    "showPassword": "نمایش گذرواژه",
+    "hidePassword": "پنهان کردن گذرواژه"
+  },
+  "errors": {
+    "somethingWentWrong": "مشکلی پیش آمد",
+    "unexpected": "خطایی غیرمنتظره رخ داد. می‌توانید دوباره تلاش کنید یا صفحه را بارگذاری مجدد کنید.",
+    "tryAgain": "تلاش دوباره",
+    "reload": "بارگذاری مجدد صفحه",
+    "pageNotFound": "صفحه پیدا نشد",
+    "pageNotFoundDescription": "صفحه‌ای که به دنبال آن هستید وجود ندارد.",
+    "goHome": "بازگشت به خانه",
+    "loadFailed": "بارگذاری داده‌ها ممکن نشد. اتصال خود را بررسی کرده و دوباره تلاش کنید.",
+    "actionFailed": "این عملیات ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "trackFailed": "پخش \"{{title}}\" ممکن نشد",
+    "loveFailed": "به‌روزرسانی کتابخانه شما ممکن نشد"
+  },
+  "common": {
+    "loading": "در حال بارگذاری…",
+    "yes": "بله",
+    "logout": "خروج",
+    "yourShares": "اشتراک‌های شما",
+    "theme": "پوسته",
+    "language": "زبان",
+    "themeDark": "تیره",
+    "themeLight": "روشن",
+    "themeSolarizedDark": "سولارایزد تیره",
+    "themeSolarizedLight": "سولارایزد روشن",
+    "back": "بازگشت",
+    "forward": "جلو"
+  },
+  "home": {
+    "title": "خانه",
+    "recentlyAdded": "به‌تازگی افزوده‌شده",
+    "recentlyPlayed": "به‌تازگی پخش‌شده",
+    "mostPlayed": "پرتکرارترین‌ها",
+    "favorites": "موردعلاقه‌ها",
+    "topRated": "بهترین امتیازها",
+    "randomPicks": "انتخاب‌های تصادفی",
+    "showAll": "نمایش همه",
+    "backToHome": "بازگشت به خانه",
+    "shelfNotFound": "بخش پیدا نشد."
+  },
+  "albums": {
+    "title": "آلبوم‌ها",
+    "sortName": "نام",
+    "sortRecentlyAdded": "به‌تازگی افزوده‌شده",
+    "sortArtist": "هنرمند",
+    "sortYear": "سال",
+    "sortMostPlayed": "پرتکرارترین‌ها",
+    "sortRandom": "تصادفی",
+    "emptyMessage": "هنوز آلبومی وجود ندارد — کمی موسیقی به کتابخانه خود اضافه کنید."
+  },
+  "songs": {
+    "title": "آهنگ‌ها",
+    "searchPlaceholder": "جستجوی آهنگ‌ها",
+    "sortTitle": "عنوان",
+    "sortArtist": "هنرمند",
+    "sortAlbum": "آلبوم",
+    "sortRecentlyAdded": "به‌تازگی افزوده‌شده",
+    "sortYear": "سال",
+    "sortMostPlayed": "پرتکرارترین‌ها",
+    "sortRandom": "تصادفی",
+    "allGenres": "همه ژانرها",
+    "allMoods": "همه حس‌وحال‌ها",
+    "favouritesOnly": "فقط موردعلاقه‌ها",
+    "columns": "ستون‌ها",
+    "colGenre": "ژانر",
+    "colYear": "سال",
+    "colMood": "حس‌وحال",
+    "colPlayCount": "تعداد پخش",
+    "colBpm": "BPM",
+    "emptyMessage": "هیچ آهنگی پیدا نشد."
+  },
+  "artists": {
+    "title": "هنرمندان",
+    "sortName": "نام",
+    "sortMostAlbums": "بیشترین آلبوم",
+    "sortRandom": "تصادفی",
+    "emptyMessage": "هنوز هنرمندی وجود ندارد — کمی موسیقی به کتابخانه خود اضافه کنید."
+  },
+  "search": {
+    "placeholder": "به چه چیزی می‌خواهید گوش دهید؟",
+    "prompt": "در میان هنرمندان، آلبوم‌ها، آهنگ‌ها و پلی‌لیست‌ها جستجو کنید.",
+    "searching": "در حال جستجو…",
+    "noResults": "نتیجه‌ای برای \"{{query}}\" پیدا نشد.",
+    "artists": "هنرمندان",
+    "albums": "آلبوم‌ها",
+    "songs": "آهنگ‌ها",
+    "playlists": "پلی‌لیست‌ها"
+  },
+  "radio": {
+    "title": "رادیو",
+    "addStation": "افزودن ایستگاه",
+    "emptyMessage": "هنوز ایستگاه رادیویی وجود ندارد.",
+    "play": "پخش {{name}}",
+    "edit": "ویرایش {{name}}",
+    "delete": "حذف {{name}}",
+    "deleteConfirm": "\"{{name}}\" حذف شود؟ این کار قابل بازگشت نیست."
+  },
+  "shares": {
+    "emptyMessage": "هنوز چیزی به اشتراک نگذاشته‌اید.",
+    "visitCount_one": "{{count}} بازدید",
+    "visitCount_other": "{{count}} بازدید",
+    "expires": "انقضا در {{date}}",
+    "downloadable": "قابل دانلود",
+    "copyLink": "کپی لینک",
+    "delete": "حذف اشتراک \"{{name}}\"",
+    "deleteConfirm": "این لینک اشتراک حذف شود؟ بلافاصله از کار می‌افتد."
+  },
+  "player": {
+    "shuffle": "درهم",
+    "previous": "قبلی",
+    "next": "بعدی",
+    "play": "پخش",
+    "pause": "مکث",
+    "repeat": "تکرار: {{mode}}",
+    "repeatMode": {
+      "off": "خاموش",
+      "all": "همه",
+      "one": "یکی"
+    },
+    "liveRadio": "رادیوی زنده",
+    "seek": "جابه‌جایی",
+    "lyrics": {
+      "loading": "در حال بارگذاری متن ترانه…",
+      "empty": "متن ترانه‌ای برای این قطعه موجود نیست."
+    },
+    "queue": {
+      "title": "صف پخش",
+      "nowPlaying": "در حال پخش",
+      "nextUp": "بعدی در صف",
+      "empty": "صف پخش خالی است.",
+      "saveAsPlaylist": "ذخیره به‌عنوان پلی‌لیست",
+      "saveTitle": "ذخیره صف پخش به‌عنوان پلی‌لیست",
+      "playlistName": "نام پلی‌لیست",
+      "save": "ذخیره",
+      "moveUp": "جابه‌جایی به بالا",
+      "moveDown": "جابه‌جایی به پایین",
+      "remove": "حذف از صف پخش"
+    },
+    "bar": {
+      "nothingPlaying": "چیزی در حال پخش نیست",
+      "expandNowPlaying": "گسترش در حال پخش",
+      "mute": "بی‌صدا",
+      "unmute": "باصدا",
+      "volume": "میزان صدا"
+    }
+  },
+  "smartPlaylist": {
+    "match": "تطبیق",
+    "all": "همه",
+    "any": "هر",
+    "ofTheFollowing": "از موارد زیر:",
+    "noRules": "هنوز قاعده‌ای وجود ندارد — یکی در زیر اضافه کنید.",
+    "addRule": "افزودن قاعده",
+    "addGroup": "افزودن گروه",
+    "removeGroup": "حذف گروه",
+    "removeRule": "حذف قاعده",
+    "minimum": "حداقل",
+    "maximum": "حداکثر",
+    "and": "و",
+    "days": "روز",
+    "true": "درست",
+    "false": "نادرست",
+    "fields": {
+      "title": "عنوان",
+      "album": "آلبوم",
+      "artist": "هنرمند",
+      "albumartist": "هنرمند آلبوم",
+      "genre": "ژانر",
+      "path": "مسیر فایل",
+      "comment": "توضیح",
+      "year": "سال",
+      "duration": "مدت‌زمان (ثانیه)",
+      "bpm": "BPM",
+      "rating": "امتیاز",
+      "albumrating": "امتیاز آلبوم",
+      "playcount": "تعداد پخش",
+      "albumplaycount": "تعداد پخش آلبوم",
+      "loved": "موردعلاقه",
+      "albumloved": "آلبوم موردعلاقه",
+      "missing": "مفقود",
+      "compilation": "گلچین",
+      "dateadded": "تاریخ افزودن",
+      "lastplayed": "آخرین پخش"
+    },
+    "operators": {
+      "is": "برابر است با",
+      "isNot": "برابر نیست با",
+      "contains": "شامل می‌شود",
+      "notContains": "شامل نمی‌شود",
+      "startsWith": "شروع می‌شود با",
+      "endsWith": "پایان می‌یابد با",
+      "gt": "بزرگ‌تر است از",
+      "lt": "کوچک‌تر است از",
+      "inTheRange": "بین",
+      "before": "قبل از",
+      "after": "بعد از",
+      "inTheLast": "در (روزهای) اخیر",
+      "notInTheLast": "نه در (روزهای) اخیر",
+      "isPresent": "مقدار دارد",
+      "isMissing": "مقدار ندارد"
+    },
+    "random": "تصادفی",
+    "loading": "در حال بارگذاری…",
+    "editSmartPlaylistRules": "ویرایش قواعد پلی‌لیست هوشمند",
+    "newSmartPlaylist": "پلی‌لیست هوشمند جدید",
+    "name": "نام",
+    "description": "توضیحات",
+    "rules": "قواعد",
+    "sortBy": "مرتب‌سازی بر اساس",
+    "defaultOrder": "ترتیب پیش‌فرض",
+    "direction": "جهت",
+    "ascending": "صعودی",
+    "descending": "نزولی",
+    "limitNoLimit": "محدودیت (۰ = بدون محدودیت)",
+    "nameRequired": "نام الزامی است.",
+    "saveError": "ذخیره پلی‌لیست ممکن نشد — قواعد خود را بررسی کرده و دوباره تلاش کنید.",
+    "savingEllipsis": "در حال ذخیره…",
+    "save": "ذخیره"
+  },
+  "help": {
+    "title": "میانبرهای صفحه‌کلید",
+    "togglePlay": "پخش / مکث",
+    "previous": "قطعه قبلی",
+    "next": "قطعه بعدی",
+    "currentSong": "رفتن به آهنگ در حال پخش",
+    "volumeUp": "افزایش صدا",
+    "volumeDown": "کاهش صدا",
+    "toggleLove": "افزودن / حذف آهنگ فعلی از موردعلاقه‌ها",
+    "toggleMenu": "باز و بسته کردن منو",
+    "showHelp": "نمایش میانبرهای صفحه‌کلید"
+  },
+  "admin": {
+    "dataTable": {
+      "noResults": "نتیجه‌ای یافت نشد.",
+      "loading": "در حال بارگذاری…",
+      "pageOf": "صفحه {{page}} از {{pageCount}} — مجموع {{rowCount}}",
+      "previous": "قبلی",
+      "next": "بعدی"
+    }
+  },
+  "library": {
+    "yourLibrary": "کتابخانه شما",
+    "albums": "آلبوم‌ها",
+    "artists": "هنرمندان",
+    "songs": "آهنگ‌ها",
+    "radio": "رادیو",
+    "playlists": "پلی‌لیست‌ها",
+    "loading": "در حال بارگذاری…",
+    "noPlaylistsYet": "هنوز پلی‌لیستی وجود ندارد.",
+    "components": {
+      "songRow": {
+        "playAria": "پخش {{title}}",
+        "moreOptionsAria": "گزینه‌های بیشتر",
+        "playNow": "اکنون پخش کن",
+        "playNext": "پخش بعدی",
+        "addToQueue": "افزودن به صف پخش",
+        "addToPlaylist": "افزودن به پلی‌لیست",
+        "noPlaylists": "هنوز پلی‌لیستی وجود ندارد",
+        "goToAlbum": "رفتن به آلبوم",
+        "goToArtist": "رفتن به هنرمند",
+        "download": "دانلود",
+        "getInfo": "اطلاعات",
+        "share": "اشتراک‌گذاری"
+      },
+      "songInfo": {
+        "title": "اطلاعات آهنگ",
+        "path": "مسیر",
+        "library": "کتابخانه",
+        "album": "آلبوم",
+        "discSubtitle": "زیرعنوان دیسک",
+        "albumArtist": "هنرمند آلبوم",
+        "artist": "هنرمند",
+        "genre": "ژانر",
+        "year": "سال",
+        "trackNumber": "قطعه",
+        "duration": "مدت‌زمان",
+        "compilation": "گلچین",
+        "format": "قالب",
+        "bitRate": "نرخ بیت",
+        "bitDepth": "عمق بیت",
+        "sampleRate": "نرخ نمونه‌برداری",
+        "channels": "کانال‌ها",
+        "size": "حجم",
+        "bpm": "BPM",
+        "playCount": "تعداد پخش",
+        "lastPlayed": "آخرین پخش",
+        "updatedAt": "به‌روزرسانی فایل",
+        "albumGain": "گین آلبوم",
+        "trackGain": "گین قطعه",
+        "comment": "توضیح",
+        "tags": "برچسب‌ها"
+      },
+      "albumCard": {
+        "playAria": "پخش {{name}}"
+      },
+      "albumListRow": {
+        "playAria": "پخش {{name}}"
+      },
+      "artistCard": {
+        "playAria": "پخش {{name}}"
+      },
+      "createPlaylistDialog": {
+        "trigger": "ایجاد پلی‌لیست",
+        "blankPlaylist": "پلی‌لیست خالی",
+        "smartPlaylist": "پلی‌لیست هوشمند",
+        "title": "پلی‌لیست جدید",
+        "nameLabel": "نام",
+        "nameRequired": "نام الزامی است",
+        "descriptionLabel": "توضیحات",
+        "create": "ایجاد"
+      },
+      "editPlaylistDialog": {
+        "trigger": "ویرایش جزئیات",
+        "title": "ویرایش پلی‌لیست",
+        "nameLabel": "نام",
+        "nameRequired": "نام الزامی است",
+        "descriptionLabel": "توضیحات",
+        "save": "ذخیره"
+      },
+      "playlistRow": {
+        "playAria": "پخش {{name}}",
+        "ownerSongs_one": "{{owner}} · {{count}} آهنگ",
+        "ownerSongs_other": "{{owner}} · {{count}} آهنگ"
+      },
+      "radioDialog": {
+        "editTitle": "ویرایش ایستگاه",
+        "addTitle": "افزودن ایستگاه رادیویی",
+        "nameLabel": "نام",
+        "nameRequired": "نام الزامی است",
+        "streamUrlLabel": "نشانی پخش زنده",
+        "streamUrlRequired": "نشانی پخش زنده الزامی است",
+        "urlInvalid": "باید یک نشانی معتبر باشد",
+        "streamUrlPlaceholder": "https://stream.example.com/live",
+        "homePageLabel": "صفحه اصلی (اختیاری)",
+        "homePagePlaceholder": "https://example.com",
+        "save": "ذخیره",
+        "addStation": "افزودن ایستگاه"
+      },
+      "ratingStars": {
+        "rateAria_one": "امتیاز {{count}} ستاره",
+        "rateAria_other": "امتیاز {{count}} ستاره"
+      },
+      "shareDialog": {
+        "title": "اشتراک‌گذاری",
+        "copyLinkAria": "کپی لینک",
+        "accessNoteListen": "هر کسی که این لینک را داشته باشد می‌تواند گوش دهد — بدون نیاز به حساب کاربری.",
+        "accessNoteListenDownload": "هر کسی که این لینک را داشته باشد می‌تواند گوش دهد و دانلود کند — بدون نیاز به حساب کاربری.",
+        "descriptionLabel": "توضیحات (اختیاری)",
+        "allowDownloading": "اجازه دانلود",
+        "createError": "ایجاد لینک اشتراک ممکن نشد — دوباره تلاش کنید.",
+        "creating": "در حال ایجاد…",
+        "createLink": "ایجاد لینک"
+      },
+      "sortableTrackRow": {
+        "dragAria": "برای تغییر ترتیب بکشید",
+        "removeAria": "حذف از پلی‌لیست"
+      },
+      "starButton": {
+        "addAria": "افزودن به موردعلاقه‌ها",
+        "removeAria": "حذف از موردعلاقه‌ها"
+      },
+      "viewToggle": {
+        "gridView": "نمای شبکه‌ای",
+        "listView": "نمای فهرستی"
+      },
+      "virtualizedGrid": {
+        "empty": "هنوز چیزی اینجا نیست."
+      }
+    }
+  },
+  "nowPlaying": {
+    "closeNowPlaying": "بستن در حال پخش",
+    "nothingPlaying": "چیزی در حال پخش نیست.",
+    "lyrics": "متن ترانه",
+    "lyricsNotAvailableForRadio": "متن ترانه برای ایستگاه‌های رادیویی در دسترس نیست.",
+    "upNext": "بعدی",
+    "aboutArtist": "درباره هنرمند",
+    "nextInQueue": "بعدی در صف",
+    "openQueue": "باز کردن صف پخش",
+    "noBiography": "زندگی‌نامه‌ای در دسترس نیست.",
+    "queueIsEmpty": "صف پخش خالی است."
+  },
+  "share": {
+    "sharedViaNavidrome": "به‌اشتراک‌گذاشته‌شده از طریق Navidrome",
+    "downloadAll": "دانلود همه",
+    "previous": "قبلی",
+    "play": "پخش",
+    "pause": "مکث",
+    "next": "بعدی",
+    "seek": "جابه‌جایی"
+  },
+  "playlists": {
+    "playlists": "پلی‌لیست‌ها",
+    "loading": "در حال بارگذاری…",
+    "noPlaylistsYet": "هنوز پلی‌لیستی وجود ندارد."
+  },
+  "playlist": {
+    "loading": "در حال بارگذاری…",
+    "loadingTracks": "در حال بارگذاری قطعات…",
+    "playlistNotFound": "پلی‌لیست پیدا نشد.",
+    "smartPlaylist": "پلی‌لیست هوشمند",
+    "playlist": "پلی‌لیست",
+    "songCount_one": "{{count}} آهنگ",
+    "songCount_other": "{{count}} آهنگ",
+    "playName": "پخش {{name}}",
+    "editRules": "ویرایش قواعد",
+    "deleteConfirm": "\"{{name}}\" حذف شود؟ این کار قابل بازگشت نیست.",
+    "delete": "حذف",
+    "share": "اشتراک‌گذاری",
+    "playlistIsEmpty": "این پلی‌لیست خالی است."
+  },
+  "album": {
+    "loading": "در حال بارگذاری…",
+    "loadingTracks": "در حال بارگذاری قطعات…",
+    "albumNotFound": "آلبوم پیدا نشد.",
+    "album": "آلبوم",
+    "songCount_one": "{{count}} آهنگ",
+    "songCount_other": "{{count}} آهنگ",
+    "playName": "پخش {{name}}",
+    "share": "اشتراک‌گذاری",
+    "download": "دانلود",
+    "discNumber": "دیسک {{n}}"
+  },
+  "artist": {
+    "loading": "در حال بارگذاری…",
+    "artistNotFound": "هنرمند پیدا نشد.",
+    "artist": "هنرمند",
+    "albumCount_one": "{{count}} آلبوم",
+    "albumCount_other": "{{count}} آلبوم",
+    "playName": "پخش {{name}}",
+    "share": "اشتراک‌گذاری",
+    "download": "دانلود",
+    "about": "درباره",
+    "readMore": "بیشتر بخوانید",
+    "showLess": "نمایش کمتر",
+    "popular": "محبوب‌ترین‌ها",
+    "discography": "کارنامه آثار",
+    "songs": "آهنگ‌ها",
+    "songCount_one": "{{count}} آهنگ",
+    "songCount_other": "{{count}} آهنگ",
+    "noSongs": "آهنگی برای این هنرمند پیدا نشد.",
+    "noAlbums": "آلبومی برای این هنرمند پیدا نشد.",
+    "loadMore": "بارگذاری بیشتر",
+    "fansAlsoLike": "طرفداران این را هم دوست دارند"
+  }
+}

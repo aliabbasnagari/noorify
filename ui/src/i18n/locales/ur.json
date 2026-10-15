@@ -1,0 +1,479 @@
+{
+  "app": {
+    "name": "Navidrome"
+  },
+  "nav": {
+    "home": "ہوم",
+    "search": "تلاش",
+    "albums": "البمز",
+    "artists": "فنکار",
+    "songs": "گانے",
+    "radio": "ریڈیو",
+    "library": "آپ کی لائبریری",
+    "admin": "ترتیبات"
+  },
+  "auth": {
+    "usernameLabel": "صارف نام",
+    "passwordLabel": "پاس ورڈ",
+    "signIn": "لاگ ان کریں",
+    "createAdmin": "ایڈمن اکاؤنٹ بنائیں",
+    "signingIn": "لاگ ان ہو رہا ہے…",
+    "invalidCredentials": "صارف نام یا پاس ورڈ غلط ہے",
+    "networkError": "سرور تک رسائی ممکن نہیں ہوئی",
+    "usernameRequired": "صارف نام درکار ہے",
+    "passwordRequired": "پاس ورڈ درکار ہے",
+    "confirmPasswordLabel": "پاس ورڈ کی تصدیق کریں",
+    "passwordMismatch": "پاس ورڈز مماثل نہیں ہیں",
+    "setupTitle": "اپنا ایڈمن اکاؤنٹ بنائیں",
+    "setupSubtitle": "خوش آمدید! اپنی میوزک لائبریری کا انتظام شروع کرنے کے لیے پہلا اکاؤنٹ بنائیں۔",
+    "welcomeBack": "خوش آمدید",
+    "signInSubtitle": "سننا جاری رکھنے کے لیے سائن ان کریں۔",
+    "creatingAdmin": "اکاؤنٹ بنایا جا رہا ہے…",
+    "showPassword": "پاس ورڈ دکھائیں",
+    "hidePassword": "پاس ورڈ چھپائیں"
+  },
+  "errors": {
+    "somethingWentWrong": "کچھ غلط ہو گیا",
+    "unexpected": "ایک غیر متوقع خرابی پیش آئی۔ آپ دوبارہ کوشش کر سکتے ہیں یا صفحہ دوبارہ لوڈ کر سکتے ہیں۔",
+    "tryAgain": "دوبارہ کوشش کریں",
+    "reload": "صفحہ دوبارہ لوڈ کریں",
+    "pageNotFound": "صفحہ نہیں ملا",
+    "pageNotFoundDescription": "جو صفحہ آپ تلاش کر رہے ہیں وہ موجود نہیں ہے۔",
+    "goHome": "ہوم پر جائیں",
+    "loadFailed": "ڈیٹا لوڈ نہیں ہو سکا۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔",
+    "actionFailed": "یہ عمل ناکام ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔",
+    "trackFailed": "\"{{title}}\" چلانا ممکن نہیں ہوا",
+    "loveFailed": "آپ کی لائبریری اپ ڈیٹ نہیں ہو سکی"
+  },
+  "common": {
+    "loading": "لوڈ ہو رہا ہے…",
+    "yes": "ہاں",
+    "logout": "لاگ آؤٹ",
+    "yourShares": "آپ کے شیئرز",
+    "theme": "تھیم",
+    "language": "زبان",
+    "themeDark": "ڈارک",
+    "themeLight": "لائٹ",
+    "themeSolarizedDark": "سولرائزڈ ڈارک",
+    "themeSolarizedLight": "سولرائزڈ لائٹ",
+    "back": "پیچھے",
+    "forward": "آگے"
+  },
+  "home": {
+    "title": "ہوم",
+    "recentlyAdded": "حال ہی میں شامل کردہ",
+    "recentlyPlayed": "حال ہی میں چلائے گئے",
+    "mostPlayed": "سب سے زیادہ چلائے گئے",
+    "favorites": "پسندیدہ",
+    "topRated": "بہترین درجہ بندی والے",
+    "randomPicks": "بے ترتیب انتخاب",
+    "showAll": "سب دکھائیں",
+    "backToHome": "ہوم پر واپس جائیں",
+    "shelfNotFound": "سیکشن نہیں ملا۔"
+  },
+  "albums": {
+    "title": "البمز",
+    "sortName": "نام",
+    "sortRecentlyAdded": "حال ہی میں شامل کردہ",
+    "sortArtist": "فنکار",
+    "sortYear": "سال",
+    "sortMostPlayed": "سب سے زیادہ چلائے گئے",
+    "sortRandom": "بے ترتیب",
+    "emptyMessage": "ابھی تک کوئی البم نہیں ہے — اپنی لائبریری میں کچھ میوزک شامل کریں۔"
+  },
+  "songs": {
+    "title": "گانے",
+    "searchPlaceholder": "گانے تلاش کریں",
+    "sortTitle": "عنوان",
+    "sortArtist": "فنکار",
+    "sortAlbum": "البم",
+    "sortRecentlyAdded": "حال ہی میں شامل کردہ",
+    "sortYear": "سال",
+    "sortMostPlayed": "سب سے زیادہ چلائے گئے",
+    "sortRandom": "بے ترتیب",
+    "allGenres": "تمام انواع",
+    "allMoods": "تمام موڈز",
+    "favouritesOnly": "صرف پسندیدہ",
+    "columns": "کالمز",
+    "colGenre": "صنف",
+    "colYear": "سال",
+    "colMood": "موڈ",
+    "colPlayCount": "تعداد چلائی گئی",
+    "colBpm": "BPM",
+    "emptyMessage": "کوئی گانا نہیں ملا۔"
+  },
+  "artists": {
+    "title": "فنکار",
+    "sortName": "نام",
+    "sortMostAlbums": "سب سے زیادہ البمز",
+    "sortRandom": "بے ترتیب",
+    "emptyMessage": "ابھی تک کوئی فنکار نہیں ہے — اپنی لائبریری میں کچھ میوزک شامل کریں۔"
+  },
+  "search": {
+    "placeholder": "آپ کیا سننا چاہتے ہیں؟",
+    "prompt": "فنکاروں، البمز، گانوں اور پلے لسٹس میں تلاش کریں۔",
+    "searching": "تلاش ہو رہی ہے…",
+    "noResults": "\"{{query}}\" کے لیے کوئی نتیجہ نہیں ملا۔",
+    "artists": "فنکار",
+    "albums": "البمز",
+    "songs": "گانے",
+    "playlists": "پلے لسٹس"
+  },
+  "radio": {
+    "title": "ریڈیو",
+    "addStation": "اسٹیشن شامل کریں",
+    "emptyMessage": "ابھی تک کوئی ریڈیو اسٹیشن نہیں ہے۔",
+    "play": "{{name}} چلائیں",
+    "edit": "{{name}} میں ترمیم کریں",
+    "delete": "{{name}} حذف کریں",
+    "deleteConfirm": "\"{{name}}\" حذف کریں؟ اسے واپس نہیں لایا جا سکتا۔"
+  },
+  "shares": {
+    "emptyMessage": "آپ نے ابھی تک کچھ شیئر نہیں کیا۔",
+    "visitCount_one": "{{count}} وزٹ",
+    "visitCount_other": "{{count}} وزٹس",
+    "expires": "{{date}} کو ختم ہو جائے گا",
+    "downloadable": "ڈاؤن لوڈ کے قابل",
+    "copyLink": "لنک کاپی کریں",
+    "delete": "شیئر \"{{name}}\" حذف کریں",
+    "deleteConfirm": "یہ شیئر لنک حذف کریں؟ یہ فوراً کام کرنا بند کر دے گا۔"
+  },
+  "player": {
+    "shuffle": "شفل",
+    "previous": "پچھلا",
+    "next": "اگلا",
+    "play": "چلائیں",
+    "pause": "روکیں",
+    "repeat": "تکرار: {{mode}}",
+    "repeatMode": {
+      "off": "آف",
+      "all": "سب",
+      "one": "ایک"
+    },
+    "liveRadio": "لائیو ریڈیو",
+    "seek": "سیک",
+    "lyrics": {
+      "loading": "لرکس لوڈ ہو رہے ہیں…",
+      "empty": "اس ٹریک کے لیے کوئی لرکس دستیاب نہیں ہیں۔"
+    },
+    "queue": {
+      "title": "قطار",
+      "nowPlaying": "ابھی چل رہا ہے",
+      "nextUp": "اگلا",
+      "empty": "قطار خالی ہے۔",
+      "saveAsPlaylist": "پلے لسٹ کے طور پر محفوظ کریں",
+      "saveTitle": "قطار کو پلے لسٹ کے طور پر محفوظ کریں",
+      "playlistName": "پلے لسٹ کا نام",
+      "save": "محفوظ کریں",
+      "moveUp": "اوپر منتقل کریں",
+      "moveDown": "نیچے منتقل کریں",
+      "remove": "قطار سے ہٹائیں"
+    },
+    "bar": {
+      "nothingPlaying": "کچھ نہیں چل رہا",
+      "expandNowPlaying": "ابھی چل رہا ہے کو پھیلائیں",
+      "mute": "میوٹ",
+      "unmute": "ان میوٹ",
+      "volume": "آواز"
+    }
+  },
+  "smartPlaylist": {
+    "match": "میچ",
+    "all": "سب",
+    "any": "کوئی بھی",
+    "ofTheFollowing": "مندرجہ ذیل میں سے:",
+    "noRules": "ابھی تک کوئی اصول نہیں ہے — نیچے ایک شامل کریں۔",
+    "addRule": "اصول شامل کریں",
+    "addGroup": "گروپ شامل کریں",
+    "removeGroup": "گروپ ہٹائیں",
+    "removeRule": "اصول ہٹائیں",
+    "minimum": "کم از کم",
+    "maximum": "زیادہ سے زیادہ",
+    "and": "اور",
+    "days": "دن",
+    "true": "درست",
+    "false": "غلط",
+    "fields": {
+      "title": "عنوان",
+      "album": "البم",
+      "artist": "فنکار",
+      "albumartist": "البم فنکار",
+      "genre": "صنف",
+      "path": "فائل پاتھ",
+      "comment": "تبصرہ",
+      "year": "سال",
+      "duration": "دورانیہ (سیکنڈز)",
+      "bpm": "BPM",
+      "rating": "ریٹنگ",
+      "albumrating": "البم ریٹنگ",
+      "playcount": "پلے کاؤنٹ",
+      "albumplaycount": "البم پلے کاؤنٹ",
+      "loved": "پسندیدہ",
+      "albumloved": "پسندیدہ البم",
+      "missing": "غائب",
+      "compilation": "کمپیلیشن",
+      "dateadded": "شامل کرنے کی تاریخ",
+      "lastplayed": "آخری بار چلایا گیا"
+    },
+    "operators": {
+      "is": "ہے",
+      "isNot": "نہیں ہے",
+      "contains": "شامل ہے",
+      "notContains": "شامل نہیں ہے",
+      "startsWith": "سے شروع ہوتا ہے",
+      "endsWith": "پر ختم ہوتا ہے",
+      "gt": "سے زیادہ ہے",
+      "lt": "سے کم ہے",
+      "inTheRange": "کے درمیان ہے",
+      "before": "سے پہلے ہے",
+      "after": "کے بعد ہے",
+      "inTheLast": "پچھلے (دنوں) میں ہے",
+      "notInTheLast": "پچھلے (دنوں) میں نہیں ہے",
+      "isPresent": "کی ایک قدر ہے",
+      "isMissing": "کی کوئی قدر نہیں ہے"
+    },
+    "random": "بے ترتیب",
+    "loading": "لوڈ ہو رہا ہے…",
+    "editSmartPlaylistRules": "اسمارٹ پلے لسٹ کے اصول ترمیم کریں",
+    "newSmartPlaylist": "نئی اسمارٹ پلے لسٹ",
+    "name": "نام",
+    "description": "تفصیل",
+    "rules": "اصول",
+    "sortBy": "ترتیب دیں بلحاظ",
+    "defaultOrder": "پہلے سے طے شدہ ترتیب",
+    "direction": "سمت",
+    "ascending": "صعودی",
+    "descending": "نزولی",
+    "limitNoLimit": "حد (0 = کوئی حد نہیں)",
+    "nameRequired": "نام درکار ہے۔",
+    "saveError": "پلے لسٹ محفوظ نہیں ہو سکی — اپنے اصول چیک کریں اور دوبارہ کوشش کریں۔",
+    "savingEllipsis": "محفوظ ہو رہا ہے…",
+    "save": "محفوظ کریں"
+  },
+  "help": {
+    "title": "کی بورڈ شارٹ کٹس",
+    "togglePlay": "پلے / پاز",
+    "previous": "پچھلا ٹریک",
+    "next": "اگلا ٹریک",
+    "currentSong": "موجودہ گانے پر جائیں",
+    "volumeUp": "آواز بڑھائیں",
+    "volumeDown": "آواز کم کریں",
+    "toggleLove": "موجودہ گانے کو پسندیدہ میں شامل / خارج کریں",
+    "toggleMenu": "مینو ٹوگل کریں",
+    "showHelp": "کی بورڈ شارٹ کٹس دکھائیں"
+  },
+  "admin": {
+    "dataTable": {
+      "noResults": "کوئی نتیجہ نہیں۔",
+      "loading": "لوڈ ہو رہا ہے…",
+      "pageOf": "صفحہ {{page}} از {{pageCount}} — مجموعی {{rowCount}}",
+      "previous": "پچھلا",
+      "next": "اگلا"
+    }
+  },
+  "library": {
+    "yourLibrary": "آپ کی لائبریری",
+    "albums": "البمز",
+    "artists": "فنکار",
+    "songs": "گانے",
+    "radio": "ریڈیو",
+    "playlists": "پلے لسٹس",
+    "loading": "لوڈ ہو رہا ہے…",
+    "noPlaylistsYet": "ابھی تک کوئی پلے لسٹ نہیں ہے۔",
+    "components": {
+      "songRow": {
+        "playAria": "{{title}} چلائیں",
+        "moreOptionsAria": "مزید اختیارات",
+        "playNow": "ابھی چلائیں",
+        "playNext": "اگلے میں چلائیں",
+        "addToQueue": "قطار میں شامل کریں",
+        "addToPlaylist": "پلے لسٹ میں شامل کریں",
+        "noPlaylists": "ابھی تک کوئی پلے لسٹ نہیں ہے",
+        "goToAlbum": "البم پر جائیں",
+        "goToArtist": "فنکار پر جائیں",
+        "download": "ڈاؤن لوڈ",
+        "getInfo": "معلومات حاصل کریں",
+        "share": "شیئر کریں"
+      },
+      "songInfo": {
+        "title": "گانے کی معلومات",
+        "path": "پاتھ",
+        "library": "لائبریری",
+        "album": "البم",
+        "discSubtitle": "ڈسک سب ٹائٹل",
+        "albumArtist": "البم فنکار",
+        "artist": "فنکار",
+        "genre": "صنف",
+        "year": "سال",
+        "trackNumber": "ٹریک",
+        "duration": "دورانیہ",
+        "compilation": "کمپیلیشن",
+        "format": "فارمیٹ",
+        "bitRate": "بٹ ریٹ",
+        "bitDepth": "بٹ ڈیپتھ",
+        "sampleRate": "سیمپل ریٹ",
+        "channels": "چینلز",
+        "size": "سائز",
+        "bpm": "BPM",
+        "playCount": "پلے کاؤنٹ",
+        "lastPlayed": "آخری بار چلایا گیا",
+        "updatedAt": "فائل اپ ڈیٹ ہوئی",
+        "albumGain": "البم گین",
+        "trackGain": "ٹریک گین",
+        "comment": "تبصرہ",
+        "tags": "ٹیگز"
+      },
+      "albumCard": {
+        "playAria": "{{name}} چلائیں"
+      },
+      "albumListRow": {
+        "playAria": "{{name}} چلائیں"
+      },
+      "artistCard": {
+        "playAria": "{{name}} چلائیں"
+      },
+      "createPlaylistDialog": {
+        "trigger": "پلے لسٹ بنائیں",
+        "blankPlaylist": "خالی پلے لسٹ",
+        "smartPlaylist": "اسمارٹ پلے لسٹ",
+        "title": "نئی پلے لسٹ",
+        "nameLabel": "نام",
+        "nameRequired": "نام درکار ہے",
+        "descriptionLabel": "تفصیل",
+        "create": "بنائیں"
+      },
+      "editPlaylistDialog": {
+        "trigger": "تفصیلات میں ترمیم کریں",
+        "title": "پلے لسٹ میں ترمیم کریں",
+        "nameLabel": "نام",
+        "nameRequired": "نام درکار ہے",
+        "descriptionLabel": "تفصیل",
+        "save": "محفوظ کریں"
+      },
+      "playlistRow": {
+        "playAria": "{{name}} چلائیں",
+        "ownerSongs_one": "{{owner}} · {{count}} گانا",
+        "ownerSongs_other": "{{owner}} · {{count}} گانے"
+      },
+      "radioDialog": {
+        "editTitle": "اسٹیشن میں ترمیم کریں",
+        "addTitle": "ریڈیو اسٹیشن شامل کریں",
+        "nameLabel": "نام",
+        "nameRequired": "نام درکار ہے",
+        "streamUrlLabel": "اسٹریم یو آر ایل",
+        "streamUrlRequired": "اسٹریم یو آر ایل درکار ہے",
+        "urlInvalid": "ایک درست یو آر ایل ہونا چاہیے",
+        "streamUrlPlaceholder": "https://stream.example.com/live",
+        "homePageLabel": "ہوم پیج (اختیاری)",
+        "homePagePlaceholder": "https://example.com",
+        "save": "محفوظ کریں",
+        "addStation": "اسٹیشن شامل کریں"
+      },
+      "ratingStars": {
+        "rateAria_one": "{{count}} ستارہ دیں",
+        "rateAria_other": "{{count}} ستارے دیں"
+      },
+      "shareDialog": {
+        "title": "شیئر کریں",
+        "copyLinkAria": "لنک کاپی کریں",
+        "accessNoteListen": "اس لنک والا کوئی بھی شخص سن سکتا ہے — کسی اکاؤنٹ کی ضرورت نہیں۔",
+        "accessNoteListenDownload": "اس لنک والا کوئی بھی شخص سن اور ڈاؤن لوڈ کر سکتا ہے — کسی اکاؤنٹ کی ضرورت نہیں۔",
+        "descriptionLabel": "تفصیل (اختیاری)",
+        "allowDownloading": "ڈاؤن لوڈ کی اجازت دیں",
+        "createError": "شیئر لنک نہیں بن سکا — دوبارہ کوشش کریں۔",
+        "creating": "بنایا جا رہا ہے…",
+        "createLink": "لنک بنائیں"
+      },
+      "sortableTrackRow": {
+        "dragAria": "ترتیب تبدیل کرنے کے لیے گھسیٹیں",
+        "removeAria": "پلے لسٹ سے ہٹائیں"
+      },
+      "starButton": {
+        "addAria": "پسندیدہ میں شامل کریں",
+        "removeAria": "پسندیدہ سے ہٹائیں"
+      },
+      "viewToggle": {
+        "gridView": "گرڈ ویو",
+        "listView": "لسٹ ویو"
+      },
+      "virtualizedGrid": {
+        "empty": "ابھی تک یہاں کچھ نہیں ہے۔"
+      }
+    }
+  },
+  "nowPlaying": {
+    "closeNowPlaying": "ابھی چل رہا ہے بند کریں",
+    "nothingPlaying": "کچھ نہیں چل رہا۔",
+    "lyrics": "لرکس",
+    "lyricsNotAvailableForRadio": "ریڈیو اسٹیشنز کے لیے لرکس دستیاب نہیں ہیں۔",
+    "upNext": "اگلا",
+    "aboutArtist": "فنکار کے بارے میں",
+    "nextInQueue": "قطار میں اگلا",
+    "openQueue": "قطار کھولیں",
+    "noBiography": "کوئی سوانح حیات دستیاب نہیں ہے۔",
+    "queueIsEmpty": "قطار خالی ہے۔"
+  },
+  "share": {
+    "sharedViaNavidrome": "Navidrome کے ذریعے شیئر کیا گیا",
+    "downloadAll": "سب ڈاؤن لوڈ کریں",
+    "previous": "پچھلا",
+    "play": "چلائیں",
+    "pause": "روکیں",
+    "next": "اگلا",
+    "seek": "سیک"
+  },
+  "playlists": {
+    "playlists": "پلے لسٹس",
+    "loading": "لوڈ ہو رہا ہے…",
+    "noPlaylistsYet": "ابھی تک کوئی پلے لسٹ نہیں ہے۔"
+  },
+  "playlist": {
+    "loading": "لوڈ ہو رہا ہے…",
+    "loadingTracks": "ٹریکس لوڈ ہو رہے ہیں…",
+    "playlistNotFound": "پلے لسٹ نہیں ملی۔",
+    "smartPlaylist": "اسمارٹ پلے لسٹ",
+    "playlist": "پلے لسٹ",
+    "songCount_one": "{{count}} گانا",
+    "songCount_other": "{{count}} گانے",
+    "playName": "{{name}} چلائیں",
+    "editRules": "اصول ترمیم کریں",
+    "deleteConfirm": "\"{{name}}\" حذف کریں؟ اسے واپس نہیں لایا جا سکتا۔",
+    "delete": "حذف کریں",
+    "share": "شیئر کریں",
+    "playlistIsEmpty": "یہ پلے لسٹ خالی ہے۔"
+  },
+  "album": {
+    "loading": "لوڈ ہو رہا ہے…",
+    "loadingTracks": "ٹریکس لوڈ ہو رہے ہیں…",
+    "albumNotFound": "البم نہیں ملا۔",
+    "album": "البم",
+    "songCount_one": "{{count}} گانا",
+    "songCount_other": "{{count}} گانے",
+    "playName": "{{name}} چلائیں",
+    "share": "شیئر کریں",
+    "download": "ڈاؤن لوڈ",
+    "discNumber": "ڈسک {{n}}"
+  },
+  "artist": {
+    "loading": "لوڈ ہو رہا ہے…",
+    "artistNotFound": "فنکار نہیں ملا۔",
+    "artist": "فنکار",
+    "albumCount_one": "{{count}} البم",
+    "albumCount_other": "{{count}} البمز",
+    "playName": "{{name}} چلائیں",
+    "share": "شیئر کریں",
+    "download": "ڈاؤن لوڈ",
+    "about": "تعارف",
+    "readMore": "مزید پڑھیں",
+    "showLess": "کم دکھائیں",
+    "popular": "مقبول",
+    "discography": "ڈسکوگرافی",
+    "songs": "گانے",
+    "songCount_one": "{{count}} گانا",
+    "songCount_other": "{{count}} گانے",
+    "noSongs": "اس فنکار کے لیے کوئی گانا نہیں ملا۔",
+    "noAlbums": "اس فنکار کے لیے کوئی البم نہیں ملا۔",
+    "loadMore": "مزید لوڈ کریں",
+    "fansAlsoLike": "مداح یہ بھی پسند کرتے ہیں"
+  }
+}
