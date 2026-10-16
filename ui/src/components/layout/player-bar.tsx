@@ -1,5 +1,12 @@
 import { Link } from '@tanstack/react-router'
-import { Maximize2, Pause, Play } from 'lucide-react'
+import {
+  ListMusic,
+  Maximize2,
+  Pause,
+  PanelRightClose,
+  PanelRightOpen,
+  Play,
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { playerButtonFx } from '@/components/player/button-fx'
@@ -16,6 +23,7 @@ import {
   usePlayerStore,
   type QueuedTrack,
 } from '@/stores/player-store'
+import { useUiStore } from '@/stores/ui-store'
 
 /**
  * Round, vinyl-style cover that spins while playing and freezes at its current
@@ -59,14 +67,14 @@ export function PlayerBar() {
   const isPlaying = usePlayerStore((s) => s.isPlaying)
   const currentTime = usePlayerStore((s) => s.currentTime)
   const duration = usePlayerStore((s) => s.duration)
+  const rightPanelOpen = useUiStore((s) => s.rightPanelOpen)
+  const toggleRightPanel = useUiStore((s) => s.toggleRightPanel)
+  const openRightPanelTab = useUiStore((s) => s.openRightPanelTab)
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
 
   return (
-    <footer
-      data-slot="player-bar"
-      className="shrink-0 border-t border-border bg-background"
-    >
+    <footer data-slot="player-bar" className="shrink-0 bg-background">
       {/* Compact tap-to-expand mini player — there's no room at phone width
           for the full transport/seek/volume layout below, and Spotify's own
           mobile web player is exactly this shape: art+title (tap to open
@@ -165,7 +173,33 @@ export function PlayerBar() {
               <Maximize2 />
             </Button>
           )}
-          <QueuePanel />
+          {/* Below lg there's no room for the right rail, so the queue
+              stays a popup; at lg+ it's a tab in the rail instead. */}
+          <div className="lg:hidden">
+            <QueuePanel />
+          </div>
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            className={cn('hidden lg:inline-flex', playerButtonFx)}
+            aria-label={t('player.queue.title')}
+            onClick={() => openRightPanelTab('queue')}
+          >
+            <ListMusic />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            className={cn('hidden lg:inline-flex', playerButtonFx)}
+            aria-label={
+              rightPanelOpen
+                ? t('player.bar.hideRightRail')
+                : t('player.bar.showRightRail')
+            }
+            onClick={toggleRightPanel}
+          >
+            {rightPanelOpen ? <PanelRightClose /> : <PanelRightOpen />}
+          </Button>
           <VolumeControl />
         </div>
       </div>

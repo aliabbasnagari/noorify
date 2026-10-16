@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { AboutDialog } from '@/components/layout/about-dialog'
+import { Logo } from '@/components/layout/logo'
 import { ScanStatusWidget } from '@/components/layout/scan-status-widget'
 import { SearchBar } from '@/components/layout/search-bar'
 import { config } from '@/lib/config'
@@ -32,7 +33,14 @@ export function AppTopbar() {
       data-slot="app-topbar"
       className="flex h-14 shrink-0 items-center justify-between gap-4 bg-background/80 px-4 backdrop-blur"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
+        <Link
+          to="/"
+          className="flex shrink-0 items-center"
+          aria-label={t('app.name')}
+        >
+          <Logo className="size-8" />
+        </Link>
         <Button
           variant="secondary"
           size="icon-sm"

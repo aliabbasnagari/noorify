@@ -45,7 +45,7 @@ export function LyricsPanel({ songId }: { songId: string }) {
   }
 
   return (
-    <div className="flex max-h-full flex-col gap-3 overflow-y-auto py-4">
+    <div className="scrollbar-fade flex max-h-full flex-col gap-3 overflow-y-auto py-4">
       {lyric.line.map((line, index) => (
         <p
           key={index}

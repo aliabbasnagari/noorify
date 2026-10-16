@@ -1,164 +1,19 @@
-import type { ReactNode } from 'react'
-import { Link, useRouter } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
 import { ChevronDown } from 'lucide-react'
+import { useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { cn } from 'cn'
 import { ArtistLinks } from '@/components/library/artist-links'
 import { Button } from '@/components/ui/button'
 import { ArtHeroBackground } from '@/components/library/art-hero-background'
+import { AboutArtist } from '@/components/player/about-artist'
 import { LyricsPanel } from '@/components/player/lyrics-panel'
+import { NextInQueue } from '@/components/player/next-in-queue'
+import { PanelCard } from '@/components/player/panel-card'
 import { QueuePanel } from '@/components/player/queue-panel'
 import { SeekBar } from '@/components/player/seek-bar'
 import { TransportControls } from '@/components/player/transport-controls'
 import { VolumeControl } from '@/components/player/volume-control'
-import { getOne } from '@/lib/api/http'
 import { getCoverArtUrl } from '@/lib/api/subsonic'
-import type { Artist } from '@/lib/api/types'
-import {
-  useCurrentTrack,
-  usePlayerStore,
-  type QueuedTrack,
-} from '@/stores/player-store'
-
-const NEXT_IN_QUEUE_COUNT = 4
-
-function Card({
-  title,
-  action,
-  compact = false,
-  children,
-}: {
-  title: string
-  action?: ReactNode
-  compact?: boolean
-  children: ReactNode
-}) {
-  return (
-    <section
-      className={cn(
-        'rounded-xl bg-card/80 shadow-sm backdrop-blur',
-        compact ? 'p-4' : 'p-6',
-      )}
-    >
-      <div
-        className={cn(
-          'flex items-center justify-between gap-4',
-          compact ? 'mb-3' : 'mb-4',
-        )}
-      >
-        <h2 className={compact ? 'text-lg font-bold' : 'text-xl font-bold'}>
-          {title}
-        </h2>
-        {action}
-      </div>
-      {children}
-    </section>
-  )
-}
-
-function AboutArtist({ track }: { track: QueuedTrack }) {
-  const { t } = useTranslation()
-  const artistId = track.artistId ?? track.artists?.[0]?.id
-  const { data: artist } = useQuery({
-    queryKey: ['artist', 'detail', artistId],
-    queryFn: () => getOne<Artist>('artist', artistId!),
-    enabled: !!artistId,
-  })
-  if (!artistId || track.isRadio) return null
-
-  const biography = artist?.biography?.replace(/<[^>]*>/g, '').trim()
-  return (
-    <Card title={t('nowPlaying.aboutArtist')} compact>
-      <div className="flex items-start gap-4">
-        <Link to="/artist/$artistId" params={{ artistId }} className="shrink-0">
-          <img
-            src={getCoverArtUrl(artistId, 'ar', 160)}
-            alt=""
-            draggable={false}
-            className="size-16 rounded-full object-cover"
-          />
-        </Link>
-        <div className="min-w-0 flex-1">
-          <Link
-            to="/artist/$artistId"
-            params={{ artistId }}
-            className="block truncate font-bold hover:underline"
-          >
-            {artist?.name ?? track.artist}
-          </Link>
-          <p className="mt-1 line-clamp-4 text-sm text-muted-foreground">
-            {biography || t('nowPlaying.noBiography')}
-          </p>
-        </div>
-      </div>
-    </Card>
-  )
-}
-
-function NextInQueue() {
-  const { t } = useTranslation()
-  const queue = usePlayerStore((s) => s.queue)
-  const currentIndex = usePlayerStore((s) => s.currentIndex)
-  const playTrackAt = usePlayerStore((s) => s.playTrackAt)
-  const upcoming = queue.slice(
-    currentIndex + 1,
-    currentIndex + 1 + NEXT_IN_QUEUE_COUNT,
-  )
-
-  return (
-    <Card
-      title={t('nowPlaying.nextInQueue')}
-      action={
-        <QueuePanel
-          trigger={
-            <button
-              type="button"
-              className="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline"
-            />
-          }
-        />
-      }
-    >
-      {upcoming.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
-          {t('nowPlaying.queueIsEmpty')}
-        </p>
-      ) : (
-        <ul className="space-y-1">
-          {upcoming.map((track, i) => (
-            <li key={`${track.id}-${i}`}>
-              <button
-                type="button"
-                onClick={() => playTrackAt(currentIndex + 1 + i)}
-                className="flex w-full items-center gap-3 rounded-md p-2 text-left hover:bg-accent"
-              >
-                <img
-                  src={getCoverArtUrl(
-                    track.id,
-                    track.isRadio ? 'ra' : 'mf',
-                    96,
-                  )}
-                  alt=""
-                  draggable={false}
-                  className="size-12 shrink-0 rounded object-cover"
-                />
-                <span className="min-w-0">
-                  <span className="block truncate font-medium">
-                    {track.title}
-                  </span>
-                  <span className="block truncate text-sm text-muted-foreground">
-                    {track.artist}
-                  </span>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </Card>
-  )
-}
+import { useCurrentTrack } from '@/stores/player-store'
 
 export default function NowPlayingPage() {
   const { t } = useTranslation()
@@ -221,7 +76,7 @@ export default function NowPlayingPage() {
             {/* Right: stacked cards. */}
             <div className="flex flex-col gap-6">
               <AboutArtist track={currentTrack} />
-              <Card title={t('nowPlaying.lyrics')}>
+              <PanelCard title={t('nowPlaying.lyrics')}>
                 {currentTrack.isRadio ? (
                   <p className="text-sm text-muted-foreground">
                     {t('nowPlaying.lyricsNotAvailableForRadio')}
@@ -231,15 +86,26 @@ export default function NowPlayingPage() {
                     <LyricsPanel songId={currentTrack.id} />
                   </div>
                 )}
-              </Card>
-              <NextInQueue />
+              </PanelCard>
+              <NextInQueue
+                action={
+                  <QueuePanel
+                    trigger={
+                      <button
+                        type="button"
+                        className="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline"
+                      />
+                    }
+                  />
+                }
+              />
             </div>
           </div>
         )}
       </div>
 
       {/* Always-visible controls, like the main player bar. */}
-      <footer className="shrink-0 border-t border-border bg-background px-4 py-3">
+      <footer className="shrink-0 bg-background px-4 py-3">
         <div className="mx-auto grid max-w-[100rem] items-center gap-3 md:grid-cols-[1fr_auto_1fr] md:gap-4">
           <div className="flex min-w-0 items-center gap-3">
             {currentTrack && (

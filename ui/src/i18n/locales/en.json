@@ -193,7 +193,9 @@
       "expandNowPlaying": "Expand now playing",
       "mute": "Mute",
       "unmute": "Unmute",
-      "volume": "Volume"
+      "volume": "Volume",
+      "showRightRail": "Show now playing panel",
+      "hideRightRail": "Hide now playing panel"
     }
   },
   "smartPlaylist": {

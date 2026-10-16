@@ -41,22 +41,18 @@ export function AppSidebar() {
     <aside
       data-slot="app-sidebar"
       className={cn(
-        'flex h-full flex-col gap-2 bg-sidebar text-sidebar-foreground transition-[width] duration-200',
+        'flex h-full flex-col gap-2 rounded-xl bg-sidebar text-sidebar-foreground transition-[width] duration-200',
         collapsed ? 'w-[4.5rem]' : 'w-60',
       )}
     >
-      <div className="flex items-center justify-between px-4 py-4">
-        {!collapsed && (
-          <span className="text-lg font-bold tracking-tight">
-            {t('app.name')}
-          </span>
-        )}
+      {/* The brand mark lives in the full-width topbar now, so this row is
+          just the collapse toggle. */}
+      <div className="flex items-center justify-end px-2 py-4">
         <Button
           variant="ghost"
           size="icon-sm"
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
-          className="ml-auto"
         >
           <ChevronLeft
             className={cn('transition-transform', collapsed && 'rotate-180')}
