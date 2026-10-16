@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { AboutDialog } from '@/components/layout/about-dialog'
 import { ScanStatusWidget } from '@/components/layout/scan-status-widget'
+import { SearchBar } from '@/components/layout/search-bar'
 import { config } from '@/lib/config'
 import { logout, useAuthStore } from '@/stores/auth-store'
 
@@ -50,6 +51,10 @@ export function AppTopbar() {
         >
           <ChevronRight />
         </Button>
+      </div>
+
+      <div className="hidden min-w-0 flex-1 sm:block">
+        <SearchBar />
       </div>
 
       <div className="flex items-center gap-1">

@@ -231,13 +231,20 @@ function searchSongToSong(s: SubsonicSearchSong): Song {
  * search endpoint — callers needing those should query native REST's
  * `playlist` resource with a `q` filter instead (substring match against
  * name/comment — see persistence/playlist_repository.go's playlistFilter).
+ *
+ * The `*Offset` params (server/subsonic/searching.go) let callers page
+ * through a single entity type's results (e.g. a "Songs" results tab)
+ * without re-fetching the others from offset 0 every time.
  */
 export async function search3(
   query: string,
   counts: {
     artistCount?: number
+    artistOffset?: number
     albumCount?: number
+    albumOffset?: number
     songCount?: number
+    songOffset?: number
   } = {},
 ) {
   const root = await subsonicFetch<{
@@ -249,8 +256,11 @@ export async function search3(
   }>('search3', {
     query,
     artistCount: counts.artistCount ?? 8,
+    artistOffset: counts.artistOffset ?? 0,
     albumCount: counts.albumCount ?? 8,
+    albumOffset: counts.albumOffset ?? 0,
     songCount: counts.songCount ?? 20,
+    songOffset: counts.songOffset ?? 0,
   })
   const result = root.searchResult3
   return {

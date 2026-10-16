@@ -15,7 +15,10 @@ export function PlayingBars({
     <span
       data-slot="playing-bars"
       aria-hidden
-      className={cn('flex h-3.5 items-end gap-0.5 text-primary', className)}
+      className={cn(
+        'grid h-3.5 w-[24px] grid-cols-3 items-end justify-items-center text-primary',
+        className,
+      )}
     >
       {DELAYS.map((delay) => (
         <span

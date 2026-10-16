@@ -113,10 +113,30 @@
     "prompt": "Search across artists, albums, songs, and playlists.",
     "searching": "Searching…",
     "noResults": "No results for \"{{query}}\".",
+    "noResultsHint": "Please make sure your words are spelled correctly or use fewer or different keywords.",
     "artists": "Artists",
     "albums": "Albums",
     "songs": "Songs",
-    "playlists": "Playlists"
+    "playlists": "Playlists",
+    "clear": "Clear search",
+    "searchForQuery": "Search for \"{{query}}\"",
+    "topResult": "Top result",
+    "loadMore": "Show more",
+    "playAria": "Play {{name}}",
+    "addToQueueAria": "Add \"{{title}}\" to queue",
+    "category": {
+      "all": "All",
+      "songs": "Songs",
+      "artists": "Artists",
+      "albums": "Albums",
+      "playlists": "Playlists"
+    },
+    "resultType": {
+      "artist": "Artist",
+      "album": "Album",
+      "song": "Song",
+      "playlist": "Playlist"
+    }
   },
   "radio": {
     "title": "Radio",

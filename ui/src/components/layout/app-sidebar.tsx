@@ -25,7 +25,6 @@ import { LibrarySwitcher } from '@/components/layout/library-switcher'
 
 const primaryNav = [
   { to: '/' as const, icon: Home, labelKey: 'nav.home' },
-  { to: '/search' as const, icon: Search, labelKey: 'nav.search' },
   { to: '/albums' as const, icon: Disc3, labelKey: 'nav.albums' },
   { to: '/artists' as const, icon: Mic2, labelKey: 'nav.artists' },
   { to: '/songs' as const, icon: Music, labelKey: 'nav.songs' },
