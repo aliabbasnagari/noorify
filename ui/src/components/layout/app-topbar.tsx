@@ -104,7 +104,7 @@ export function AppTopbar() {
               </DropdownMenuItem>
             )}
             <DropdownMenuItem onClick={() => setAboutOpen(true)}>
-              About Navidrome
+              About Noorify
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

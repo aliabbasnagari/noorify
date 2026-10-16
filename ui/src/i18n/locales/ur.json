@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Navidrome"
+    "name": "Noorify"
   },
   "nav": {
     "home": "ہوم",
@@ -414,7 +414,7 @@
     "queueIsEmpty": "قطار خالی ہے۔"
   },
   "share": {
-    "sharedViaNavidrome": "Navidrome کے ذریعے شیئر کیا گیا",
+    "sharedViaNavidrome": "Noorify کے ذریعے شیئر کیا گیا",
     "downloadAll": "سب ڈاؤن لوڈ کریں",
     "previous": "پچھلا",
     "play": "چلائیں",

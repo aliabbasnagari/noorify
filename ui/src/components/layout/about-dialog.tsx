@@ -80,7 +80,7 @@ export function AboutDialog({
       {trigger && <DialogTrigger render={trigger} />}
       <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>About Navidrome</DialogTitle>
+          <DialogTitle>About Noorify</DialogTitle>
         </DialogHeader>
         {showConfigTab ? (
           <Tabs defaultValue="about">

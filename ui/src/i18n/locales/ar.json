@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Navidrome"
+    "name": "Noorify"
   },
   "nav": {
     "home": "الرئيسية",
@@ -426,7 +426,7 @@
     "queueIsEmpty": "قائمة الانتظار فارغة."
   },
   "share": {
-    "sharedViaNavidrome": "تمت المشاركة عبر Navidrome",
+    "sharedViaNavidrome": "تمت المشاركة عبر Noorify",
     "downloadAll": "تنزيل الكل",
     "previous": "السابق",
     "play": "تشغيل",

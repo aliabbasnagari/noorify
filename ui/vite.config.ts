@@ -67,10 +67,10 @@ export default defineConfig({
 // PWA manifest
 function manifest() {
   return {
-    name: 'Navidrome',
-    short_name: 'Navidrome',
+    name: 'Noorify',
+    short_name: 'noorify',
     description:
-      'Navidrome, an open source web-based music collection server and streamer',
+      'Noorify, an open source web-based music collection server and streamer',
     categories: ['music', 'entertainment'],
     display: 'standalone' as Display,
     start_url: './',

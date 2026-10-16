@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Navidrome"
+    "name": "Noorify"
   },
   "nav": {
     "home": "Home",
@@ -413,7 +413,7 @@
     "queueIsEmpty": "Queue is empty."
   },
   "share": {
-    "sharedViaNavidrome": "Shared via Navidrome",
+    "sharedViaNavidrome": "Shared via Noorify",
     "downloadAll": "Download all",
     "previous": "Previous",
     "play": "Play",

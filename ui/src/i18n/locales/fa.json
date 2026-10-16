@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Navidrome"
+    "name": "Noorify"
   },
   "nav": {
     "home": "خانه",
@@ -414,7 +414,7 @@
     "queueIsEmpty": "صف پخش خالی است."
   },
   "share": {
-    "sharedViaNavidrome": "به‌اشتراک‌گذاشته‌شده از طریق Navidrome",
+    "sharedViaNavidrome": "به‌اشتراک‌گذاشته‌شده از طریق Noorify",
     "downloadAll": "دانلود همه",
     "previous": "قبلی",
     "play": "پخش",
