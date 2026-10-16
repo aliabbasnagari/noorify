@@ -1,33 +1,25 @@
 import { useState } from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { useTheme } from 'next-themes'
-import { ChevronLeft, ChevronRight, Moon, Sun } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { AboutDialog } from '@/components/layout/about-dialog'
 import { ScanStatusWidget } from '@/components/layout/scan-status-widget'
 import { config } from '@/lib/config'
-import { isDarkTheme } from '@/lib/themes'
 import { logout, useAuthStore } from '@/stores/auth-store'
 
 export function AppTopbar() {
   const { t } = useTranslation()
   const router = useRouter()
   const session = useAuthStore((s) => s.session)
-  const { theme, setTheme } = useTheme()
   const [aboutOpen, setAboutOpen] = useState(false)
 
   const initials = (session?.name || session?.username || '?')
@@ -72,32 +64,6 @@ export function AppTopbar() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                {isDarkTheme(theme) ? (
-                  <Moon className="size-4" />
-                ) : (
-                  <Sun className="size-4" />
-                )}
-                {t('common.theme')}
-              </DropdownMenuSubTrigger>
-              <DropdownMenuSubContent>
-                <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
-                  <DropdownMenuRadioItem value="dark">
-                    {t('common.themeDark')}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="light">
-                    {t('common.themeLight')}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="solarized-dark">
-                    {t('common.themeSolarizedDark')}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="solarized-light">
-                    {t('common.themeSolarizedLight')}
-                  </DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuSubContent>
-            </DropdownMenuSub>
             <DropdownMenuItem render={<Link to="/personal" />}>
               {t('personal.title')}
             </DropdownMenuItem>
