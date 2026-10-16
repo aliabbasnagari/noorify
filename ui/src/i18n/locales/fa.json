@@ -475,5 +475,66 @@
     "noAlbums": "آلبومی برای این هنرمند پیدا نشد.",
     "loadMore": "بارگذاری بیشتر",
     "fansAlsoLike": "طرفداران این را هم دوست دارند"
+  },
+  "personal": {
+    "title": "تنظیمات شخصی",
+    "appearance": "ظاهر",
+    "language": "زبان",
+    "defaultView": "نمای پیش‌فرض",
+    "defaultViewHelp": "صفحه‌ای که هنگام باز کردن برنامه نمایش داده می‌شود.",
+    "playback": "پخش",
+    "replayGain": "ReplayGain",
+    "replayGainHelp": "با استفاده از برچسب‌های ReplayGain شدت صدا را بین آهنگ‌ها یکسان می‌کند.",
+    "replayGainModes": {
+      "none": "غیرفعال",
+      "album": "استفاده از گین آلبوم",
+      "track": "استفاده از گین آهنگ"
+    },
+    "preAmp": "پیش‌تقویت (دسی‌بل)",
+    "desktopNotifications": "اعلان‌های دسکتاپ",
+    "desktopNotificationsHelp": "هنگام تغییر آهنگ اعلان نشان بده.",
+    "notificationsBlocked": "اعلان‌ها برای این سایت مسدود شده‌اند. آن‌ها را در تنظیمات مرورگر مجاز کنید.",
+    "notificationsUnavailable": "اعلان‌ها در این مرورگر یا در اتصال ناامن (غیر HTTPS) در دسترس نیستند.",
+    "scrobbling": "اسکراب",
+    "lastfm": {
+      "label": "اسکراب به Last.fm",
+      "notConfigured": "Last.fm روی این سرور پیکربندی نشده است.",
+      "waiting": "در انتظار تأیید شما در زبانه Last.fm…",
+      "linkSuccess": "حساب Last.fm متصل شد.",
+      "linkFailure": "اتصال حساب Last.fm ممکن نشد.",
+      "unlinkSuccess": "اتصال حساب Last.fm قطع شد.",
+      "unlinkFailure": "قطع اتصال حساب Last.fm ممکن نشد."
+    },
+    "listenbrainz": {
+      "label": "اسکراب به ListenBrainz",
+      "tokenHelp": "توکن کاربری ListenBrainz را برای اتصال حساب خود جای‌گذاری کنید.",
+      "getToken": "دریافت توکن",
+      "tokenLabel": "توکن کاربر",
+      "linkSuccess": "ListenBrainz با نام {{user}} متصل شد.",
+      "linkFailure": "اتصال به ListenBrainz ممکن نشد: {{error}}",
+      "unlinkSuccess": "اتصال حساب ListenBrainz قطع شد.",
+      "unlinkFailure": "قطع اتصال حساب ListenBrainz ممکن نشد."
+    },
+    "account": {
+      "title": "حساب کاربری",
+      "username": "نام کاربری",
+      "name": "نام",
+      "email": "ایمیل",
+      "nameRequired": "نام الزامی است",
+      "emailInvalid": "ایمیل معتبر وارد کنید",
+      "passwordRequired": "الزامی",
+      "changePassword": "تغییر گذرواژه",
+      "cancelPassword": "لغو تغییر گذرواژه",
+      "currentPassword": "گذرواژه فعلی",
+      "newPassword": "گذرواژه جدید",
+      "wrongPassword": "گذرواژه فعلی نادرست است",
+      "saved": "نمایه ذخیره شد.",
+      "passwordChanged": "گذرواژه تغییر کرد.",
+      "passwordChangedSignIn": "گذرواژه تغییر کرد. لطفاً دوباره وارد شوید.",
+      "saveFailed": "ذخیره تغییرات ممکن نشد."
+    },
+    "save": "ذخیره",
+    "saving": "در حال ذخیره…",
+    "cancel": "لغو"
   }
 }

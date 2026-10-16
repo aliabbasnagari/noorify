@@ -474,5 +474,66 @@
     "noAlbums": "No albums found for this artist.",
     "loadMore": "Load more",
     "fansAlsoLike": "Fans also like"
+  },
+  "personal": {
+    "title": "Personal",
+    "appearance": "Appearance",
+    "language": "Language",
+    "defaultView": "Default view",
+    "defaultViewHelp": "The page you land on when you open the app.",
+    "playback": "Playback",
+    "replayGain": "ReplayGain",
+    "replayGainHelp": "Evens out loudness between tracks using their ReplayGain tags.",
+    "replayGainModes": {
+      "none": "Disabled",
+      "album": "Use album gain",
+      "track": "Use track gain"
+    },
+    "preAmp": "Pre-amp (dB)",
+    "desktopNotifications": "Desktop notifications",
+    "desktopNotificationsHelp": "Show a notification when the track changes.",
+    "notificationsBlocked": "Notifications are blocked for this site. Allow them in your browser settings.",
+    "notificationsUnavailable": "Notifications aren't available in this browser or on an insecure (non-HTTPS) connection.",
+    "scrobbling": "Scrobbling",
+    "lastfm": {
+      "label": "Scrobble to Last.fm",
+      "notConfigured": "Last.fm isn't configured on this server.",
+      "waiting": "Waiting for you to authorise in the Last.fm tab…",
+      "linkSuccess": "Last.fm account linked.",
+      "linkFailure": "Couldn't link your Last.fm account.",
+      "unlinkSuccess": "Last.fm account unlinked.",
+      "unlinkFailure": "Couldn't unlink your Last.fm account."
+    },
+    "listenbrainz": {
+      "label": "Scrobble to ListenBrainz",
+      "tokenHelp": "Paste your ListenBrainz user token to link your account.",
+      "getToken": "Get your token",
+      "tokenLabel": "User token",
+      "linkSuccess": "ListenBrainz linked as {{user}}.",
+      "linkFailure": "Couldn't link ListenBrainz: {{error}}",
+      "unlinkSuccess": "ListenBrainz account unlinked.",
+      "unlinkFailure": "Couldn't unlink your ListenBrainz account."
+    },
+    "account": {
+      "title": "Account",
+      "username": "Username",
+      "name": "Name",
+      "email": "Email",
+      "nameRequired": "Name is required",
+      "emailInvalid": "Must be a valid email",
+      "passwordRequired": "Required",
+      "changePassword": "Change password",
+      "cancelPassword": "Cancel password change",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "wrongPassword": "Current password is incorrect",
+      "saved": "Profile saved.",
+      "passwordChanged": "Password changed.",
+      "passwordChangedSignIn": "Password changed. Please sign in again.",
+      "saveFailed": "Couldn't save your changes."
+    },
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel"
   }
 }

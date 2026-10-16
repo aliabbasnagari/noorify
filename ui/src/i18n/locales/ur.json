@@ -475,5 +475,66 @@
     "noAlbums": "اس فنکار کے لیے کوئی البم نہیں ملا۔",
     "loadMore": "مزید لوڈ کریں",
     "fansAlsoLike": "مداح یہ بھی پسند کرتے ہیں"
+  },
+  "personal": {
+    "title": "ذاتی ترتیبات",
+    "appearance": "ظاہری شکل",
+    "language": "زبان",
+    "defaultView": "ڈیفالٹ منظر",
+    "defaultViewHelp": "ایپ کھولنے پر نظر آنے والا صفحہ۔",
+    "playback": "پلے بیک",
+    "replayGain": "ReplayGain",
+    "replayGainHelp": "ReplayGain ٹیگز کے ذریعے ٹریکس کے درمیان آواز کی بلندی برابر کرتا ہے۔",
+    "replayGainModes": {
+      "none": "غیر فعال",
+      "album": "البم گین استعمال کریں",
+      "track": "ٹریک گین استعمال کریں"
+    },
+    "preAmp": "پری ایمپ (ڈی بی)",
+    "desktopNotifications": "ڈیسک ٹاپ اطلاعات",
+    "desktopNotificationsHelp": "ٹریک بدلنے پر اطلاع دکھائیں۔",
+    "notificationsBlocked": "اس سائٹ کے لیے اطلاعات بلاک ہیں۔ براؤزر کی ترتیبات میں انہیں اجازت دیں۔",
+    "notificationsUnavailable": "اس براؤزر میں یا غیر محفوظ (غیر HTTPS) کنکشن پر اطلاعات دستیاب نہیں ہیں۔",
+    "scrobbling": "اسکروبلنگ",
+    "lastfm": {
+      "label": "Last.fm پر اسکروبل کریں",
+      "notConfigured": "اس سرور پر Last.fm ترتیب نہیں دیا گیا۔",
+      "waiting": "Last.fm ٹیب میں آپ کی اجازت کا انتظار ہے…",
+      "linkSuccess": "Last.fm اکاؤنٹ منسلک ہو گیا۔",
+      "linkFailure": "Last.fm اکاؤنٹ منسلک نہیں ہو سکا۔",
+      "unlinkSuccess": "Last.fm اکاؤنٹ منقطع ہو گیا۔",
+      "unlinkFailure": "Last.fm اکاؤنٹ منقطع نہیں ہو سکا۔"
+    },
+    "listenbrainz": {
+      "label": "ListenBrainz پر اسکروبل کریں",
+      "tokenHelp": "اپنا اکاؤنٹ منسلک کرنے کے لیے ListenBrainz صارف ٹوکن چسپاں کریں۔",
+      "getToken": "ٹوکن حاصل کریں",
+      "tokenLabel": "صارف ٹوکن",
+      "linkSuccess": "ListenBrainz بطور {{user}} منسلک ہو گیا۔",
+      "linkFailure": "ListenBrainz سے منسلک نہیں ہو سکا: {{error}}",
+      "unlinkSuccess": "ListenBrainz اکاؤنٹ منقطع ہو گیا۔",
+      "unlinkFailure": "ListenBrainz اکاؤنٹ منقطع نہیں ہو سکا۔"
+    },
+    "account": {
+      "title": "اکاؤنٹ",
+      "username": "صارف نام",
+      "name": "نام",
+      "email": "ای میل",
+      "nameRequired": "نام ضروری ہے",
+      "emailInvalid": "درست ای میل درج کریں",
+      "passwordRequired": "ضروری",
+      "changePassword": "پاس ورڈ تبدیل کریں",
+      "cancelPassword": "پاس ورڈ کی تبدیلی منسوخ کریں",
+      "currentPassword": "موجودہ پاس ورڈ",
+      "newPassword": "نیا پاس ورڈ",
+      "wrongPassword": "موجودہ پاس ورڈ غلط ہے",
+      "saved": "پروفائل محفوظ ہو گیا۔",
+      "passwordChanged": "پاس ورڈ تبدیل ہو گیا۔",
+      "passwordChangedSignIn": "پاس ورڈ تبدیل ہو گیا۔ براہِ کرم دوبارہ سائن ان کریں۔",
+      "saveFailed": "تبدیلیاں محفوظ نہیں ہو سکیں۔"
+    },
+    "save": "محفوظ کریں",
+    "saving": "محفوظ ہو رہا ہے…",
+    "cancel": "منسوخ کریں"
   }
 }

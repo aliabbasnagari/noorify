@@ -18,6 +18,7 @@ import { playlistDetailRoute } from '@/routes/playlist-detail'
 import { smartPlaylistNewRoute } from '@/routes/smart-playlist-new'
 import { smartPlaylistEditRoute } from '@/routes/smart-playlist-edit'
 import { sharesRoute } from '@/routes/shares'
+import { personalRoute } from '@/routes/personal'
 import { nowPlayingRoute } from '@/routes/now-playing'
 import { adminLayoutRoute } from '@/routes/admin/layout'
 import { adminIndexRoute } from '@/routes/admin'
@@ -47,6 +48,7 @@ const routeTree = rootRoute.addChildren([
     smartPlaylistNewRoute,
     smartPlaylistEditRoute,
     sharesRoute,
+    personalRoute,
     nowPlayingRoute,
     adminLayoutRoute.addChildren([
       adminIndexRoute,

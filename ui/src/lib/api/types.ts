@@ -50,7 +50,9 @@ export interface SongDetails extends Song {
   playDate?: string
   updatedAt?: string
   rgAlbumGain?: number | null
+  rgAlbumPeak?: number | null
   rgTrackGain?: number | null
+  rgTrackPeak?: number | null
   genres?: { id: string; name: string }[]
   tags?: Record<string, string[]>
 }

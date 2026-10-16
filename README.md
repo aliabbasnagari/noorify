@@ -1,20 +1,26 @@
-<img src="resources/logo-192x192.png" alt="Noorify logo" title="Noorify" align="right" height="60px" />
+<a href="https://www.navidrome.org"><img src="resources/logo-192x192.png" alt="Navidrome logo" title="navidrome" align="right" height="60px" /></a>
 
-# Noorify &nbsp;<sub>a modern UI for Navidrome</sub>
+# Noorify Music Server &nbsp;[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Tired%20of%20paying%20for%20music%20subscriptions%2C%20and%20not%20finding%20what%20you%20really%20like%3F%20Roll%20your%20own%20streaming%20service%21&url=https://navidrome.org&via=navidrome)
 
-<p align="center">
-    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-desktop-player.png">
-</p>
-<p align="center">
-    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-login.png">
-    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-player.png">
-    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-album-view.png">
-</p>
+[![Last Release](https://img.shields.io/github/v/release/aliabbasnagari/noorify?logo=github&label=latest&style=flat-square)](https://github.com/aliabbasnagari/noorify/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/aliabbasnagari/noorify/pipeline.yml?branch=master&logo=github&style=flat-square)](https://nightly.link/aliabbasnagari/noorify/workflows/pipeline/master)
+[![Downloads](https://img.shields.io/github/downloads/aliabbasnagari/noorify/total?logo=github&style=flat-square)](https://github.com/aliabbasnagari/noorify/releases/latest)
+[![Docker Pulls](https://img.shields.io/docker/pulls/aliabbasnagari/noorify?logo=docker&label=pulls&style=flat-square)](https://hub.docker.com/r/aliabbasnagari/noorify)
 
 **Noorify** is an open source, self-hosted music server and streamer with a completely redesigned web interface.
 It is a fork of [Navidrome](https://www.navidrome.org): the server, scanner, transcoding and Subsonic-compatible API
 are upstream Navidrome, and Noorify replaces the web UI with a new React + TypeScript one. Listen to your music
 collection from any browser or mobile device. It's like your personal Spotify!
+
+<p align="center">
+    <img height="550" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-desktop-player.png">
+</p>
+
+<p align="center">
+    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-login.png">
+    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-player.png">
+    <img height="480" src="https://raw.githubusercontent.com/aliabbasnagari/noorify/refs/heads/master/.github/screenshots/ss-mobile-album-view.png">
+</p>
 
 ## Thanks to Navidrome
 

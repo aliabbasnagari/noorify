@@ -9,6 +9,14 @@ export const THEMES = [
 
 export type ThemeId = (typeof THEMES)[number]
 
+/** i18n key for each theme's display name. */
+export const THEME_LABEL_KEYS: Record<ThemeId, string> = {
+  dark: 'common.themeDark',
+  light: 'common.themeLight',
+  'solarized-dark': 'common.themeSolarizedDark',
+  'solarized-light': 'common.themeSolarizedLight',
+}
+
 const DARK_THEMES: readonly string[] = ['dark', 'solarized-dark']
 
 /** Whether the theme has a dark surface (for libraries that only know light/dark). */

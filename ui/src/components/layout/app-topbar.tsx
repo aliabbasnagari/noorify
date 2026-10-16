@@ -98,6 +98,9 @@ export function AppTopbar() {
                 </DropdownMenuRadioGroup>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
+            <DropdownMenuItem render={<Link to="/personal" />}>
+              {t('personal.title')}
+            </DropdownMenuItem>
             {config.enableSharing && (
               <DropdownMenuItem render={<Link to="/shares" />}>
                 {t('common.yourShares')}

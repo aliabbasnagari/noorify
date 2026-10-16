@@ -503,5 +503,66 @@
     "noAlbums": "لم يتم العثور على ألبومات لهذا الفنان.",
     "loadMore": "تحميل المزيد",
     "fansAlsoLike": "يعجب المعجبون أيضًا بـ"
+  },
+  "personal": {
+    "title": "الإعدادات الشخصية",
+    "appearance": "المظهر",
+    "language": "اللغة",
+    "defaultView": "العرض الافتراضي",
+    "defaultViewHelp": "الصفحة التي تفتح عند تشغيل التطبيق.",
+    "playback": "التشغيل",
+    "replayGain": "ReplayGain",
+    "replayGainHelp": "يوازن مستوى الصوت بين المقاطع باستخدام وسوم ReplayGain.",
+    "replayGainModes": {
+      "none": "معطّل",
+      "album": "استخدام كسب الألبوم",
+      "track": "استخدام كسب المقطع"
+    },
+    "preAmp": "التضخيم المسبق (ديسيبل)",
+    "desktopNotifications": "إشعارات سطح المكتب",
+    "desktopNotificationsHelp": "عرض إشعار عند تغيّر المقطع.",
+    "notificationsBlocked": "الإشعارات محظورة لهذا الموقع. اسمح بها من إعدادات المتصفح.",
+    "notificationsUnavailable": "الإشعارات غير متاحة في هذا المتصفح أو عبر اتصال غير آمن (غير HTTPS).",
+    "scrobbling": "السكروبل",
+    "lastfm": {
+      "label": "تسجيل الاستماع في Last.fm",
+      "notConfigured": "Last.fm غير مُعدّ على هذا الخادم.",
+      "waiting": "بانتظار موافقتك في تبويب Last.fm…",
+      "linkSuccess": "تم ربط حساب Last.fm.",
+      "linkFailure": "تعذّر ربط حساب Last.fm.",
+      "unlinkSuccess": "تم فك ربط حساب Last.fm.",
+      "unlinkFailure": "تعذّر فك ربط حساب Last.fm."
+    },
+    "listenbrainz": {
+      "label": "تسجيل الاستماع في ListenBrainz",
+      "tokenHelp": "الصق رمز مستخدم ListenBrainz لربط حسابك.",
+      "getToken": "احصل على الرمز",
+      "tokenLabel": "رمز المستخدم",
+      "linkSuccess": "تم الربط مع ListenBrainz باسم {{user}}.",
+      "linkFailure": "تعذّر الربط مع ListenBrainz: {{error}}",
+      "unlinkSuccess": "تم فك ربط حساب ListenBrainz.",
+      "unlinkFailure": "تعذّر فك ربط حساب ListenBrainz."
+    },
+    "account": {
+      "title": "الحساب",
+      "username": "اسم المستخدم",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "nameRequired": "الاسم مطلوب",
+      "emailInvalid": "يجب إدخال بريد إلكتروني صالح",
+      "passwordRequired": "مطلوب",
+      "changePassword": "تغيير كلمة المرور",
+      "cancelPassword": "إلغاء تغيير كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "wrongPassword": "كلمة المرور الحالية غير صحيحة",
+      "saved": "تم حفظ الملف الشخصي.",
+      "passwordChanged": "تم تغيير كلمة المرور.",
+      "passwordChangedSignIn": "تم تغيير كلمة المرور. يرجى تسجيل الدخول مجددًا.",
+      "saveFailed": "تعذّر حفظ التغييرات."
+    },
+    "save": "حفظ",
+    "saving": "جارٍ الحفظ…",
+    "cancel": "إلغاء"
   }
 }

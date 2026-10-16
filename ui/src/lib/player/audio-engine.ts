@@ -1,7 +1,13 @@
 import { toast } from 'sonner'
 import i18n from '@/i18n'
+import { apiFetch } from '@/lib/api/http'
 import { getCoverArtUrl, reportPlayback, streamUrl } from '@/lib/api/subsonic'
+import type { SongDetails } from '@/lib/api/types'
+import { config } from '@/lib/config'
+import { notifyTrackChange } from '@/lib/notifications'
+import { replayGainFactor, type ReplayGainInfo } from '@/lib/replay-gain'
 import { usePlayerStore, type QueuedTrack } from '@/stores/player-store'
+import { useSettingsStore } from '@/stores/settings-store'
 
 // Scrobble once a track crosses whichever comes first, matching the
 // Subsonic/last.fm convention old-ui followed (server/subsonic/scrobble.go
@@ -32,6 +38,16 @@ class AudioEngine {
   private lastLoadedTrackId: string | null = null
   private scrobbledTrackId: string | null = null
   private consecutiveFailures = 0
+  // ReplayGain is applied with a Web Audio gain node, since an <audio>
+  // element's own volume can only attenuate. The graph is created lazily the
+  // first time ReplayGain is needed, because an element routed through
+  // createMediaElementSource stays routed through it — and a cross-origin
+  // source (an internet-radio stream without CORS headers) plays silent
+  // through the graph. So once ReplayGain has been used, radio needs a page
+  // reload to sound again; old-ui behaved the same way.
+  private audioContext: AudioContext | null = null
+  private gainNode: GainNode | null = null
+  private replayGainInfo = new Map<string, ReplayGainInfo>()
 
   constructor() {
     this.audio.preload = 'metadata'
@@ -43,7 +59,11 @@ class AudioEngine {
   private bindAudioEvents() {
     const { setTelemetry } = usePlayerStore.getState()
 
-    this.audio.addEventListener('play', () => setTelemetry({ isPlaying: true }))
+    this.audio.addEventListener('play', () => {
+      setTelemetry({ isPlaying: true })
+      // A context created before any user gesture starts suspended.
+      void this.audioContext?.resume()
+    })
     this.audio.addEventListener('pause', () =>
       setTelemetry({ isPlaying: false }),
     )
@@ -68,6 +88,15 @@ class AudioEngine {
   private subscribeToStore() {
     this.applyVolume(usePlayerStore.getState())
     this.loadCurrentTrack(usePlayerStore.getState())
+
+    useSettingsStore.subscribe((state, prevState) => {
+      if (
+        state.replayGainMode !== prevState.replayGainMode ||
+        state.replayGainPreAmp !== prevState.replayGainPreAmp
+      ) {
+        void this.applyReplayGain()
+      }
+    })
 
     usePlayerStore.subscribe((state, prevState) => {
       if (
@@ -102,6 +131,7 @@ class AudioEngine {
     if (!force && track?.id === this.lastLoadedTrackId) return
     this.lastLoadedTrackId = track?.id ?? null
     this.scrobbledTrackId = null
+    void this.applyReplayGain()
 
     if (!track) {
       this.audio.pause()
@@ -143,6 +173,69 @@ class AudioEngine {
       safeReport(track.id, false)
     }
     this.updateMediaSessionMetadata(track)
+    notifyTrackChange(track)
+  }
+
+  private ensureGainNode(): GainNode | null {
+    if (this.gainNode) return this.gainNode
+    if (typeof AudioContext === 'undefined') return null
+    try {
+      const context = new AudioContext()
+      const source = context.createMediaElementSource(this.audio)
+      const gain = context.createGain()
+      source.connect(gain)
+      gain.connect(context.destination)
+      this.audioContext = context
+      this.gainNode = gain
+    } catch {
+      return null
+    }
+    return this.gainNode
+  }
+
+  private setGain(value: number) {
+    if (this.gainNode && this.audioContext) {
+      this.gainNode.gain.setValueAtTime(value, this.audioContext.currentTime)
+    }
+  }
+
+  /** Sets the gain node for the current track from the user's ReplayGain
+   * settings. The tags aren't on queue entries, so they're fetched once per
+   * track from the native API; until they arrive the track is held silent
+   * rather than blasting out at unity gain. */
+  private async applyReplayGain() {
+    const { replayGainMode: mode, replayGainPreAmp: preAmp } =
+      useSettingsStore.getState()
+    const state = usePlayerStore.getState()
+    const track = state.queue[state.currentIndex] ?? null
+
+    if (
+      !config.enableReplayGain ||
+      mode === 'none' ||
+      !track ||
+      track.isRadio
+    ) {
+      this.setGain(1)
+      return
+    }
+    if (!this.ensureGainNode()) return
+
+    let info = this.replayGainInfo.get(track.id)
+    if (!info) {
+      this.setGain(0)
+      try {
+        info = await apiFetch<SongDetails>(`/api/song/${track.id}`)
+      } catch {
+        info = {}
+      }
+      this.replayGainInfo.set(track.id, info)
+      // The track or the settings may have changed while the request was in
+      // flight, so re-evaluate (now a cache hit) instead of applying stale
+      // values.
+      if (this.lastLoadedTrackId === track.id) void this.applyReplayGain()
+      return
+    }
+    this.setGain(replayGainFactor(mode, preAmp, info))
   }
 
   private handleTimeUpdate = () => {
