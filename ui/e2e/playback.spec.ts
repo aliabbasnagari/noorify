@@ -95,8 +95,8 @@ async function mockBackend(page: Page, clipSeconds: number) {
 
 async function login(page: Page) {
   await page.goto('/')
-  await page.getByLabel('Username').fill('testuser')
-  await page.getByLabel('Password').fill('password')
+  await page.getByLabel('Username', { exact: true }).fill('testuser')
+  await page.getByLabel('Password', { exact: true }).fill('password')
   await page.getByRole('button', { name: /log in/i }).click()
   await expect(page.getByRole('heading', { name: 'Home' })).toBeVisible()
 }

@@ -242,8 +242,14 @@ async function mockBackend(page: Page) {
     route.fulfill({ headers: { 'X-Total-Count': '1' }, json: [FAKE_PLAYLIST] }),
   )
   await page.route('**/api/playlist/1/tracks?**', (route) => {
-    if (route.request().method() === 'GET') {
+    const method = route.request().method()
+    if (method === 'GET') {
       return route.fulfill({ json: fakePlaylistTracks })
+    }
+    if (method === 'DELETE') {
+      const id = new URL(route.request().url()).searchParams.get('id')!
+      fakePlaylistTracks = fakePlaylistTracks.filter((t) => t.id !== id)
+      return route.fulfill({ json: { id } })
     }
     return route.continue()
   })
@@ -268,11 +274,6 @@ async function mockBackend(page: Page) {
         fakePlaylistTracks.splice(newIndex, 0, moved)
       }
       return route.fulfill({ json: { id: pos } })
-    }
-    if (method === 'DELETE') {
-      const id = route.request().url().split('/').pop()!
-      fakePlaylistTracks = fakePlaylistTracks.filter((t) => t.id !== id)
-      return route.fulfill({ json: { id } })
     }
     return route.continue()
   })
@@ -315,8 +316,8 @@ async function mockBackend(page: Page) {
 
 async function login(page: Page) {
   await page.goto('/')
-  await page.getByLabel('Username').fill('testuser')
-  await page.getByLabel('Password').fill('password')
+  await page.getByLabel('Username', { exact: true }).fill('testuser')
+  await page.getByLabel('Password', { exact: true }).fill('password')
   await page.getByRole('button', { name: /log in/i }).click()
   await expect(page.getByRole('heading', { name: 'Home' })).toBeVisible()
 }
@@ -374,6 +375,59 @@ test('adds a song to the queue from its overflow menu', async ({ page }) => {
     .getByRole('button', { name: 'Queue' })
     .click()
   await expect(page.getByText('Track One')).toBeVisible()
+})
+
+test('warns before re-adding a song that is already in the playlist', async ({
+  page,
+}) => {
+  await mockBackend(page)
+  await login(page)
+
+  await page.goto('/#/album/album-1')
+  const firstRow = page.locator('[data-slot="song-row"]').first()
+  await firstRow.getByRole('button', { name: 'More options' }).click()
+  await page.getByText('Add to playlist').click()
+
+  const addRequest = page.waitForRequest(
+    (req) =>
+      req.url().endsWith('/api/playlist/1/tracks') && req.method() === 'POST',
+    { timeout: 2000 },
+  )
+  await page.getByRole('menuitem', { name: 'My Mix' }).click()
+
+  // Track One (song-1) is already in "My Mix" (see fakePlaylistTracks) — a
+  // warning toast should appear instead of silently adding a duplicate.
+  await expect(page.getByText('Already in My Mix')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Add anyway' })).toBeVisible()
+  await expect(addRequest).rejects.toThrow()
+})
+
+test('removes a track from a playlist via the X button', async ({ page }) => {
+  await mockBackend(page)
+  await login(page)
+  await page.goto('/#/playlist/1')
+  await expect(page.getByRole('heading', { name: 'My Mix' })).toBeVisible()
+
+  const rows = page.locator('[data-slot="song-row"]')
+  await expect(rows).toHaveCount(3)
+
+  // The single-track path route (.../tracks/{id}) silently removes nothing
+  // server-side (see playlist-detail-page.tsx's removeMutation comment) —
+  // assert the actual request shape so this doesn't regress back to it.
+  const deleteRequest = page.waitForRequest(
+    (req) =>
+      req.url().includes('/api/playlist/1/tracks?') &&
+      req.method() === 'DELETE',
+  )
+  await page
+    .getByRole('button', { name: 'Remove from playlist' })
+    .first()
+    .click()
+  const request = await deleteRequest
+  expect(new URL(request.url()).searchParams.get('id')).toBe('1')
+
+  await expect(rows).toHaveCount(2)
+  await expect(page.getByText('Track One')).not.toBeVisible()
 })
 
 test('reorders playlist tracks by dragging', async ({ page }) => {

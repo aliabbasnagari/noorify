@@ -139,17 +139,17 @@ function LoginPage() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t('auth.usernameLabel')}</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <div className="relative">
+                    <User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                    <FormControl>
                       <Input
                         autoComplete="username"
                         autoFocus
                         className="h-10 pl-9"
                         {...field}
                       />
-                    </div>
-                  </FormControl>
+                    </FormControl>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -160,9 +160,9 @@ function LoginPage() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t('auth.passwordLabel')}</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <div className="relative">
+                    <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                    <FormControl>
                       <Input
                         type={passwordType}
                         autoComplete={
@@ -171,24 +171,24 @@ function LoginPage() {
                         className="h-10 px-9"
                         {...field}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((v) => !v)}
-                        aria-label={
-                          showPassword
-                            ? t('auth.hidePassword')
-                            : t('auth.showPassword')
-                        }
-                        className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
-                      >
-                        {showPassword ? (
-                          <EyeOff className="size-4" />
-                        ) : (
-                          <Eye className="size-4" />
-                        )}
-                      </button>
-                    </div>
-                  </FormControl>
+                    </FormControl>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      aria-label={
+                        showPassword
+                          ? t('auth.hidePassword')
+                          : t('auth.showPassword')
+                      }
+                      className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="size-4" />
+                      ) : (
+                        <Eye className="size-4" />
+                      )}
+                    </button>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -200,17 +200,17 @@ function LoginPage() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t('auth.confirmPasswordLabel')}</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                    <div className="relative">
+                      <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                      <FormControl>
                         <Input
                           type={passwordType}
                           autoComplete="new-password"
                           className="h-10 pl-9"
                           {...field}
                         />
-                      </div>
-                    </FormControl>
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

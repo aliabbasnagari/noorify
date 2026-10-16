@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { MoreHorizontal, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,13 +25,23 @@ import { apiFetch } from '@/lib/api/http'
 import { downloadUrl } from '@/lib/api/subsonic'
 import { config } from '@/lib/config'
 import { formatDuration } from '@/lib/format'
-import type { Playlist, Song } from '@/lib/api/types'
+import type { Playlist, PlaylistTrack, Song } from '@/lib/api/types'
 
 function addSongToPlaylist(playlistId: string, songId: string) {
   return apiFetch(`/api/playlist/${playlistId}/tracks`, {
     method: 'POST',
     body: { ids: [songId] },
   })
+}
+
+/** Playlists allow duplicate tracks, so the backend adds silently — fetch
+ * the target playlist's current tracks first so we can warn before piling
+ * on another copy of a song it already has. */
+async function songIsAlreadyInPlaylist(playlistId: string, songId: string) {
+  const tracks = await apiFetch<PlaylistTrack[]>(
+    `/api/playlist/${playlistId}/tracks?_end=2000`,
+  )
+  return tracks.some((track) => track.mediaFileId === songId)
 }
 
 export function SongRow({
@@ -71,6 +82,33 @@ export function SongRow({
   const [shareOpen, setShareOpen] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
   const isPlaying = usePlayerStore((s) => s.isPlaying)
+
+  async function handleAddToPlaylist(playlist: Playlist) {
+    try {
+      if (await songIsAlreadyInPlaylist(playlist.id, song.id)) {
+        toast(
+          t('library.components.songRow.alreadyInPlaylist', {
+            name: playlist.name,
+          }),
+          {
+            action: {
+              label: t('library.components.songRow.addAnyway'),
+              onClick: () => void addSongToPlaylist(playlist.id, song.id),
+            },
+          },
+        )
+        return
+      }
+      await addSongToPlaylist(playlist.id, song.id)
+      toast.success(
+        t('library.components.songRow.addedToPlaylist', {
+          name: playlist.name,
+        }),
+      )
+    } catch {
+      toast.error(t('errors.actionFailed'))
+    }
+  }
 
   return (
     <div
@@ -165,7 +203,7 @@ export function SongRow({
                   playlists.data.map((playlist) => (
                     <DropdownMenuItem
                       key={playlist.id}
-                      onClick={() => addSongToPlaylist(playlist.id, song.id)}
+                      onClick={() => void handleAddToPlaylist(playlist)}
                     >
                       {playlist.name}
                     </DropdownMenuItem>

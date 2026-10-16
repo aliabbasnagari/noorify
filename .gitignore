@@ -49,6 +49,7 @@ zz_*_test.go
 /plugins/testdata/.wazero-cache/
 /plugins/testdata/*.stage/
 
+artwork/hashed/
 
 ui-old/
 ai-artifacts/

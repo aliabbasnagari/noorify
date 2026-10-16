@@ -102,10 +102,18 @@ export default function PlaylistDetailPage({
   })
 
   const removeMutation = useMutation({
+    // The single-track route (DELETE .../tracks/{id}) reads the id from the
+    // wrong query key server-side and silently removes nothing — use the
+    // bulk route with the id as a query param instead, which reads it
+    // correctly. See server/nativeapi/playlists.go's deleteFromPlaylist:
+    // `p.Strings("id")` needs `:id` to see the chi path param, matching
+    // reorderItem's `p.IntOr(":id", 0)` in the same file — a backend fix
+    // this UI-only fork can't make (CLAUDE.md), so this routes around it.
     mutationFn: (trackId: string) =>
-      apiFetch(`/api/playlist/${playlistId}/tracks/${trackId}`, {
-        method: 'DELETE',
-      }),
+      apiFetch(
+        `/api/playlist/${playlistId}/tracks?id=${encodeURIComponent(trackId)}`,
+        { method: 'DELETE' },
+      ),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: tracksQueryKey(playlistId) }),
   })
