@@ -1,6 +1,6 @@
-<a href="https://www.navidrome.org"><img src="resources/logo-192x192.png" alt="Navidrome logo" title="navidrome" align="right" height="60px" /></a>
+<a href="https://www.noorify.qzz.io"><img src="resources/logo-192x192.png" alt="Noorify logo" title="noorify" align="right" height="60px" /></a>
 
-# Noorify Music Server &nbsp;[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Tired%20of%20paying%20for%20music%20subscriptions%2C%20and%20not%20finding%20what%20you%20really%20like%3F%20Roll%20your%20own%20streaming%20service%21&url=https://navidrome.org&via=navidrome)
+# Noorify Music Server &nbsp;[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Tired%20of%20paying%20for%20music%20subscriptions%2C%20and%20not%20finding%20what%20you%20really%20like%3F%20Roll%20your%20own%20streaming%20service%21&url=https://www.noorify.qzz.io&via=noorify)
 
 [![Last Release](https://img.shields.io/github/v/release/aliabbasnagari/noorify?logo=github&label=latest&style=flat-square)](https://github.com/aliabbasnagari/noorify/releases)
 [![Build](https://img.shields.io/github/actions/workflow/status/aliabbasnagari/noorify/pipeline.yml?branch=master&logo=github&style=flat-square)](https://nightly.link/aliabbasnagari/noorify/workflows/pipeline/master)
@@ -36,7 +36,7 @@ compatible with upstream Navidrome.
 
 ## Noorify UI vs the legacy Navidrome UI
 
-|               | Noorify (`ui/`)                                                                       | Legacy Navidrome UI (`ui-old/`)                              |
+|               | Noorify                                                                               | Legacy Navidrome UI                                          |
 | ------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | Framework     | React 19 + TypeScript                                                                 | React 17 + JavaScript (JSX)                                  |
 | UI toolkit    | shadcn-style components on Base UI, Tailwind CSS 4                                    | react-admin 3 + Material UI                                  |
