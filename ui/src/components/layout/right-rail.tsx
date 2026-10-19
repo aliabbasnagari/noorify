@@ -8,6 +8,8 @@ import { QueueList } from '@/components/player/queue-list'
 import { useCurrentTrack } from '@/stores/player-store'
 import { useUiStore, type RightPanelTab } from '@/stores/ui-store'
 
+import topBanner from '@/assets/emam-shahid-la.png'
+
 const TABS: { id: RightPanelTab; icon: typeof Info }[] = [
   { id: 'now-playing', icon: Info },
   { id: 'queue', icon: ListMusic },
@@ -35,6 +37,14 @@ export function RightRail() {
       data-slot="right-rail"
       className="flex h-full w-80 flex-col gap-3 overflow-hidden rounded-xl bg-card p-3"
     >
+      <img
+        src={topBanner}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        className="hidden h-14 w-auto  shrink-0 object-contain md:block"
+      />
+
       <div className="flex shrink-0 items-center gap-1 rounded-lg bg-muted/50 p-1">
         {TABS.map(({ id, icon: Icon }) => (
           <button
