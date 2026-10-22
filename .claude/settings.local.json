@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node node_modules/prettier/bin/prettier.cjs --check src/components/layout/app-sidebar.tsx)",
-      "Bash(node node_modules/eslint/bin/eslint.js src/components/layout/app-sidebar.tsx)"
+      "Bash(node node_modules/eslint/bin/eslint.js src/components/layout/app-sidebar.tsx)",
+      "Bash(node node_modules/typescript/bin/tsc --noEmit)"
     ]
   }
 }

@@ -83,7 +83,24 @@ export function AppSidebar() {
         })}
       </nav>
 
-      {!collapsed && <YourLibrarySection pathname={pathname} />}
+      {collapsed ? (
+        <div className="px-2">
+          <Link
+            to="/playlists"
+            aria-label={t('nav.library')}
+            className={cn(
+              'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-semibold transition-colors',
+              pathname === '/playlists' || pathname.startsWith('/playlist/')
+                ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                : 'text-muted-foreground hover:text-sidebar-foreground',
+            )}
+          >
+            <ListMusic className="size-5 shrink-0" />
+          </Link>
+        </div>
+      ) : (
+        <YourLibrarySection pathname={pathname} />
+      )}
 
       <div className="px-2 pb-3">
         <Link
