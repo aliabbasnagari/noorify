@@ -340,6 +340,7 @@
         "nameLabel": "نام",
         "nameRequired": "نام الزامی است",
         "descriptionLabel": "توضیحات",
+        "publicLabel": "عمومی",
         "create": "ایجاد"
       },
       "editPlaylistDialog": {
@@ -348,6 +349,7 @@
         "nameLabel": "نام",
         "nameRequired": "نام الزامی است",
         "descriptionLabel": "توضیحات",
+        "publicLabel": "عمومی",
         "save": "ذخیره"
       },
       "playlistRow": {

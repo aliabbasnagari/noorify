@@ -344,6 +344,7 @@
         "nameLabel": "الاسم",
         "nameRequired": "الاسم مطلوب",
         "descriptionLabel": "الوصف",
+        "publicLabel": "عامة",
         "create": "إنشاء"
       },
       "editPlaylistDialog": {
@@ -352,6 +353,7 @@
         "nameLabel": "الاسم",
         "nameRequired": "الاسم مطلوب",
         "descriptionLabel": "الوصف",
+        "publicLabel": "عامة",
         "save": "حفظ"
       },
       "playlistRow": {

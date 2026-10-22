@@ -340,6 +340,7 @@
         "nameLabel": "نام",
         "nameRequired": "نام درکار ہے",
         "descriptionLabel": "تفصیل",
+        "publicLabel": "عوامی",
         "create": "بنائیں"
       },
       "editPlaylistDialog": {
@@ -348,6 +349,7 @@
         "nameLabel": "نام",
         "nameRequired": "نام درکار ہے",
         "descriptionLabel": "تفصیل",
+        "publicLabel": "عوامی",
         "save": "محفوظ کریں"
       },
       "playlistRow": {

@@ -364,6 +364,7 @@
         "nameLabel": "Name",
         "nameRequired": "Name is required",
         "descriptionLabel": "Description",
+        "publicLabel": "Public",
         "create": "Create"
       },
       "editPlaylistDialog": {
@@ -372,6 +373,7 @@
         "nameLabel": "Name",
         "nameRequired": "Name is required",
         "descriptionLabel": "Description",
+        "publicLabel": "Public",
         "save": "Save"
       },
       "playlistRow": {

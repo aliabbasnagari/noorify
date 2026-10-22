@@ -10,6 +10,7 @@ import type { Playlist } from '@/lib/api/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Switch } from '@/components/ui/switch'
 import {
   Dialog,
   DialogContent,
@@ -33,6 +34,7 @@ function editPlaylistSchema(t: (key: string) => string) {
       .string()
       .min(1, t('library.components.editPlaylistDialog.nameRequired')),
     comment: z.string().optional(),
+    public: z.boolean(),
   })
 }
 
@@ -44,7 +46,11 @@ export function EditPlaylistDialog({ playlist }: { playlist: Playlist }) {
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    values: { name: playlist.name, comment: playlist.comment ?? '' },
+    values: {
+      name: playlist.name,
+      comment: playlist.comment ?? '',
+      public: playlist.public,
+    },
   })
 
   const mutation = useMutation({
@@ -105,6 +111,23 @@ export function EditPlaylistDialog({ playlist }: { playlist: Playlist }) {
                     <Textarea rows={3} {...field} />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="public"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between">
+                  <FormLabel className="!mt-0">
+                    {t('library.components.editPlaylistDialog.publicLabel')}
+                  </FormLabel>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
                 </FormItem>
               )}
             />
