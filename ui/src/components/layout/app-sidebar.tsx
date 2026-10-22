@@ -154,7 +154,7 @@ function YourLibrarySection({ pathname }: { pathname: string }) {
 
       {expanded && (
         <div className="flex min-h-0 flex-1 flex-col gap-1">
-          <div className="relative px-1 pb-2">
+          <div className="relative px-1 mb-2">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               value={filterText}
