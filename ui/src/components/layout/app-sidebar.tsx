@@ -21,6 +21,7 @@ import { useResourceList } from '@/hooks/use-resource-list'
 import type { Playlist } from '@/lib/api/types'
 import { useUiStore } from '@/stores/ui-store'
 import { useLibraryStore } from '@/stores/library-store'
+import { useAuthStore } from '@/stores/auth-store'
 import { LibrarySwitcher } from '@/components/layout/library-switcher'
 
 const primaryNav = [
@@ -36,6 +37,7 @@ export function AppSidebar() {
   const collapsed = useUiStore((s) => s.sidebarCollapsed)
   const toggleSidebar = useUiStore((s) => s.toggleSidebar)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const isAdmin = useAuthStore((s) => s.session?.isAdmin ?? false)
 
   return (
     <aside
@@ -102,20 +104,22 @@ export function AppSidebar() {
         <YourLibrarySection pathname={pathname} />
       )}
 
-      <div className="px-2 pb-3">
-        <Link
-          to="/admin"
-          className={cn(
-            'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-semibold transition-colors',
-            pathname.startsWith('/admin')
-              ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-              : 'text-muted-foreground hover:text-sidebar-foreground',
-          )}
-        >
-          <Settings className="size-5 shrink-0" />
-          {!collapsed && <span>{t('nav.admin')}</span>}
-        </Link>
-      </div>
+      {isAdmin && (
+        <div className="px-2 pb-3">
+          <Link
+            to="/admin"
+            className={cn(
+              'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-semibold transition-colors',
+              pathname.startsWith('/admin')
+                ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                : 'text-muted-foreground hover:text-sidebar-foreground',
+            )}
+          >
+            <Settings className="size-5 shrink-0" />
+            {!collapsed && <span>{t('nav.admin')}</span>}
+          </Link>
+        </div>
+      )}
     </aside>
   )
 }

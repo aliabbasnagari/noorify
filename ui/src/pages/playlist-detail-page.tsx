@@ -26,6 +26,7 @@ import {
   useCurrentTrack,
   usePlayerStore,
 } from '@/stores/player-store'
+import { useAuthStore } from '@/stores/auth-store'
 
 function tracksQueryKey(playlistId: string) {
   return ['playlist', 'tracks', playlistId]
@@ -47,6 +48,7 @@ export default function PlaylistDetailPage({
   const queryClient = useQueryClient()
   const setQueue = usePlayerStore((s) => s.setQueue)
   const currentTrack = useCurrentTrack()
+  const session = useAuthStore((s) => s.session)
 
   const { data: playlist, isLoading: playlistLoading } = useQuery({
     queryKey: ['playlist', 'detail', playlistId],
@@ -153,12 +155,14 @@ export default function PlaylistDetailPage({
 
   const trackList = tracks ?? []
   const isSmart = playlist.rules !== null
+  const isOwner =
+    session?.id === playlist.ownerId || (session?.isAdmin ?? false)
   // Only the *track list* is non-editable for smart/synced playlists (it's
   // derived, not stored) — the playlist itself is still renameable,
   // deletable, and (for smart playlists) has its rules editable. Phase 3
   // wrongly gated all of these together; fixed here since this is exactly
   // when rule-editing came online.
-  const tracksEditable = !isSmart && !playlist.sync
+  const tracksEditable = isOwner && !isSmart && !playlist.sync
 
   return (
     <div className="space-y-6 py-8">
@@ -188,32 +192,40 @@ export default function PlaylistDetailPage({
         >
           <Play className="size-5 fill-current" />
         </Button>
-        {isSmart ? (
+        {isOwner &&
+          (isSmart ? (
+            <Button
+              variant="outline"
+              size="sm"
+              render={
+                <Link
+                  to="/playlist/$playlistId/rules"
+                  params={{ playlistId }}
+                />
+              }
+            >
+              <ListMusic className="size-3.5" />
+              {t('playlist.editRules')}
+            </Button>
+          ) : (
+            <EditPlaylistDialog playlist={playlist} />
+          ))}
+        {isOwner && (
           <Button
             variant="outline"
             size="sm"
-            render={
-              <Link to="/playlist/$playlistId/rules" params={{ playlistId }} />
-            }
+            onClick={() => {
+              if (
+                confirm(t('playlist.deleteConfirm', { name: playlist.name }))
+              ) {
+                deletePlaylistMutation.mutate()
+              }
+            }}
           >
-            <ListMusic className="size-3.5" />
-            {t('playlist.editRules')}
+            <Trash2 className="size-3.5" />
+            {t('playlist.delete')}
           </Button>
-        ) : (
-          <EditPlaylistDialog playlist={playlist} />
         )}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            if (confirm(t('playlist.deleteConfirm', { name: playlist.name }))) {
-              deletePlaylistMutation.mutate()
-            }
-          }}
-        >
-          <Trash2 className="size-3.5" />
-          {t('playlist.delete')}
-        </Button>
         {config.enableSharing && (
           <ShareDialog
             resourceIds={[playlist.id]}

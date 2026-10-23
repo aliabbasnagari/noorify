@@ -265,6 +265,7 @@ export interface Playlist {
   songCount: number
   duration: number
   ownerName: string
+  ownerId: string
   public: boolean
   sync: boolean
   /** Non-null means server-managed (smart playlist) — not user-reorderable. */
