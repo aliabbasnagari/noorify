@@ -1,6 +1,6 @@
 import { createRoute, useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
-import { Eye, EyeOff, Lock, Music2, User } from 'lucide-react'
+import { Eye, EyeOff, Lock, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -12,6 +12,7 @@ import { config, markSetupComplete } from '@/lib/config'
 import { useAuthStore, type AuthSession } from '@/stores/auth-store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Logo } from '@/components/layout/logo'
 import {
   Form,
   FormControl,
@@ -116,8 +117,8 @@ function LoginPage() {
       />
       <div className="relative w-full max-w-sm space-y-6 rounded-2xl border border-border bg-card/80 p-8 shadow-xl backdrop-blur">
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
-            <Music2 className="size-7" />
+          <div className="flex size-14 items-center justify-center rounded-full text-primary-foreground shadow-lg">
+            <Logo />
           </div>
           <h1 className="text-2xl font-bold">{t('app.name')}</h1>
           <div className="space-y-1">
