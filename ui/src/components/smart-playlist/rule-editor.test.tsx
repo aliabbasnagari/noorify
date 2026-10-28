@@ -27,12 +27,9 @@ describe('SmartPlaylistRuleEditor', () => {
     expect(
       screen.queryByText('No rules yet — add one below.'),
     ).not.toBeInTheDocument()
-    // The field select's closed trigger displays the raw selected value
-    // (Base UI only resolves it to the item's rendered label once the
-    // popup has actually opened and registered its items — see the
-    // dropdown-interaction note in song-row.test.tsx) — so the closed
-    // trigger shows the field key, not FIELDS[0].label.
-    expect(screen.getByText(FIELDS[0].key)).toBeInTheDocument()
+    // The closed trigger shows the field's display label, not its raw key.
+    expect(screen.getByText('Title')).toBeInTheDocument()
+    expect(screen.queryByText(FIELDS[0].key)).not.toBeInTheDocument()
   })
 
   it('adds a nested group', () => {
@@ -72,6 +69,6 @@ describe('SmartPlaylistRuleEditor', () => {
     expect(
       screen.queryByRole('button', { name: 'Remove group' }),
     ).not.toBeInTheDocument()
-    expect(screen.getByText('title')).toBeInTheDocument()
+    expect(screen.getByText('Title')).toBeInTheDocument()
   })
 })
