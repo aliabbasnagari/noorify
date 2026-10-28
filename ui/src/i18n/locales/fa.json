@@ -283,6 +283,7 @@
     "components": {
       "songRow": {
         "playAria": "پخش {{title}}",
+        "pauseAria": "توقف {{title}}",
         "moreOptionsAria": "گزینه‌های بیشتر",
         "playNow": "اکنون پخش کن",
         "playNext": "پخش بعدی",

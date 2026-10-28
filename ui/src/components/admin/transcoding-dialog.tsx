@@ -124,6 +124,11 @@ export function TranscodingDialog({
                 <FormItem>
                   <FormLabel>Default bit rate</FormLabel>
                   <Select
+                    items={TRANSCODING_BITRATE_CHOICES.map((rate) => ({
+                      value: String(rate),
+                      label:
+                        rate === 0 ? 'No default bit rate' : `${rate} kbps`,
+                    }))}
                     value={String(field.value)}
                     onValueChange={(v) => v && field.onChange(Number(v))}
                   >

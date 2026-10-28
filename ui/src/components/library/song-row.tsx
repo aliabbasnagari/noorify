@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { MoreHorizontal, Play } from 'lucide-react'
+import { MoreHorizontal, Pause, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { cn } from 'cn'
@@ -18,6 +18,7 @@ import { StarButton } from '@/components/library/star-button'
 import { RatingStars } from '@/components/library/rating-stars'
 import { PlayingBars } from '@/components/library/playing-bars'
 import { SongInfoDialog } from '@/components/library/song-info-dialog'
+import { audioEngine } from '@/lib/player/audio-engine'
 import { usePlayerStore } from '@/stores/player-store'
 import { ShareDialog } from '@/components/library/share-dialog'
 import { useResourceList } from '@/hooks/use-resource-list'
@@ -82,6 +83,14 @@ export function SongRow({
   const [shareOpen, setShareOpen] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
   const isPlaying = usePlayerStore((s) => s.isPlaying)
+  const showPause = active && isPlaying
+
+  // The current track is already loaded: clicking it pauses/resumes instead
+  // of restarting the queue from this row.
+  function handleRowPlay() {
+    if (active) audioEngine.togglePlayPause()
+    else onPlay()
+  }
 
   async function handleAddToPlaylist(playlist: Playlist) {
     try {
@@ -120,11 +129,14 @@ export function SongRow({
     >
       <button
         type="button"
-        onClick={onPlay}
+        onClick={handleRowPlay}
         className="flex size-6 items-center justify-center text-sm text-muted-foreground"
-        aria-label={t('library.components.songRow.playAria', {
-          title: song.title,
-        })}
+        aria-label={t(
+          showPause
+            ? 'library.components.songRow.pauseAria'
+            : 'library.components.songRow.playAria',
+          { title: song.title },
+        )}
       >
         {active ? (
           <PlayingBars playing={isPlaying} className="group-hover:hidden" />
@@ -133,10 +145,18 @@ export function SongRow({
             {displayNumber ?? index + 1}
           </span>
         )}
-        <Play className="hidden size-3.5 fill-current group-hover:block" />
+        {showPause ? (
+          <Pause className="hidden size-3.5 fill-current group-hover:block" />
+        ) : (
+          <Play className="hidden size-3.5 fill-current group-hover:block" />
+        )}
       </button>
 
-      <button type="button" onClick={onPlay} className="min-w-0 text-left">
+      <button
+        type="button"
+        onClick={handleRowPlay}
+        className="min-w-0 text-left"
+      >
         <p
           className={cn(
             'truncate text-sm font-medium',

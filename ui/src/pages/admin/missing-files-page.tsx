@@ -113,6 +113,13 @@ export default function MissingFilesPage() {
         <h1 className="text-2xl font-bold">Missing Files</h1>
         <div className="flex items-center gap-2">
           <Select
+            items={[
+              { value: ALL_LIBRARIES, label: 'All libraries' },
+              ...(libraries?.data.map((lib) => ({
+                value: String(lib.id),
+                label: lib.name,
+              })) ?? []),
+            ]}
             value={libraryFilter}
             onValueChange={(v) => v && setLibraryFilter(v)}
           >

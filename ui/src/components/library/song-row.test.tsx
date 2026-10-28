@@ -4,6 +4,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SongRow } from './song-row'
+import { audioEngine } from '@/lib/player/audio-engine'
+import { usePlayerStore } from '@/stores/player-store'
 import type { Song } from '@/lib/api/types'
 
 vi.mock('@tanstack/react-router', () => ({
@@ -23,6 +25,10 @@ vi.mock('@/lib/api/subsonic', () => ({
   downloadUrl: (id: string) => `https://example.test/download/${id}`,
   star: vi.fn().mockResolvedValue(undefined),
   unstar: vi.fn().mockResolvedValue(undefined),
+}))
+
+vi.mock('@/lib/player/audio-engine', () => ({
+  audioEngine: { togglePlayPause: vi.fn() },
 }))
 
 const song: Song = {
@@ -89,6 +95,31 @@ describe('SongRow', () => {
     const { onPlay } = renderRow()
     fireEvent.click(screen.getByText('Test Song'))
     expect(onPlay).toHaveBeenCalledOnce()
+  })
+
+  it('plays this song from a non-active row, even while another plays', () => {
+    usePlayerStore.setState({ isPlaying: true })
+    const { onPlay } = renderRow({ active: false })
+    fireEvent.click(screen.getByRole('button', { name: 'Play Test Song' }))
+    expect(onPlay).toHaveBeenCalledOnce()
+    expect(audioEngine.togglePlayPause).not.toHaveBeenCalled()
+  })
+
+  it('offers pause on the active row while playing and toggles instead of restarting', () => {
+    usePlayerStore.setState({ isPlaying: true })
+    const { onPlay } = renderRow({ active: true })
+    fireEvent.click(screen.getByRole('button', { name: 'Pause Test Song' }))
+    fireEvent.click(screen.getByText('Test Song'))
+    expect(audioEngine.togglePlayPause).toHaveBeenCalledTimes(2)
+    expect(onPlay).not.toHaveBeenCalled()
+  })
+
+  it('offers play on the active row while paused and resumes instead of restarting', () => {
+    usePlayerStore.setState({ isPlaying: false })
+    const { onPlay } = renderRow({ active: true })
+    fireEvent.click(screen.getByRole('button', { name: 'Play Test Song' }))
+    expect(audioEngine.togglePlayPause).toHaveBeenCalledOnce()
+    expect(onPlay).not.toHaveBeenCalled()
   })
 
   it('offers play-next and add-to-queue in the overflow menu', async () => {

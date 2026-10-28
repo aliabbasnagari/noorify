@@ -304,6 +304,7 @@
     "components": {
       "songRow": {
         "playAria": "Play {{title}}",
+        "pauseAria": "Pause {{title}}",
         "moreOptionsAria": "More options",
         "playNow": "Play now",
         "playNext": "Play next",

@@ -52,6 +52,10 @@ export default function ArtistsPage() {
       <div className="flex items-center justify-between gap-2">
         <h1 className="text-2xl font-bold">{t('artists.title')}</h1>
         <Select
+          items={SORT_OPTIONS.map((o) => ({
+            value: o.value,
+            label: t(o.labelKey),
+          }))}
           value={sortValue}
           onValueChange={(value) => value && setSortValue(value)}
         >

@@ -101,6 +101,10 @@ function RuleGroupView({
           {t('smartPlaylist.match')}
         </span>
         <Select
+          items={[
+            { value: 'all', label: t('smartPlaylist.all') },
+            { value: 'any', label: t('smartPlaylist.any') },
+          ]}
           value={group.combinator}
           onValueChange={(value) =>
             value && setCombinator(value as 'all' | 'any')
@@ -207,6 +211,10 @@ function RuleLeafRow({
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Select
+        items={FIELDS.map((f) => ({
+          value: f.key,
+          label: t(`smartPlaylist.fields.${f.key}`),
+        }))}
         value={rule.field}
         onValueChange={(v) => v && handleFieldChange(v)}
       >
@@ -222,6 +230,10 @@ function RuleLeafRow({
         </SelectContent>
       </Select>
       <Select
+        items={OPERATORS_BY_TYPE[type].map((o) => ({
+          value: o.value,
+          label: t(`smartPlaylist.operators.${o.value}`),
+        }))}
         value={rule.operator}
         onValueChange={(v) => v && handleOperatorChange(v as RuleOperator)}
       >

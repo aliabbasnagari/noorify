@@ -137,6 +137,13 @@ export function PlayerDialog({
                 <FormItem>
                   <FormLabel>Transcoding</FormLabel>
                   <Select
+                    items={[
+                      { value: NONE, label: 'None' },
+                      ...(transcodingOptions?.data.map((tc) => ({
+                        value: tc.id,
+                        label: tc.name,
+                      })) ?? []),
+                    ]}
                     value={field.value}
                     onValueChange={(v) => v && field.onChange(v)}
                   >
@@ -164,6 +171,13 @@ export function PlayerDialog({
                 <FormItem>
                   <FormLabel>Max bit rate</FormLabel>
                   <Select
+                    items={[
+                      { value: NONE, label: 'No limit' },
+                      ...BITRATE_CHOICES.map((rate) => ({
+                        value: String(rate),
+                        label: `${rate} kbps`,
+                      })),
+                    ]}
                     value={field.value}
                     onValueChange={(v) => v && field.onChange(v)}
                   >

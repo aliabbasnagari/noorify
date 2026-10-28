@@ -283,6 +283,7 @@
     "components": {
       "songRow": {
         "playAria": "{{title}} چلائیں",
+        "pauseAria": "{{title}} روکیں",
         "moreOptionsAria": "مزید اختیارات",
         "playNow": "ابھی چلائیں",
         "playNext": "اگلے میں چلائیں",

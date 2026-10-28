@@ -60,6 +60,10 @@ export default function AlbumsPage() {
         <h1 className="text-2xl font-bold">{t('albums.title')}</h1>
         <div className="flex items-center gap-2">
           <Select
+            items={SORT_OPTIONS.map((o) => ({
+              value: o.value,
+              label: t(o.labelKey),
+            }))}
             value={sortValue}
             onValueChange={(value) => value && setSortValue(value)}
           >

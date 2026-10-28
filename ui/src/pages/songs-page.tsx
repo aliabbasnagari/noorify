@@ -223,6 +223,10 @@ export default function SongsPage() {
             </Button>
           )}
           <Select
+            items={SORT_OPTIONS.map((o) => ({
+              value: o.value,
+              label: t(o.labelKey),
+            }))}
             value={sortValue}
             onValueChange={(value) => value && setSortValue(value)}
           >

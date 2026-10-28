@@ -67,6 +67,10 @@ export function RuleValueInput({
   if (type === 'boolean') {
     return (
       <Select
+        items={[
+          { value: 'true', label: t('smartPlaylist.true') },
+          { value: 'false', label: t('smartPlaylist.false') },
+        ]}
         value={String(value)}
         onValueChange={(v) => onChange(v === 'true')}
       >
