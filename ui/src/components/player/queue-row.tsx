@@ -51,7 +51,10 @@ export function QueueRow({
         >
           {track.title}
         </p>
-        <p className="truncate text-xs text-muted-foreground">{track.artist}</p>
+        <p className="truncate text-xs text-muted-foreground">
+          {track.artist}
+          {track.autoplay && ` · ${t('player.queue.autoplayBadge')}`}
+        </p>
       </button>
       <span className="shrink-0 text-xs text-muted-foreground">
         {formatDuration(track.durationSeconds)}

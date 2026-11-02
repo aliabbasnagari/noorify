@@ -18,6 +18,9 @@ export interface QueuedTrack {
    * the audio engine's isRadio branches. */
   isRadio?: boolean
   streamUrl?: string
+  /** Appended automatically by Autoplay (lib/player/autoplay.ts) rather
+   * than chosen by the user — the queue labels these. */
+  autoplay?: boolean
 }
 
 export function songToQueuedTrack(song: Song): QueuedTrack {
@@ -102,6 +105,7 @@ interface PlayerState {
   playNext: () => void
   playPrevious: () => void
   addToQueue: (track: QueuedTrack) => void
+  appendToQueue: (tracks: QueuedTrack[]) => void
   playNextInQueue: (track: QueuedTrack) => void
   removeFromQueue: (index: number) => void
   moveInQueue: (index: number, direction: -1 | 1) => void
@@ -206,6 +210,15 @@ export const usePlayerStore = create<PlayerState>()(
           unshuffledQueue: state.unshuffledQueue && [
             ...state.unshuffledQueue,
             track,
+          ],
+        })),
+
+      appendToQueue: (tracks) =>
+        set((state) => ({
+          queue: [...state.queue, ...tracks],
+          unshuffledQueue: state.unshuffledQueue && [
+            ...state.unshuffledQueue,
+            ...tracks,
           ],
         })),
 

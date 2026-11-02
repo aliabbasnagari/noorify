@@ -1,5 +1,11 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest'
-import { getLyricsBySongId, search3, subsonicFetch } from './subsonic'
+import {
+  getLyricsBySongId,
+  getRandomSongs,
+  getSimilarSongs,
+  search3,
+  subsonicFetch,
+} from './subsonic'
 import type { SubsonicStructuredLyric } from '@/lib/api/types'
 
 function mockLyricsResponse(structuredLyrics: SubsonicStructuredLyric[]) {
@@ -233,5 +239,48 @@ describe('subsonicFetch error handling', () => {
     )
     await expect(subsonicFetch('ping')).rejects.toThrow('Not found')
     expect(window.location.hash).not.toBe('#/login')
+  })
+})
+
+describe('getSimilarSongs / getRandomSongs', () => {
+  function stubSongs(body: Record<string, unknown>) {
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: () =>
+        Promise.resolve({ 'subsonic-response': { status: 'ok', ...body } }),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+    return fetchMock
+  }
+
+  it('maps similar songs, keeping genre and year', async () => {
+    const fetchMock = stubSongs({
+      similarSongs2: {
+        song: [
+          { id: 's1', title: 'One', artist: 'A', genre: 'Jazz', year: 1999 },
+        ],
+      },
+    })
+    const songs = await getSimilarSongs('al-1', 30)
+    expect(songs).toHaveLength(1)
+    expect(songs[0]).toMatchObject({ id: 's1', genre: 'Jazz', year: 1999 })
+    const url = new URL(String(fetchMock.mock.calls[0][0]), 'http://x')
+    expect(url.pathname).toMatch(/getSimilarSongs2$/)
+    expect(url.searchParams.get('id')).toBe('al-1')
+    expect(url.searchParams.get('count')).toBe('30')
+  })
+
+  it('treats a missing song list as empty', async () => {
+    stubSongs({ similarSongs2: {} })
+    expect(await getSimilarSongs('x')).toEqual([])
+  })
+
+  it('only sends the random-song filters that are set', async () => {
+    const fetchMock = stubSongs({ randomSongs: { song: [] } })
+    await getRandomSongs({ size: 10, genre: 'Rock' })
+    const url = new URL(String(fetchMock.mock.calls[0][0]), 'http://x')
+    expect(url.searchParams.get('size')).toBe('10')
+    expect(url.searchParams.get('genre')).toBe('Rock')
+    expect(url.searchParams.has('fromYear')).toBe(false)
+    expect(url.searchParams.has('toYear')).toBe(false)
   })
 })

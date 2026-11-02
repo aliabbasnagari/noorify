@@ -32,6 +32,10 @@
     "showPassword": "نمایش گذرواژه",
     "hidePassword": "پنهان کردن گذرواژه"
   },
+  "instantMix": {
+    "started": "میکس فوری شروع شد",
+    "empty": "موسیقی‌ای برای ساخت میکس با این پیدا نشد."
+  },
   "errors": {
     "somethingWentWrong": "مشکلی پیش آمد",
     "unexpected": "خطایی غیرمنتظره رخ داد. می‌توانید دوباره تلاش کنید یا صفحه را بارگذاری مجدد کنید.",
@@ -167,7 +171,10 @@
       "save": "ذخیره",
       "moveUp": "جابه‌جایی به بالا",
       "moveDown": "جابه‌جایی به پایین",
-      "remove": "حذف از صف پخش"
+      "remove": "حذف از صف پخش",
+      "autoplay": "پخش خودکار",
+      "autoplayHelp": "وقتی صف پخش تمام شد، موسیقی مشابه را ادامه بده",
+      "autoplayBadge": "پخش خودکار"
     },
     "bar": {
       "nothingPlaying": "چیزی در حال پخش نیست",
@@ -294,7 +301,8 @@
         "goToArtist": "رفتن به هنرمند",
         "download": "دانلود",
         "getInfo": "اطلاعات",
-        "share": "اشتراک‌گذاری"
+        "share": "اشتراک‌گذاری",
+        "instantMix": "شروع میکس فوری"
       },
       "songInfo": {
         "title": "اطلاعات آهنگ",
@@ -453,6 +461,7 @@
     "songCount_one": "{{count}} آهنگ",
     "songCount_other": "{{count}} آهنگ",
     "playName": "پخش {{name}}",
+    "instantMix": "میکس فوری",
     "share": "اشتراک‌گذاری",
     "download": "دانلود",
     "discNumber": "دیسک {{n}}"
@@ -464,6 +473,7 @@
     "albumCount_one": "{{count}} آلبوم",
     "albumCount_other": "{{count}} آلبوم",
     "playName": "پخش {{name}}",
+    "instantMix": "میکس فوری",
     "share": "اشتراک‌گذاری",
     "download": "دانلود",
     "about": "درباره",
@@ -494,6 +504,8 @@
       "track": "استفاده از گین آهنگ"
     },
     "preAmp": "پیش‌تقویت (دسی‌بل)",
+    "autoplay": "پخش خودکار",
+    "autoplayHelp": "وقتی صف پخش تمام شد، موسیقی مشابه آخرین آهنگ را ادامه بده.",
     "desktopNotifications": "اعلان‌های دسکتاپ",
     "desktopNotificationsHelp": "هنگام تغییر آهنگ اعلان نشان بده.",
     "notificationsBlocked": "اعلان‌ها برای این سایت مسدود شده‌اند. آن‌ها را در تنظیمات مرورگر مجاز کنید.",

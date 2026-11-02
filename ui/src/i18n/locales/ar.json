@@ -32,6 +32,10 @@
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور"
   },
+  "instantMix": {
+    "started": "بدأ المزيج الفوري",
+    "empty": "تعذّر العثور على موسيقى لمزجها مع هذا."
+  },
   "errors": {
     "somethingWentWrong": "حدث خطأ ما",
     "unexpected": "حدث خطأ غير متوقع. يمكنك المحاولة مرة أخرى أو إعادة تحميل الصفحة.",
@@ -171,7 +175,10 @@
       "save": "حفظ",
       "moveUp": "تحريك لأعلى",
       "moveDown": "تحريك لأسفل",
-      "remove": "إزالة من قائمة الانتظار"
+      "remove": "إزالة من قائمة الانتظار",
+      "autoplay": "تشغيل تلقائي",
+      "autoplayHelp": "عند انتهاء قائمة الانتظار، استمر في تشغيل موسيقى مشابهة",
+      "autoplayBadge": "تشغيل تلقائي"
     },
     "bar": {
       "nothingPlaying": "لا شيء قيد التشغيل",
@@ -298,7 +305,8 @@
         "goToArtist": "الانتقال إلى الفنان",
         "download": "تنزيل",
         "getInfo": "عرض المعلومات",
-        "share": "مشاركة"
+        "share": "مشاركة",
+        "instantMix": "بدء مزيج فوري"
       },
       "songInfo": {
         "title": "معلومات الأغنية",
@@ -473,6 +481,7 @@
     "songCount_many": "{{count}} أغنية",
     "songCount_other": "{{count}} أغنية",
     "playName": "تشغيل {{name}}",
+    "instantMix": "مزيج فوري",
     "share": "مشاركة",
     "download": "تنزيل",
     "discNumber": "القرص {{n}}"
@@ -488,6 +497,7 @@
     "albumCount_many": "{{count}} ألبومًا",
     "albumCount_other": "{{count}} ألبوم",
     "playName": "تشغيل {{name}}",
+    "instantMix": "مزيج فوري",
     "share": "مشاركة",
     "download": "تنزيل",
     "about": "عن الفنان",
@@ -522,6 +532,8 @@
       "track": "استخدام كسب المقطع"
     },
     "preAmp": "التضخيم المسبق (ديسيبل)",
+    "autoplay": "تشغيل تلقائي",
+    "autoplayHelp": "عند انتهاء قائمة الانتظار، استمر في تشغيل موسيقى مشابهة للمقطع الأخير.",
     "desktopNotifications": "إشعارات سطح المكتب",
     "desktopNotificationsHelp": "عرض إشعار عند تغيّر المقطع.",
     "notificationsBlocked": "الإشعارات محظورة لهذا الموقع. اسمح بها من إعدادات المتصفح.",

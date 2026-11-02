@@ -362,6 +362,8 @@ export interface SubsonicSearchSong {
   track?: number
   discNumber?: number
   duration?: number
+  genre?: string
+  year?: number
   starred?: string
   userRating?: number
 }

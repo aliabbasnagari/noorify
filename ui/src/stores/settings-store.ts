@@ -20,6 +20,10 @@ interface SettingsState {
    * has granted notification permission (see lib/notifications.ts). */
   notifications: boolean
   setNotifications: (enabled: boolean) => void
+  /** Keep playing similar tracks when the queue runs out — see
+   * lib/player/autoplay.ts. Off by default so existing queues still stop. */
+  autoplay: boolean
+  setAutoplay: (enabled: boolean) => void
 }
 
 /** Per-browser preferences edited on the Personal page. Theme and language
@@ -41,6 +45,8 @@ export const useSettingsStore = create<SettingsState>()(
         }),
       notifications: false,
       setNotifications: (notifications) => set({ notifications }),
+      autoplay: false,
+      setAutoplay: (autoplay) => set({ autoplay }),
     }),
     { name: 'nd-settings' },
   ),

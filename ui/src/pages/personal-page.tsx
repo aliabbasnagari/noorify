@@ -140,6 +140,17 @@ export default function PersonalPage() {
           </>
         )}
         <SettingRow
+          label={t('personal.autoplay')}
+          description={t('personal.autoplayHelp')}
+          htmlFor="personal-autoplay"
+        >
+          <Switch
+            id="personal-autoplay"
+            checked={settings.autoplay}
+            onCheckedChange={settings.setAutoplay}
+          />
+        </SettingRow>
+        <SettingRow
           label={t('personal.desktopNotifications')}
           description={
             notificationsAvailable()

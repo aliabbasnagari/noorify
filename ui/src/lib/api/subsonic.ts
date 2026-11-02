@@ -182,6 +182,38 @@ export async function getTopSongs(artistName: string, count = 5) {
   return root.topSongs.song ?? []
 }
 
+/** Radio-style recommendations seeded by any song, album, artist, playlist
+ * or genre id (server/subsonic/browsing.go's GetSimilarSongs2). The server
+ * tops the list up from the library itself when no external agent is
+ * configured, so a non-empty result is the norm — but an unknown seed id is
+ * an error, and the seed song itself is not part of the result. */
+export async function getSimilarSongs(id: string, count = 50) {
+  const root = await subsonicFetch<{
+    similarSongs2: { song?: SubsonicSearchSong[] }
+  }>('getSimilarSongs2', { id, count })
+  return (root.similarSongs2.song ?? []).map(searchSongToSong)
+}
+
+/** Random library sample, optionally narrowed by genre and/or year range
+ * (server/subsonic/album_lists.go; the server caps `size` at 500). */
+export async function getRandomSongs(
+  filter: {
+    size?: number
+    genre?: string
+    fromYear?: number
+    toYear?: number
+  } = {},
+) {
+  const params: Record<string, string | number> = { size: filter.size ?? 50 }
+  if (filter.genre) params.genre = filter.genre
+  if (filter.fromYear) params.fromYear = filter.fromYear
+  if (filter.toYear) params.toYear = filter.toYear
+  const root = await subsonicFetch<{
+    randomSongs: { song?: SubsonicSearchSong[] }
+  }>('getRandomSongs', params)
+  return (root.randomSongs.song ?? []).map(searchSongToSong)
+}
+
 function searchArtistToArtist(a: SubsonicSearchArtist): Artist {
   return {
     id: a.id,
@@ -217,6 +249,8 @@ function searchSongToSong(s: SubsonicSearchSong): Song {
     duration: s.duration ?? 0,
     trackNumber: s.track,
     discNumber: s.discNumber,
+    genre: s.genre,
+    year: s.year,
     starred: !!s.starred,
     rating: s.userRating ?? 0,
   }

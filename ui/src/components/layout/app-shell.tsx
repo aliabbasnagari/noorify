@@ -5,6 +5,7 @@ import { PlayerBar } from '@/components/layout/player-bar'
 import { MobileTabBar } from '@/components/layout/mobile-tab-bar'
 import { HelpDialog } from '@/components/layout/help-dialog'
 import { RightRail } from '@/components/layout/right-rail'
+import { useAutoplay } from '@/hooks/use-autoplay'
 import { usePlayerHotkeys } from '@/hooks/use-player-hotkeys'
 import { useQueueSync } from '@/hooks/use-queue-sync'
 import { useSyncUserLibraries } from '@/hooks/use-sync-user-libraries'
@@ -14,6 +15,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   usePlayerHotkeys()
   useSyncUserLibraries()
   useQueueSync()
+  useAutoplay()
   const rightPanelOpen = useUiStore((s) => s.rightPanelOpen)
 
   return (

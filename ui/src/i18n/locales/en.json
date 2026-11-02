@@ -32,6 +32,10 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password"
   },
+  "instantMix": {
+    "started": "Instant mix started",
+    "empty": "Couldn't find music to mix with this."
+  },
   "errors": {
     "somethingWentWrong": "Something went wrong",
     "unexpected": "An unexpected error occurred. You can try again or reload the page.",
@@ -186,7 +190,10 @@
       "save": "Save",
       "moveUp": "Move up",
       "moveDown": "Move down",
-      "remove": "Remove from queue"
+      "remove": "Remove from queue",
+      "autoplay": "Autoplay",
+      "autoplayHelp": "When the queue ends, keep playing similar music",
+      "autoplayBadge": "Autoplay"
     },
     "bar": {
       "nothingPlaying": "Nothing playing",
@@ -318,7 +325,8 @@
         "goToArtist": "Go to artist",
         "download": "Download",
         "getInfo": "Get info",
-        "share": "Share"
+        "share": "Share",
+        "instantMix": "Start instant mix"
       },
       "songInfo": {
         "title": "Song info",
@@ -477,6 +485,7 @@
     "songCount_one": "{{count}} song",
     "songCount_other": "{{count}} songs",
     "playName": "Play {{name}}",
+    "instantMix": "Instant mix",
     "share": "Share",
     "download": "Download",
     "discNumber": "Disc {{n}}"
@@ -488,6 +497,7 @@
     "albumCount_one": "{{count}} album",
     "albumCount_other": "{{count}} albums",
     "playName": "Play {{name}}",
+    "instantMix": "Instant mix",
     "share": "Share",
     "download": "Download",
     "about": "About",
@@ -518,6 +528,8 @@
       "track": "Use track gain"
     },
     "preAmp": "Pre-amp (dB)",
+    "autoplay": "Autoplay",
+    "autoplayHelp": "When the queue runs out, keep playing music similar to the last track.",
     "desktopNotifications": "Desktop notifications",
     "desktopNotificationsHelp": "Show a notification when the track changes.",
     "notificationsBlocked": "Notifications are blocked for this site. Allow them in your browser settings.",

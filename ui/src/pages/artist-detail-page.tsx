@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Download, Play, Share2 } from 'lucide-react'
+import { Download, Play, Share2, Sparkles } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { getList, getOne } from '@/lib/api/http'
 import {
@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ShareDialog } from '@/components/library/share-dialog'
 import { ArtHeroBackground } from '@/components/library/art-hero-background'
 import { config } from '@/lib/config'
+import { playInstantMix } from '@/lib/player/instant-mix'
 import { playArtist } from '@/lib/player/play-actions'
 import {
   songToQueuedTrack,
@@ -128,6 +129,14 @@ export default function ArtistDetailPage({ artistId }: { artistId: string }) {
           <Play className="size-5 fill-current" />
         </Button>
         <StarButton resource="artist" id={artist.id} starred={artist.starred} />
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => void playInstantMix(artist.id)}
+        >
+          <Sparkles className="size-3.5" />
+          {t('artist.instantMix')}
+        </Button>
         {config.enableDownloads && (
           <Button
             variant="outline"

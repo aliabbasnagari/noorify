@@ -264,3 +264,35 @@ describe('player-store', () => {
     })
   })
 })
+
+describe('appendToQueue', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    resetStore()
+  })
+
+  it('adds every track to the end of the queue', () => {
+    usePlayerStore.getState().setQueue([track('a')], 0)
+    usePlayerStore.getState().appendToQueue([track('b'), track('c')])
+    expect(usePlayerStore.getState().queue.map((t) => t.id)).toEqual([
+      'a',
+      'b',
+      'c',
+    ])
+    expect(usePlayerStore.getState().currentIndex).toBe(0)
+  })
+
+  it('keeps the unshuffled order in sync so un-shuffling keeps them', () => {
+    usePlayerStore.getState().setQueue([track('a'), track('b'), track('c')], 0)
+    usePlayerStore.getState().toggleShuffle()
+    usePlayerStore.getState().appendToQueue([track('x'), track('y')])
+    usePlayerStore.getState().toggleShuffle()
+    expect(usePlayerStore.getState().queue.map((t) => t.id)).toEqual([
+      'a',
+      'b',
+      'c',
+      'x',
+      'y',
+    ])
+  })
+})

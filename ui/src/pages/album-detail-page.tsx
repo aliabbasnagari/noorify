@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
-import { Download, Play, Share2 } from 'lucide-react'
+import { Download, Play, Share2, Sparkles } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { getList, getOne } from '@/lib/api/http'
 import { downloadUrl, getCoverArtUrl } from '@/lib/api/subsonic'
@@ -14,6 +14,7 @@ import { ShareDialog } from '@/components/library/share-dialog'
 import { ArtHeroBackground } from '@/components/library/art-hero-background'
 import { config } from '@/lib/config'
 import { formatDuration } from '@/lib/format'
+import { playInstantMix } from '@/lib/player/instant-mix'
 import { playAlbum } from '@/lib/player/play-actions'
 import {
   songToQueuedTrack,
@@ -110,6 +111,14 @@ export default function AlbumDetailPage({ albumId }: { albumId: string }) {
         </Button>
         <StarButton resource="album" id={album.id} starred={album.starred} />
         <RatingStars resource="album" id={album.id} rating={album.rating} />
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => void playInstantMix(album.id)}
+        >
+          <Sparkles className="size-3.5" />
+          {t('album.instantMix')}
+        </Button>
         {config.enableDownloads && (
           <Button
             variant="outline"

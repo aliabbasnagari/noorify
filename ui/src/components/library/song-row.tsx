@@ -19,6 +19,7 @@ import { RatingStars } from '@/components/library/rating-stars'
 import { PlayingBars } from '@/components/library/playing-bars'
 import { SongInfoDialog } from '@/components/library/song-info-dialog'
 import { audioEngine } from '@/lib/player/audio-engine'
+import { playInstantMix } from '@/lib/player/instant-mix'
 import { usePlayerStore } from '@/stores/player-store'
 import { ShareDialog } from '@/components/library/share-dialog'
 import { useResourceList } from '@/hooks/use-resource-list'
@@ -213,6 +214,11 @@ export function SongRow({
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onAddToQueue}>
               {t('library.components.songRow.addToQueue')}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => void playInstantMix(song.id, song)}
+            >
+              {t('library.components.songRow.instantMix')}
             </DropdownMenuItem>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>

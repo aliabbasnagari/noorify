@@ -32,6 +32,10 @@
     "showPassword": "پاس ورڈ دکھائیں",
     "hidePassword": "پاس ورڈ چھپائیں"
   },
+  "instantMix": {
+    "started": "فوری مکس شروع ہو گیا",
+    "empty": "اس کے ساتھ مکس کرنے کے لیے موسیقی نہیں ملی۔"
+  },
   "errors": {
     "somethingWentWrong": "کچھ غلط ہو گیا",
     "unexpected": "ایک غیر متوقع خرابی پیش آئی۔ آپ دوبارہ کوشش کر سکتے ہیں یا صفحہ دوبارہ لوڈ کر سکتے ہیں۔",
@@ -167,7 +171,10 @@
       "save": "محفوظ کریں",
       "moveUp": "اوپر منتقل کریں",
       "moveDown": "نیچے منتقل کریں",
-      "remove": "قطار سے ہٹائیں"
+      "remove": "قطار سے ہٹائیں",
+      "autoplay": "خودکار پلے",
+      "autoplayHelp": "قطار ختم ہونے پر ملتی جلتی موسیقی چلاتے رہیں",
+      "autoplayBadge": "خودکار پلے"
     },
     "bar": {
       "nothingPlaying": "کچھ نہیں چل رہا",
@@ -294,7 +301,8 @@
         "goToArtist": "فنکار پر جائیں",
         "download": "ڈاؤن لوڈ",
         "getInfo": "معلومات حاصل کریں",
-        "share": "شیئر کریں"
+        "share": "شیئر کریں",
+        "instantMix": "فوری مکس شروع کریں"
       },
       "songInfo": {
         "title": "گانے کی معلومات",
@@ -453,6 +461,7 @@
     "songCount_one": "{{count}} گانا",
     "songCount_other": "{{count}} گانے",
     "playName": "{{name}} چلائیں",
+    "instantMix": "فوری مکس",
     "share": "شیئر کریں",
     "download": "ڈاؤن لوڈ",
     "discNumber": "ڈسک {{n}}"
@@ -464,6 +473,7 @@
     "albumCount_one": "{{count}} البم",
     "albumCount_other": "{{count}} البمز",
     "playName": "{{name}} چلائیں",
+    "instantMix": "فوری مکس",
     "share": "شیئر کریں",
     "download": "ڈاؤن لوڈ",
     "about": "تعارف",
@@ -494,6 +504,8 @@
       "track": "ٹریک گین استعمال کریں"
     },
     "preAmp": "پری ایمپ (ڈی بی)",
+    "autoplay": "خودکار پلے",
+    "autoplayHelp": "قطار ختم ہونے پر آخری ٹریک جیسی موسیقی چلاتے رہیں۔",
     "desktopNotifications": "ڈیسک ٹاپ اطلاعات",
     "desktopNotificationsHelp": "ٹریک بدلنے پر اطلاع دکھائیں۔",
     "notificationsBlocked": "اس سائٹ کے لیے اطلاعات بلاک ہیں۔ براؤزر کی ترتیبات میں انہیں اجازت دیں۔",
