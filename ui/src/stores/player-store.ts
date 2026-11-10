@@ -106,6 +106,7 @@ interface PlayerState {
   playPrevious: () => void
   addToQueue: (track: QueuedTrack) => void
   appendToQueue: (tracks: QueuedTrack[]) => void
+  clearQueueExceptCurrent: () => void
   playNextInQueue: (track: QueuedTrack) => void
   removeFromQueue: (index: number) => void
   moveInQueue: (index: number, direction: -1 | 1) => void
@@ -221,6 +222,19 @@ export const usePlayerStore = create<PlayerState>()(
             ...tracks,
           ],
         })),
+
+      // Deliberately leaves `playNonce` alone: the audio engine only reloads on
+      // a track-id change or a nonce bump, so playback carries on untouched.
+      clearQueueExceptCurrent: () =>
+        set((state) => {
+          const current = state.queue[state.currentIndex]
+          if (!current) return state
+          return {
+            queue: [current],
+            currentIndex: 0,
+            unshuffledQueue: state.unshuffledQueue && [current],
+          }
+        }),
 
       playNextInQueue: (track) =>
         set((state) => {

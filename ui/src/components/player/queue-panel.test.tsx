@@ -99,4 +99,69 @@ describe('QueuePanel', () => {
       await screen.findByRole('button', { name: 'Save as playlist' }),
     ).toBeInTheDocument()
   })
+
+  describe('shuffle and clear', () => {
+    const openQueue = () =>
+      fireEvent.click(screen.getByRole('button', { name: 'Queue' }))
+
+    it('shuffles the queue in place, keeping the playing track first', async () => {
+      const upcoming = Array.from({ length: 12 }, (_, i) =>
+        track(`t${i}`, `T${i}`),
+      )
+      usePlayerStore.setState({
+        queue: [track('now', 'Now'), ...upcoming],
+        currentIndex: 0,
+      })
+      render(<QueuePanel />)
+      openQueue()
+
+      const button = await screen.findByRole('button', { name: 'Shuffle' })
+      expect(button).toHaveAttribute('aria-pressed', 'false')
+      fireEvent.click(button)
+
+      const state = usePlayerStore.getState()
+      expect(state.shuffle).toBe(true)
+      expect(state.queue[0].id).toBe('now')
+      expect(state.queue.map((t) => t.id).sort()).toEqual(
+        ['now', ...upcoming.map((t) => t.id)].sort(),
+      )
+      expect(screen.getByRole('button', { name: 'Shuffle' })).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      )
+    })
+
+    it('disables shuffle and clear when there is nothing to reorder or clear', async () => {
+      usePlayerStore.setState({ queue: [track('1', 'A')], currentIndex: 0 })
+      render(<QueuePanel />)
+      openQueue()
+
+      expect(
+        await screen.findByRole('button', { name: 'Shuffle' }),
+      ).toBeDisabled()
+      expect(screen.getByRole('button', { name: 'Clear queue' })).toBeDisabled()
+    })
+
+    it('clears everything except the playing track, history included', async () => {
+      usePlayerStore.setState({
+        queue: [track('1', 'A'), track('2', 'B'), track('3', 'C')],
+        currentIndex: 1,
+        playNonce: 7,
+      })
+      render(<QueuePanel />)
+      openQueue()
+
+      fireEvent.click(
+        await screen.findByRole('button', { name: 'Clear queue' }),
+      )
+
+      const state = usePlayerStore.getState()
+      expect(state.queue.map((t) => t.title)).toEqual(['B'])
+      expect(state.currentIndex).toBe(0)
+      // The audio engine restarts a track on a nonce bump — it must not.
+      expect(state.playNonce).toBe(7)
+      expect(screen.queryByText('A')).not.toBeInTheDocument()
+      expect(screen.queryByText('C')).not.toBeInTheDocument()
+    })
+  })
 })

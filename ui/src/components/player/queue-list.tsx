@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Infinity as InfinityIcon, Save } from 'lucide-react'
+import { Infinity as InfinityIcon, Save, Shuffle, X } from 'lucide-react'
 import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
 import { QueueRow } from '@/components/player/queue-row'
@@ -18,6 +18,11 @@ export function QueueList() {
   const playTrackAt = usePlayerStore((s) => s.playTrackAt)
   const removeFromQueue = usePlayerStore((s) => s.removeFromQueue)
   const moveInQueue = usePlayerStore((s) => s.moveInQueue)
+  const shuffle = usePlayerStore((s) => s.shuffle)
+  const toggleShuffle = usePlayerStore((s) => s.toggleShuffle)
+  const clearQueueExceptCurrent = usePlayerStore(
+    (s) => s.clearQueueExceptCurrent,
+  )
   const autoplay = useSettingsStore((s) => s.autoplay)
   const setAutoplay = useSettingsStore((s) => s.setAutoplay)
   const [saveOpen, setSaveOpen] = useState(false)
@@ -31,8 +36,8 @@ export function QueueList() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
-      <div className="flex gap-2">
-        {queue.length > 0 && (
+      {queue.length > 0 && (
+        <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -42,7 +47,31 @@ export function QueueList() {
             <Save className="size-3.5" />
             {t('player.queue.saveAsPlaylist')}
           </Button>
-        )}
+          <Button
+            variant="outline"
+            size="icon-sm"
+            // Nothing to clear when only the playing track is left.
+            disabled={queue.length < 2}
+            aria-label={t('player.queue.clear')}
+            title={t('player.queue.clearHelp')}
+            onClick={clearQueueExceptCurrent}
+          >
+            <X className="size-3.5" />
+          </Button>
+        </div>
+      )}
+      <div className="grid grid-cols-2 gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={queue.length < 2}
+          aria-pressed={shuffle}
+          className={cn(shuffle && 'text-primary')}
+          onClick={toggleShuffle}
+        >
+          <Shuffle className="size-3.5" />
+          {t('player.shuffle')}
+        </Button>
         <Button
           variant="outline"
           size="sm"

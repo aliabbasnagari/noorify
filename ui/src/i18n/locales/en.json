@@ -193,7 +193,9 @@
       "remove": "Remove from queue",
       "autoplay": "Autoplay",
       "autoplayHelp": "When the queue ends, keep playing similar music",
-      "autoplayBadge": "Autoplay"
+      "autoplayBadge": "Autoplay",
+      "clear": "Clear queue",
+      "clearHelp": "Remove everything except the track that's playing"
     },
     "bar": {
       "nothingPlaying": "Nothing playing",

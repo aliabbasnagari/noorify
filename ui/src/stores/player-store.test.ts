@@ -296,3 +296,34 @@ describe('appendToQueue', () => {
     ])
   })
 })
+
+describe('clearQueueExceptCurrent', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    resetStore()
+  })
+
+  it('keeps only the playing track and does not restart it', () => {
+    usePlayerStore.getState().setQueue([track('a'), track('b'), track('c')], 1)
+    const nonce = usePlayerStore.getState().playNonce
+    usePlayerStore.getState().clearQueueExceptCurrent()
+    const state = usePlayerStore.getState()
+    expect(state.queue.map((t) => t.id)).toEqual(['b'])
+    expect(state.currentIndex).toBe(0)
+    expect(state.playNonce).toBe(nonce)
+  })
+
+  it('drops the saved pre-shuffle order too, so un-shuffling cannot bring tracks back', () => {
+    usePlayerStore.getState().setQueue([track('a'), track('b'), track('c')], 0)
+    usePlayerStore.getState().toggleShuffle()
+    usePlayerStore.getState().clearQueueExceptCurrent()
+    usePlayerStore.getState().toggleShuffle()
+    expect(usePlayerStore.getState().queue.map((t) => t.id)).toEqual(['a'])
+  })
+
+  it('does nothing when no track is playing', () => {
+    usePlayerStore.getState().clearQueueExceptCurrent()
+    expect(usePlayerStore.getState().queue).toEqual([])
+    expect(usePlayerStore.getState().currentIndex).toBe(-1)
+  })
+})
