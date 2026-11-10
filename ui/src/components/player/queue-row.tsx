@@ -1,4 +1,5 @@
-import { ChevronDown, ChevronUp, X } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
@@ -13,8 +14,7 @@ export function QueueRow({
   played = false,
   onPlay,
   onRemove,
-  onMoveUp,
-  onMoveDown,
+  dragHandle,
 }: {
   track: QueuedTrack
   active?: boolean
@@ -24,8 +24,8 @@ export function QueueRow({
   played?: boolean
   onPlay?: () => void
   onRemove?: () => void
-  onMoveUp?: () => void
-  onMoveDown?: () => void
+  /** Grab handle for reordering — only upcoming rows get one. */
+  dragHandle?: ReactNode
 }) {
   const { t } = useTranslation()
   return (
@@ -36,6 +36,7 @@ export function QueueRow({
         played && 'opacity-60',
       )}
     >
+      {dragHandle}
       {active && <PlayingBars playing={playing} className="shrink-0" />}
       <button
         type="button"
@@ -59,26 +60,6 @@ export function QueueRow({
       <span className="shrink-0 text-xs text-muted-foreground">
         {formatDuration(track.durationSeconds)}
       </span>
-      {onMoveUp && (
-        <Button
-          variant="ghost"
-          size="icon-xs"
-          onClick={onMoveUp}
-          aria-label={t('player.queue.moveUp')}
-        >
-          <ChevronUp className="size-3.5" />
-        </Button>
-      )}
-      {onMoveDown && (
-        <Button
-          variant="ghost"
-          size="icon-xs"
-          onClick={onMoveDown}
-          aria-label={t('player.queue.moveDown')}
-        >
-          <ChevronDown className="size-3.5" />
-        </Button>
-      )}
       {onRemove && (
         <Button
           variant="ghost"

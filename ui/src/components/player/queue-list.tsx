@@ -1,12 +1,35 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type Modifier,
+} from '@dnd-kit/core'
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
 import { useTranslation } from 'react-i18next'
 import { Infinity as InfinityIcon, Save, Shuffle, X } from 'lucide-react'
 import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
 import { QueueRow } from '@/components/player/queue-row'
 import { SaveQueueDialog } from '@/components/player/save-queue-dialog'
+import { SortableQueueRow } from '@/components/player/sortable-queue-row'
+import { queueItemIds } from '@/lib/player/queue-ids'
 import { usePlayerStore } from '@/stores/player-store'
 import { useSettingsStore } from '@/stores/settings-store'
+
+/** Rows only ever travel up and down the list. */
+const lockToVerticalAxis: Modifier = ({ transform }) => ({
+  ...transform,
+  x: 0,
+})
 
 /** The queue's track list + "save as playlist" action, shared by the mobile
  * queue Sheet (queue-panel.tsx) and the desktop right rail's Queue tab. */
@@ -26,6 +49,29 @@ export function QueueList() {
   const autoplay = useSettingsStore((s) => s.autoplay)
   const setAutoplay = useSettingsStore((s) => s.setAutoplay)
   const [saveOpen, setSaveOpen] = useState(false)
+
+  const ids = useMemo(() => queueItemIds(queue), [queue])
+  // Only upcoming rows can be reordered (the store keeps history and the
+  // current track fixed), so only they take part in the sortable list.
+  const upcomingIds = useMemo(
+    () => ids.slice(currentIndex + 1),
+    [ids, currentIndex],
+  )
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    // Keeps reordering usable without a pointer now that the move up/down
+    // buttons are gone: focus the handle, Space to lift, arrows, Space to drop.
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  )
+
+  function handleDragEnd({ active, over }: DragEndEvent) {
+    if (!over || active.id === over.id) return
+    const from = ids.indexOf(String(active.id))
+    const to = ids.indexOf(String(over.id))
+    if (from !== -1 && to !== -1) moveInQueue(from, to)
+  }
 
   // Keep the current track in view: on mount, and as playback advances.
   const scrollToCurrent = useCallback(
@@ -90,41 +136,49 @@ export function QueueList() {
             {t('player.queue.empty')}
           </p>
         ) : (
-          <ul className="space-y-1">
-            {queue.map((track, index) => {
-              const isCurrent = index === currentIndex
-              const isUpcoming = index > currentIndex
-              return (
-                <li
-                  key={`${track.id}-${index}`}
-                  ref={isCurrent ? scrollToCurrent : undefined}
-                >
-                  <QueueRow
-                    track={track}
-                    active={isCurrent}
-                    playing={isPlaying}
-                    played={index < currentIndex}
-                    onPlay={() => playTrackAt(index)}
-                    onRemove={
-                      isCurrent ? undefined : () => removeFromQueue(index)
-                    }
-                    // Only upcoming entries can be reordered (the store
-                    // keeps history and the current track fixed).
-                    onMoveUp={
-                      isUpcoming && index - 1 > currentIndex
-                        ? () => moveInQueue(index, -1)
-                        : undefined
-                    }
-                    onMoveDown={
-                      isUpcoming && index < queue.length - 1
-                        ? () => moveInQueue(index, 1)
-                        : undefined
-                    }
-                  />
-                </li>
-              )
-            })}
-          </ul>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            modifiers={[lockToVerticalAxis]}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={upcomingIds}
+              strategy={verticalListSortingStrategy}
+            >
+              <ul className="space-y-1">
+                {queue.map((track, index) => {
+                  const id = ids[index]
+                  if (index > currentIndex) {
+                    return (
+                      <SortableQueueRow
+                        key={id}
+                        id={id}
+                        track={track}
+                        onPlay={() => playTrackAt(index)}
+                        onRemove={() => removeFromQueue(index)}
+                      />
+                    )
+                  }
+                  const isCurrent = index === currentIndex
+                  return (
+                    <li key={id} ref={isCurrent ? scrollToCurrent : undefined}>
+                      <QueueRow
+                        track={track}
+                        active={isCurrent}
+                        playing={isPlaying}
+                        played={!isCurrent}
+                        onPlay={() => playTrackAt(index)}
+                        onRemove={
+                          isCurrent ? undefined : () => removeFromQueue(index)
+                        }
+                      />
+                    </li>
+                  )
+                })}
+              </ul>
+            </SortableContext>
+          </DndContext>
         )}
       </div>
       {saveOpen && (

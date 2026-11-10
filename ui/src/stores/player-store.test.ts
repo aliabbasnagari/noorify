@@ -135,28 +135,61 @@ describe('player-store', () => {
       ])
     })
 
-    it('moveInQueue reorders two upcoming tracks', () => {
+    const ids = () => usePlayerStore.getState().queue.map((t) => t.id)
+    const seed = (current: number) =>
       usePlayerStore
         .getState()
-        .setQueue([track('a'), track('b'), track('c')], 0)
-      usePlayerStore.getState().moveInQueue(1, 1)
-      expect(usePlayerStore.getState().queue.map((t) => t.id)).toEqual([
-        'a',
-        'c',
-        'b',
-      ])
+        .setQueue([track('a'), track('b'), track('c'), track('d')], current)
+
+    it('moveInQueue swaps two neighbouring upcoming tracks', () => {
+      seed(0)
+      usePlayerStore.getState().moveInQueue(1, 2)
+      expect(ids()).toEqual(['a', 'c', 'b', 'd'])
     })
 
-    it('moveInQueue refuses to touch the now-playing track', () => {
-      usePlayerStore
-        .getState()
-        .setQueue([track('a'), track('b'), track('c')], 1)
-      usePlayerStore.getState().moveInQueue(1, -1)
-      expect(usePlayerStore.getState().queue.map((t) => t.id)).toEqual([
-        'a',
-        'b',
-        'c',
-      ])
+    it('moveInQueue drags an upcoming track a long way in either direction', () => {
+      seed(0)
+      usePlayerStore.getState().moveInQueue(1, 3)
+      expect(ids()).toEqual(['a', 'c', 'd', 'b'])
+      usePlayerStore.getState().moveInQueue(3, 1)
+      expect(ids()).toEqual(['a', 'b', 'c', 'd'])
+    })
+
+    it('moveInQueue keeps the playing track and its index fixed', () => {
+      seed(1)
+      usePlayerStore.getState().moveInQueue(3, 2)
+      expect(ids()).toEqual(['a', 'b', 'd', 'c'])
+      expect(usePlayerStore.getState().currentIndex).toBe(1)
+    })
+
+    it('moveInQueue refuses to move the now-playing or an already-played track', () => {
+      seed(1)
+      usePlayerStore.getState().moveInQueue(1, 2) // now-playing
+      usePlayerStore.getState().moveInQueue(0, 3) // played
+      expect(ids()).toEqual(['a', 'b', 'c', 'd'])
+    })
+
+    it('moveInQueue refuses to drop a track on or before the now-playing one', () => {
+      seed(1)
+      usePlayerStore.getState().moveInQueue(3, 1)
+      usePlayerStore.getState().moveInQueue(3, 0)
+      expect(ids()).toEqual(['a', 'b', 'c', 'd'])
+    })
+
+    it('moveInQueue ignores out-of-range and no-op moves', () => {
+      seed(0)
+      const before = usePlayerStore.getState().queue
+      usePlayerStore.getState().moveInQueue(2, 2)
+      usePlayerStore.getState().moveInQueue(2, 9)
+      usePlayerStore.getState().moveInQueue(-1, 2)
+      expect(usePlayerStore.getState().queue).toBe(before)
+    })
+
+    it('moveInQueue does not restart playback', () => {
+      seed(0)
+      const nonce = usePlayerStore.getState().playNonce
+      usePlayerStore.getState().moveInQueue(1, 3)
+      expect(usePlayerStore.getState().playNonce).toBe(nonce)
     })
   })
 

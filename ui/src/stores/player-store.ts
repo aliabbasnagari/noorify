@@ -109,7 +109,8 @@ interface PlayerState {
   clearQueueExceptCurrent: () => void
   playNextInQueue: (track: QueuedTrack) => void
   removeFromQueue: (index: number) => void
-  moveInQueue: (index: number, direction: -1 | 1) => void
+  /** Moves the upcoming track at `from` to position `to` (drag-and-drop). */
+  moveInQueue: (from: number, to: number) => void
   toggleShuffle: () => void
   cycleRepeatMode: () => void
   setVolume: (volume: number) => void
@@ -269,17 +270,20 @@ export const usePlayerStore = create<PlayerState>()(
           return { queue, currentIndex, unshuffledQueue }
         }),
 
-      moveInQueue: (index, direction) =>
+      moveInQueue: (from, to) =>
         set((state) => {
-          const target = index + direction
-          if (target < 0 || target >= state.queue.length) return state
+          if (from === to) return state
+          if (from < 0 || to < 0) return state
+          if (from >= state.queue.length || to >= state.queue.length)
+            return state
           // Reordering only makes sense for upcoming tracks — history and
           // the now-playing row stay put so the audio element's current
           // track never silently changes under the user.
-          if (index <= state.currentIndex || target <= state.currentIndex)
+          if (from <= state.currentIndex || to <= state.currentIndex)
             return state
           const queue = [...state.queue]
-          ;[queue[index], queue[target]] = [queue[target], queue[index]]
+          const [moved] = queue.splice(from, 1)
+          queue.splice(to, 0, moved)
           return { queue }
         }),
 

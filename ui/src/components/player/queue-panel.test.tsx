@@ -100,6 +100,40 @@ describe('QueuePanel', () => {
     ).toBeInTheDocument()
   })
 
+  describe('reordering', () => {
+    it('offers a drag handle on upcoming tracks only, and no move arrows', async () => {
+      usePlayerStore.setState({
+        queue: [
+          track('1', 'A'),
+          track('2', 'B'),
+          track('3', 'C'),
+          track('4', 'D'),
+        ],
+        currentIndex: 1,
+      })
+      render(<QueuePanel />)
+      fireEvent.click(screen.getByRole('button', { name: 'Queue' }))
+
+      // C and D are upcoming; A (played) and B (now playing) stay put.
+      const handles = await screen.findAllByRole('button', {
+        name: 'Drag to reorder',
+      })
+      expect(handles).toHaveLength(2)
+      expect(screen.queryByRole('button', { name: 'Move up' })).toBeNull()
+      expect(screen.queryByRole('button', { name: 'Move down' })).toBeNull()
+    })
+
+    it('keeps every row — same song queued twice included — when the list renders', async () => {
+      usePlayerStore.setState({
+        queue: [track('1', 'A'), track('2', 'Dup'), track('2', 'Dup')],
+        currentIndex: 0,
+      })
+      render(<QueuePanel />)
+      fireEvent.click(screen.getByRole('button', { name: 'Queue' }))
+      expect(await screen.findAllByText('Dup')).toHaveLength(2)
+    })
+  })
+
   describe('shuffle and clear', () => {
     const openQueue = () =>
       fireEvent.click(screen.getByRole('button', { name: 'Queue' }))
