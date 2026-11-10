@@ -327,7 +327,11 @@ export const usePlayerStore = create<PlayerState>()(
     }),
     {
       name: 'nd-player',
-      partialize: (state) => ({ volume: state.volume, muted: state.muted }),
+      partialize: (state) => ({
+        volume: state.volume,
+        muted: state.muted,
+        repeatMode: state.repeatMode,
+      }),
     },
   ),
 )

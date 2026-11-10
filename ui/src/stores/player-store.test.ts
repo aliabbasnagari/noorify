@@ -296,6 +296,19 @@ describe('player-store', () => {
       expect(usePlayerStore.getState().muted).toBe(true)
     })
   })
+
+  describe('persistence', () => {
+    it('persists repeatMode alongside volume/muted, not the queue', () => {
+      usePlayerStore.getState().cycleRepeatMode() // off -> all
+      const partialize = usePlayerStore.persist.getOptions().partialize
+      const persisted = partialize?.(usePlayerStore.getState())
+      expect(persisted).toEqual({
+        volume: 100,
+        muted: false,
+        repeatMode: 'all',
+      })
+    })
+  })
 })
 
 describe('appendToQueue', () => {
