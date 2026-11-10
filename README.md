@@ -44,7 +44,7 @@ compatible with upstream Navidrome.
 | Data fetching | TanStack Query                                                                        | react-admin data provider                                    |
 | State         | Zustand stores (auth, player, library, scan status, UI)                               | Redux                                                        |
 | Tables        | TanStack Table + virtualized lists                                                    | react-admin lists                                            |
-| Theming       | Dark (default) and Light, plus the Solarized pair; server-configured default theme    | 32 theme files, including Catppuccin, Dracula, Nord and more |
+| Theming       | Dark (default), Light, the Solarized pair, and Cave; server-configured default theme  | 32 theme files, including Catppuccin, Dracula, Nord and more |
 | Playback      | Custom audio engine, queue panel, synced queue, lyrics panel, hotkeys                 | Audio player component, hotkeys                              |
 | Admin         | Dedicated pages for users, libraries, players, transcoding, plugins and missing files | Admin resources inside react-admin                           |
 | Other pages   | Home, search, radio, shares, smart-playlist editor                                    | Equivalent react-admin views                                 |

@@ -1,6 +1,7 @@
 // Theme ids registered with next-themes. Each id is applied as a class on
 // <html> and has a matching token block in index.css.
 export const THEMES = [
+  'cave',
   'dark',
   'light',
   'solarized-dark',
@@ -11,13 +12,14 @@ export type ThemeId = (typeof THEMES)[number]
 
 /** i18n key for each theme's display name. */
 export const THEME_LABEL_KEYS: Record<ThemeId, string> = {
+  cave: 'common.themeCave',
   dark: 'common.themeDark',
   light: 'common.themeLight',
   'solarized-dark': 'common.themeSolarizedDark',
   'solarized-light': 'common.themeSolarizedLight',
 }
 
-const DARK_THEMES: readonly string[] = ['dark', 'solarized-dark']
+const DARK_THEMES: readonly string[] = ['cave', 'dark', 'solarized-dark']
 
 /** Whether the theme has a dark surface (for libraries that only know light/dark). */
 export function isDarkTheme(theme: string | undefined): boolean {

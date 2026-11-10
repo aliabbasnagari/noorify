@@ -5,6 +5,7 @@ describe('themes', () => {
   it('knows which themes are dark', () => {
     expect(isDarkTheme('dark')).toBe(true)
     expect(isDarkTheme('solarized-dark')).toBe(true)
+    expect(isDarkTheme('cave')).toBe(true)
     expect(isDarkTheme('light')).toBe(false)
     expect(isDarkTheme('solarized-light')).toBe(false)
     expect(isDarkTheme(undefined)).toBe(false)
@@ -14,6 +15,7 @@ describe('themes', () => {
     expect(themeFromConfig('Light')).toBe('light')
     expect(themeFromConfig('Solarized Dark')).toBe('solarized-dark')
     expect(themeFromConfig('Solarized Light')).toBe('solarized-light')
+    expect(themeFromConfig('Cave')).toBe('cave')
     expect(themeFromConfig('Dracula')).toBe('dark')
     expect(themeFromConfig('')).toBe('dark')
     expect(themeFromConfig(undefined)).toBe('dark')

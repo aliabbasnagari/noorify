@@ -3,7 +3,7 @@
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
 
-@custom-variant dark (&:is(.dark *, .solarized-dark *));
+@custom-variant dark (&:is(.dark *, .solarized-dark *, .cave *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -193,6 +193,43 @@
   --sidebar-accent-foreground: #073642;
   --sidebar-border: oklch(0.4 0.03 200 / 18%);
   --sidebar-ring: #1c6599;
+}
+
+.cave {
+  /* Cave: near-black background with a single orange accent, ported from
+     upstream's MUI theme (based on the colors of https://acave.pt). */
+  color-scheme: dark;
+  --background: #0b0b0d;
+  --foreground: #f2f2f0;
+  --card: #151518;
+  --card-foreground: #f2f2f0;
+  --popover: #151518;
+  --popover-foreground: #f2f2f0;
+  --primary: #ff4d1a;
+  --primary-foreground: #0b0b0d;
+  --secondary: #151518;
+  --secondary-foreground: #f2f2f0;
+  --muted: #151518;
+  --muted-foreground: #b7b7b7;
+  --accent: #1e1e22;
+  --accent-foreground: #f2f2f0;
+  --destructive: #f15e6c;
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #ff4d1a;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #0b0b0d;
+  --sidebar-foreground: #f2f2f0;
+  --sidebar-primary: #ff4d1a;
+  --sidebar-primary-foreground: #0b0b0d;
+  --sidebar-accent: #151518;
+  --sidebar-accent-foreground: #f2f2f0;
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: #ff4d1a;
 }
 
 /* Spotify hides the scrollbar entirely on horizontally-scrolling shelves
